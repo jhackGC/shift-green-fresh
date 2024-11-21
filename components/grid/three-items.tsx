@@ -1,5 +1,5 @@
 import { GridTileImage } from 'components/grid/tile';
-import { getCollectionProducts } from 'lib/shopify';
+import { getCollection, getCollectionProducts } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
@@ -44,8 +44,14 @@ function ThreeItemGridItem({
 export async function ThreeItemGrid() {
   // Collections that start with `hidden-*` are hidden from the search page.
   const homepageItems = await getCollectionProducts({
-    collection: 'hidden-homepage-featured-items'
+    collection: 'face-care'
   });
+
+  // const shopData = await getShopData();
+  // console.log('### ThreeItemGrid shopData 4: ', shopData);
+
+  const coll = await getCollection('face-care');
+  console.log('### ThreeItemGrid coll 2: ', coll);
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 

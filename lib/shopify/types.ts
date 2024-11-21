@@ -213,6 +213,12 @@ export type ShopifyCollectionProductsOperation = {
   };
 };
 
+export type ShopifyShopOperation = {
+  data: {
+    shop: any;
+  };
+};
+
 export type ShopifyCollectionsOperation = {
   data: {
     collections: Connection<ShopifyCollection>;

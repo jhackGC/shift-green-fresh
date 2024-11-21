@@ -11,11 +11,7 @@ import {
   removeFromCartMutation
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
-import {
-  getCollectionProductsQuery,
-  getCollectionQuery,
-  getCollectionsQuery
-} from './queries/collection';
+import { getCollectionQuery, getCollectionsQuery, getShopDataQuery } from './queries/collection';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
@@ -36,7 +32,6 @@ import {
   ShopifyCartOperation,
   ShopifyCollection,
   ShopifyCollectionOperation,
-  ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
@@ -47,6 +42,7 @@ import {
   ShopifyProductRecommendationsOperation,
   ShopifyProductsOperation,
   ShopifyRemoveFromCartOperation,
+  ShopifyShopOperation,
   ShopifyUpdateCartOperation
 } from './types';
 
@@ -72,6 +68,14 @@ export async function shopifyFetch<T>({
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
   try {
+    // console.log('### shopifyFetch variables: ', variables);
+
+    const theBody = {
+      ...(query && { query }),
+      ...(variables && { variables })
+    };
+
+    // console.log('### shopifyFetch theBody: ', theBody);
     const result = await fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -79,12 +83,58 @@ export async function shopifyFetch<T>({
         'X-Shopify-Storefront-Access-Token': key,
         ...headers
       },
-      body: JSON.stringify({
-        ...(query && { query }),
-        ...(variables && { variables })
-      }),
+      body: JSON.stringify(theBody),
       cache,
       ...(tags && { next: { tags } })
+    });
+
+    const body = await result.json();
+
+    if (body.errors) {
+      throw body.errors[0];
+    }
+
+    return {
+      status: result.status,
+      body
+    };
+  } catch (e) {
+    if (isShopifyError(e)) {
+      throw {
+        cause: e.cause?.toString() || 'unknown',
+        status: e.status || 500,
+        message: e.message,
+        query
+      };
+    }
+
+    throw {
+      error: e,
+      query
+    };
+  }
+}
+
+export async function shopifyFetchNoVars(
+  query: string
+): Promise<{ status: number; body: any } | never> {
+  try {
+    const theBody = {
+      ...(query && { query })
+    };
+
+    console.log('### shopifyFetch endpoint: ', endpoint);
+    console.log('### shopifyFetch theBody: ', theBody);
+    console.log('### shopifyFetch key: ', key);
+
+    const result = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': key,
+        ...headers
+      },
+      body: JSON.stringify(theBody)
     });
 
     const body = await result.json();
@@ -285,6 +335,19 @@ export async function getCollection(handle: string): Promise<Collection | undefi
   return reshapeCollection(res.body.data.collection);
 }
 
+export async function getShopData(): Promise<any> {
+  const res = await shopifyFetch<ShopifyShopOperation>({
+    query: getShopDataQuery
+  });
+
+  if (!res.body.data.shop) {
+    console.log(`No shop data found`);
+    return [];
+  }
+
+  return res.body.data.shop;
+}
+
 export async function getCollectionProducts({
   collection,
   reverse,
@@ -294,15 +357,33 @@ export async function getCollectionProducts({
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
-    query: getCollectionProductsQuery,
-    tags: [TAGS.collections, TAGS.products],
-    variables: {
-      handle: collection,
-      reverse,
-      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
+  console.log('### getCollectionProducts collection 2: ', collection);
+  // const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+  //   query: getCollectionProductsQuery,
+  //   tags: [TAGS.collections, TAGS.products],
+  //   variables: {
+  //     handle: collection,
+  //     reverse,
+  //     sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
+  //   }
+  // });
+
+  const getCollectionProductsQuery = `query getCollectionProducts {
+       collection(handle: "face-care") {
+        id
+        products(first: 5) {
+          edges {
+            node {
+              id
+              handle
+            }
+          }
+        }
     }
-  });
+  }`;
+  const res = await shopifyFetchNoVars(getCollectionProductsQuery);
+
+  console.log('### getCollectionProducts collection res now: ', res.body.data.collection);
 
   if (!res.body.data.collection) {
     console.log(`No collection found for \`${collection}\``);

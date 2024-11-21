@@ -36,6 +36,39 @@ export const getCollectionsQuery = /* GraphQL */ `
   ${collectionFragment}
 `;
 
+export const getShopDataQuery = /* GraphQL */ `
+  query getShopData {
+    shop {
+      name
+      description
+      moneyFormat
+      primaryDomain {
+        url
+        host
+      }
+    }
+  }
+`;
+
+// export const getCollectionProductsQuery = /* GraphQL */ `
+//   query getCollectionProducts(
+//     $handle: String!
+//     $sortKey: ProductCollectionSortKeys
+//     $reverse: Boolean
+//   ) {
+//     collection(handle: $handle) {
+//       products(sortKey: $sortKey, reverse: $reverse, first: 100) {
+//         edges {
+//           node {
+//             ...product
+//           }
+//         }
+//       }
+//     }
+//   }
+//   ${productFragment}
+// `;
+
 export const getCollectionProductsQuery = /* GraphQL */ `
   query getCollectionProducts(
     $handle: String!
