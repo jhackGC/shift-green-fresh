@@ -73,7 +73,9 @@ export async function getShopProducts() {
     throw new Error(response.statusText);
   }
 
+  console.log('### getShopProducts response: ', response);
   const json = await response.json();
+  console.log('### getShopProducts json: ', json);
 
   return { props: json };
 }
