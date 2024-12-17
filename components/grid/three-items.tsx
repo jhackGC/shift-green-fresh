@@ -1,5 +1,6 @@
+import { Box } from '@mui/material';
 import { GridTileImage } from 'components/grid/tile';
-import { getCollection, getCollectionProducts } from 'lib/shopify';
+import { getCollection, getCollectionProducts, getProducts, getProductsHarcoded, getShopData } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
@@ -46,22 +47,32 @@ export async function ThreeItemGrid() {
   const homepageItems = await getCollectionProducts({
     collection: 'face-care'
   });
+  console.log('### ThreeItemGrid homepageItems: ', homepageItems);
 
-  // const shopData = await getShopData();
-  // console.log('### ThreeItemGrid shopData 4: ', shopData);
 
-  const coll = await getCollection('face-care');
-  console.log('### ThreeItemGrid coll 2: ', coll);
+  const allProducts = await getProducts({});
+  console.log('### ThreeItemGrid allProducts: ', allProducts);
+
+
+  const shopData = await getShopData();
+  console.log('### ThreeItemGrid shopData: ', shopData);
+
+  const collection = await getCollection('face-care');
+  console.log('### ThreeItemGrid face-care collection: ', collection);
+
+  const prods = await getProductsHarcoded();
+  console.log('### ThreeItemGrid getProductsHarcoded: ', prods);
+
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
   const [firstProduct, secondProduct, thirdProduct] = homepageItems;
 
   return (
-    <section className="mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 lg:max-h-[calc(100vh-200px)]">
+    <Box>
       <ThreeItemGridItem size="full" item={firstProduct} priority={true} />
       <ThreeItemGridItem size="half" item={secondProduct} priority={true} />
       <ThreeItemGridItem size="half" item={thirdProduct} />
-    </section>
+    </Box>
   );
 }

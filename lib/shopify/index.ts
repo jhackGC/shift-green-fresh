@@ -123,9 +123,9 @@ export async function shopifyFetchNoVars(
       ...(query && { query })
     };
 
-    console.log('### shopifyFetch endpoint: ', endpoint);
-    console.log('### shopifyFetch theBody: ', theBody);
-    console.log('### shopifyFetch key: ', key);
+    // console.log('### shopifyFetch endpoint: ', endpoint);
+    // console.log('### shopifyFetch theBody: ', theBody);
+    // console.log('### shopifyFetch key: ', key);
 
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -393,6 +393,25 @@ export async function getCollectionProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
 }
 
+export async function getProductsHarcoded(): Promise<Product[]> {
+  const getProductsQuery = `query getProducts {
+    products(first: 100) {
+      edges {
+        cursor
+        node {
+          title
+        }
+      }
+    }
+  }`;
+  const res = await shopifyFetchNoVars(getProductsQuery);
+
+  console.log('### getProductsQuery res now: ', res.body);
+
+  return [];
+  // return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+}
+
 export async function getCollections(): Promise<Collection[]> {
   const res = await shopifyFetch<ShopifyCollectionsOperation>({
     query: getCollectionsQuery,
@@ -491,13 +510,35 @@ export async function getProducts({
   sortKey?: string;
 }): Promise<Product[]> {
   const res = await shopifyFetch<ShopifyProductsOperation>({
-    query: getProductsQuery,
-    tags: [TAGS.products],
-    variables: {
-      query,
-      reverse,
-      sortKey
-    }
+    query: getProductsQuery
+    // tags: [TAGS.products],
+    // variables: {
+    //   query,
+    //   reverse,
+    //   sortKey
+    // }
+  });
+
+  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
+export async function getProductsWithClient({
+  query,
+  reverse,
+  sortKey
+}: {
+  query?: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getProductsQuery
+    // tags: [TAGS.products],
+    // variables: {
+    //   query,
+    //   reverse,
+    //   sortKey
+    // }
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
