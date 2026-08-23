@@ -57,7 +57,15 @@ const RAW_ROWS: RawRow[] = [
     stem: 'apple',
     size: 'PER KG',
     price: 9.9,
-    note: "Board's price column position for 'Apples Loose' vs 'Apples 2nds 2kg Bags' is ambiguous in the photo — verify against the source before trusting this figure."
+    note: 'Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety.'
+  },
+  {
+    rawLabel: 'Apples 2nds 2kg Bags',
+    stem: 'apple',
+    matchLabel: 'Apple Juicing',
+    size: '2KG',
+    price: 11.9,
+    note: "Confirmed by hand: Merrimac's '2nds' bags are the wholesale juicing apples (all juicing varieties, not variety-specific)."
   },
   { rawLabel: 'Avocados Fuerte', stem: 'avocado', size: '1EA', price: 11.9 },
   {
@@ -373,7 +381,8 @@ function main() {
         qty: row.qty,
         retailUnit: row.retailUnit,
         proposedDate: date,
-        note: `Re-ingest on ${date} found a different price for "${row.rawLabel}" than what's currently live — approve to apply it, reject to keep the current value.`
+        note: `Re-ingest on ${date} found a different price for "${row.rawLabel}" than what's currently live — approve to apply it, reject to keep the current value.`,
+        proposedRow: row
       });
     }
   }

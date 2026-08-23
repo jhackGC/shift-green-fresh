@@ -113,18 +113,16 @@ export function loadAllPendingRetailChanges(): PendingRetailChange[] {
 }
 
 /**
- * Approves or rejects one pending change. Approving applies the proposed price to `current.json`
- * (recomputed via `recompute`, same contract as updateCurrentRetailPricingRow) and returns the
- * updated row; rejecting just discards the pending entry and returns null. Either way the change
- * is removed from pending.json. Throws if no pending change exists for that product.
+ * Approves or rejects one pending change. Approving swaps in the *entire* proposed row (not just
+ * its price) — the re-ingest that proposed it may also have fixed the matching label/note, and
+ * only updating price would leave that metadata stale. Rejecting just discards the pending entry
+ * and keeps current.json untouched. Either way the change is removed from pending.json. Throws if
+ * no pending change exists for that id.
  */
 export function resolvePendingRetailChange(
   retailerCode: string,
   id: string,
-  action: 'approve' | 'reject',
-  recompute: (
-    row: RetailPricing
-  ) => Pick<RetailPricing, 'pricePerDestinationUnit' | 'needsConversionFactor'>
+  action: 'approve' | 'reject'
 ): RetailPricing | null {
   const pending = loadPendingRetailChanges(retailerCode);
   const index = pending.findIndex((p) => p.id === id);
@@ -137,11 +135,12 @@ export function resolvePendingRetailChange(
 
   if (action === 'reject') return null;
 
-  return updateCurrentRetailPricingRow(
-    retailerCode,
-    change.id,
-    change.proposedPrice,
-    change.proposedDate,
-    recompute
-  );
+  const current = loadCurrentRetailPricing(retailerCode);
+  const rowIndex = current.findIndex((r) => r.id === change.id);
+  if (rowIndex === -1) {
+    throw new Error(`Current row "${change.id}" disappeared for ${retailerCode}.`);
+  }
+  current[rowIndex] = change.proposedRow;
+  saveCurrentRetailPricing(retailerCode, current);
+  return change.proposedRow;
 }

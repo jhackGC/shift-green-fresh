@@ -1,5 +1,6 @@
 'use client';
 
+import { marginTier } from 'lib/margins/calc';
 import type { Product } from 'lib/vendor-pricing/types';
 import type { PendingRetailChange, RetailPricing } from 'lib/retail-pricing/types';
 import { useMemo, useState } from 'react';
@@ -8,13 +9,33 @@ import { toast } from 'sonner';
 export type JoinedRetailRow = RetailPricing & {
   productName: string;
   category?: Product['category'];
+  /** Cheapest known wholesale $/kg for this product, across every vendor — null if no vendor has
+   *  a priced (kg-known) line for it yet. */
+  wholesalePricePerKg: number | null;
+  wholesaleVendorCode?: string;
 };
 
 export type JoinedPendingChange = PendingRetailChange & { productName: string };
 
-type SortKey = 'product' | 'pricePerKg';
+type SortKey = 'product' | 'pricePerKg' | 'margin';
 type SortState = { key: SortKey | null; dir: 1 | -1 };
 type StatusFilter = 'all' | 'priced' | 'needsConversion' | 'verify';
+
+const TIER_CLASSES: Record<'good' | 'warn' | 'bad', string> = {
+  good: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+  warn: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
+  bad: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
+};
+
+/** retail $/kg vs the cheapest known wholesale $/kg for the same product — null if either side
+ *  isn't known yet (needs a conversion factor, no vendor price, etc.). */
+function computeMargin(row: JoinedRetailRow): { dollar: number; percent: number } | null {
+  if (row.pricePerDestinationUnit == null || row.wholesalePricePerKg == null) return null;
+  const dollar = row.pricePerDestinationUnit - row.wholesalePricePerKg;
+  const percent =
+    row.pricePerDestinationUnit !== 0 ? (dollar / row.pricePerDestinationUnit) * 100 : NaN;
+  return { dollar, percent };
+}
 
 function formatMoney(n: number | null): string {
   if (n == null || Number.isNaN(n)) return '—';
@@ -62,15 +83,14 @@ export function RetailPricingTable({
   const sorted = useMemo(() => {
     if (!sort.key) return filtered;
     const copy = [...filtered];
+    const sortValue = (row: JoinedRetailRow): number | string => {
+      if (sort.key === 'product') return row.productName.toLowerCase();
+      if (sort.key === 'margin') return computeMargin(row)?.percent ?? -Infinity;
+      return row.pricePerDestinationUnit ?? -Infinity;
+    };
     copy.sort((a, b) => {
-      const av =
-        sort.key === 'product'
-          ? a.productName.toLowerCase()
-          : (a.pricePerDestinationUnit ?? -Infinity);
-      const bv =
-        sort.key === 'product'
-          ? b.productName.toLowerCase()
-          : (b.pricePerDestinationUnit ?? -Infinity);
+      const av = sortValue(a);
+      const bv = sortValue(b);
       if (av < bv) return -1 * sort.dir;
       if (av > bv) return 1 * sort.dir;
       return 0;
@@ -258,6 +278,14 @@ export function RetailPricingTable({
                   onClick={() => toggleSort('pricePerKg')}
                   numeric
                 />
+                <th className="px-3 py-2 text-right">Wholesale $/kg</th>
+                <SortableTh
+                  label="Margin"
+                  active={sort.key === 'margin'}
+                  dir={sort.dir}
+                  onClick={() => toggleSort('margin')}
+                  numeric
+                />
               </tr>
             </thead>
             <tbody>
@@ -287,6 +315,7 @@ function RowEditor({
   onSave: (price: number) => void;
 }) {
   const [draft, setDraft] = useState(String(row.price));
+  const margin = computeMargin(row);
 
   function commit() {
     const price = Number(draft);
@@ -353,6 +382,38 @@ function RowEditor({
           <span className="inline-block rounded-full bg-emerald-100 px-2.5 py-0.5 font-mono text-xs font-semibold tabular-nums text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
             {formatMoney(row.pricePerDestinationUnit)}
           </span>
+        )}
+      </td>
+      <td className="px-3 py-2 text-right align-top font-mono text-xs tabular-nums">
+        {row.wholesalePricePerKg != null ? (
+          <>
+            {formatMoney(row.wholesalePricePerKg)}
+            {row.wholesaleVendorCode && (
+              <div className="mt-0.5 text-[10px] normal-case text-neutral-400">
+                {row.wholesaleVendorCode}
+              </div>
+            )}
+          </>
+        ) : (
+          <span className="text-neutral-300 dark:text-neutral-600">&mdash;</span>
+        )}
+      </td>
+      <td className="px-3 py-2 text-right align-top">
+        {margin ? (
+          <>
+            <span
+              className={`inline-block rounded-full px-2.5 py-0.5 font-mono text-xs font-semibold tabular-nums ${TIER_CLASSES[marginTier(margin.percent)]}`}
+            >
+              {Number.isNaN(margin.percent)
+                ? '—'
+                : `${margin.percent >= 0 ? '+' : ''}${margin.percent.toFixed(0)}%`}
+            </span>
+            <div className="mt-1 font-mono text-xs text-neutral-400">
+              {formatMoney(margin.dollar)}
+            </div>
+          </>
+        ) : (
+          <span className="text-neutral-300 dark:text-neutral-600">&mdash;</span>
         )}
       </td>
     </tr>

@@ -105,24 +105,27 @@ export function matchProducts(products: Product[], rawLabel: string, stem: strin
   const gradeWords = [...labelWords].filter((w) => GRADE_QUALIFIERS.has(w));
 
   if (contentWords.length > 0) {
-    // A specific variety was named — narrow to candidates whose slug mentions it.
-    const overlap = candidates.filter((p) =>
-      slugWords(p.id)
-        .slice(1)
-        .some((w) => contentWords.includes(w))
-    );
+    // A specific variety was named — narrow to candidates whose slug mentions ALL of it. Grade
+    // words named alongside a variety (e.g. "Apple Juicing Red") are folded in as required too,
+    // not just used as a loose fallback — otherwise "Apple Juicing Red" would match on "red"
+    // alone and land on apple-red-del (Red Delicious) instead of apple-juicing-red.
+    const requiredWords = [...contentWords, ...gradeWords];
+    const overlap = candidates.filter((p) => {
+      const words = slugWords(p.id).slice(1);
+      return requiredWords.every((w) => words.includes(w));
+    });
     if (overlap.length > 0) {
       return {
         productIds: overlap.map((p) => p.id),
         ambiguous: overlap.length > 1,
-        note: `Matched on variety word(s): ${contentWords.join(', ')}.`
+        note: `Matched on variety word(s): ${requiredWords.join(', ')}.`
       };
     }
     // Named a variety we don't stock from this vendor — do not guess a different one.
     return {
       productIds: [],
       ambiguous: false,
-      note: `Board names a variety ("${contentWords.join(', ')}") not found among wholesale "${stem}" products — left unmatched rather than guessing.`
+      note: `Board names a variety ("${requiredWords.join(', ')}") not found among wholesale "${stem}" products — left unmatched rather than guessing.`
     };
   }
 

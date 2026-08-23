@@ -1,9 +1,24 @@
 [
   {
+    "id": "apple-juicing-red__merrimac__apples-2nds-2kg-bags",
+    "productId": "apple-juicing-red",
+    "retailerCode": "merrimac",
+    "date": "2026-08-31",
+    "rawLabel": "Apples 2nds 2kg Bags",
+    "price": 9.9,
+    "qty": 2,
+    "retailUnit": "KG",
+    "destinationUnit": "kg",
+    "pricePerDestinationUnit": 4.95,
+    "needsConversionFactor": false,
+    "confidence": "verify",
+    "note": "Retail '2nds' grade apples matched to wholesale's juicing-red apples (the closest lower-grade equivalent) — confirmed by hand, not by the generic matcher. Matched on variety word(s): red, juicing."
+  },
+  {
     "id": "avocado-hass-tray__merrimac__avocados-hass",
     "productId": "avocado-hass-tray",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Avocados Hass",
     "price": 2.9,
     "qty": 1,
@@ -12,13 +27,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Board also offers 3-for-$8 (~$2.67ea) \u2014 using the single-unit price. Matched on variety word(s): hass."
+    "note": "Board also offers 3-for-$8 (~$2.67ea) — using the single-unit price. Matched on variety word(s): hass."
   },
   {
     "id": "avocado-hass-tray-premium__merrimac__avocados-hass",
     "productId": "avocado-hass-tray-premium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Avocados Hass",
     "price": 2.9,
     "qty": 1,
@@ -27,13 +42,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Board also offers 3-for-$8 (~$2.67ea) \u2014 using the single-unit price. Matched on variety word(s): hass."
+    "note": "Board also offers 3-for-$8 (~$2.67ea) — using the single-unit price. Matched on variety word(s): hass."
   },
   {
     "id": "avocado-hass-bulk__merrimac__avocados-hass",
     "productId": "avocado-hass-bulk",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Avocados Hass",
     "price": 2.9,
     "qty": 1,
@@ -42,13 +57,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Board also offers 3-for-$8 (~$2.67ea) \u2014 using the single-unit price. Matched on variety word(s): hass."
+    "note": "Board also offers 3-for-$8 (~$2.67ea) — using the single-unit price. Matched on variety word(s): hass."
   },
   {
     "id": "sapote-black__merrimac__black-sapote",
     "productId": "sapote-black",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Black Sapote",
     "price": 3.5,
     "qty": 1,
@@ -63,7 +78,7 @@
     "id": "grapefruit-yellow__merrimac__grapefruit-loose",
     "productId": "grapefruit-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit Loose",
     "price": 6.9,
     "qty": 1,
@@ -72,13 +87,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"grapefruit\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"grapefruit\" varieties we stock."
   },
   {
     "id": "grapefruit-pink__merrimac__grapefruit-loose",
     "productId": "grapefruit-pink",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit Loose",
     "price": 6.9,
     "qty": 1,
@@ -87,13 +102,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"grapefruit\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"grapefruit\" varieties we stock."
   },
   {
     "id": "grapefruit-ruby__merrimac__grapefruit-loose",
     "productId": "grapefruit-ruby",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit Loose",
     "price": 6.9,
     "qty": 1,
@@ -102,13 +117,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"grapefruit\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"grapefruit\" varieties we stock."
   },
   {
     "id": "grapefruit-yellow__merrimac__grapefruit-2nds-2kg-bags",
     "productId": "grapefruit-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit 2nds 2kg Bags",
     "price": 5.9,
     "qty": 2,
@@ -117,13 +132,13 @@
     "pricePerDestinationUnit": 2.95,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "grapefruit-pink__merrimac__grapefruit-2nds-2kg-bags",
     "productId": "grapefruit-pink",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit 2nds 2kg Bags",
     "price": 5.9,
     "qty": 2,
@@ -132,13 +147,13 @@
     "pricePerDestinationUnit": 2.95,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "grapefruit-ruby__merrimac__grapefruit-2nds-2kg-bags",
     "productId": "grapefruit-ruby",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Grapefruit 2nds 2kg Bags",
     "price": 5.9,
     "qty": 2,
@@ -147,13 +162,13 @@
     "pricePerDestinationUnit": 2.95,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "kiwifruit__merrimac__kiwifruit",
     "productId": "kiwifruit",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Kiwifruit",
     "price": 4.9,
     "qty": 1,
@@ -168,7 +183,7 @@
     "id": "lemonades__merrimac__lemonades",
     "productId": "lemonades",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Lemonades",
     "price": 19.9,
     "qty": 1,
@@ -183,7 +198,7 @@
     "id": "lemon__merrimac__lemons-1st-grade",
     "productId": "lemon",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Lemons 1st Grade",
     "price": 6.9,
     "qty": 1,
@@ -192,13 +207,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Price/column alignment around the 1st/2nd grade lemon rows is hand-corrected on the board \u2014 verify against the source. Generic label \u2014 same price applied to all 2 \"lemon\" varieties we stock."
+    "note": "Price/column alignment around the 1st/2nd grade lemon rows is hand-corrected on the board — verify against the source. Generic label — same price applied to all 2 \"lemon\" varieties we stock."
   },
   {
     "id": "lemons__merrimac__lemons-1st-grade",
     "productId": "lemons",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Lemons 1st Grade",
     "price": 6.9,
     "qty": 1,
@@ -207,13 +222,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Price/column alignment around the 1st/2nd grade lemon rows is hand-corrected on the board \u2014 verify against the source. Generic label \u2014 same price applied to all 2 \"lemon\" varieties we stock."
+    "note": "Price/column alignment around the 1st/2nd grade lemon rows is hand-corrected on the board — verify against the source. Generic label — same price applied to all 2 \"lemon\" varieties we stock."
   },
   {
     "id": "limes__merrimac__limes",
     "productId": "limes",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Limes",
     "price": 29.9,
     "qty": 1,
@@ -228,7 +243,7 @@
     "id": "mandarin-daisy__merrimac__mandarins-daisy",
     "productId": "mandarin-daisy",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mandarins Daisy",
     "price": 9.9,
     "qty": 1,
@@ -243,7 +258,7 @@
     "id": "mandarin-imperial__merrimac__mandarins-imperial",
     "productId": "mandarin-imperial",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mandarins Imperial",
     "price": 12.9,
     "qty": 1,
@@ -258,7 +273,7 @@
     "id": "oranges-navel__merrimac__oranges",
     "productId": "oranges-navel",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Oranges",
     "price": 7.9,
     "qty": 1,
@@ -267,13 +282,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"orange\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"orange\" varieties we stock."
   },
   {
     "id": "oranges-navel-3kg-net__merrimac__oranges",
     "productId": "oranges-navel-3kg-net",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Oranges",
     "price": 7.9,
     "qty": 1,
@@ -282,13 +297,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"orange\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"orange\" varieties we stock."
   },
   {
     "id": "orange-navelina__merrimac__oranges",
     "productId": "orange-navelina",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Oranges",
     "price": 7.9,
     "qty": 1,
@@ -297,13 +312,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"orange\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"orange\" varieties we stock."
   },
   {
     "id": "orange-blood__merrimac__oranges",
     "productId": "orange-blood",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Oranges",
     "price": 7.9,
     "qty": 1,
@@ -312,13 +327,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"orange\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"orange\" varieties we stock."
   },
   {
     "id": "orange-cara-cara-red__merrimac__oranges",
     "productId": "orange-cara-cara-red",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Oranges",
     "price": 7.9,
     "qty": 1,
@@ -327,13 +342,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"orange\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"orange\" varieties we stock."
   },
   {
     "id": "passionfruit__merrimac__passionfruit",
     "productId": "passionfruit",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Passionfruit",
     "price": 19.9,
     "qty": 1,
@@ -348,7 +363,7 @@
     "id": "papaya__merrimac__paw-paw",
     "productId": "papaya",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Paw Paw",
     "price": 9.9,
     "qty": 1,
@@ -363,7 +378,7 @@
     "id": "pear-beurre-bosc__merrimac__pears",
     "productId": "pear-beurre-bosc",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pears",
     "price": 9.9,
     "qty": 1,
@@ -372,13 +387,13 @@
     "pricePerDestinationUnit": 9.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"pear\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"pear\" varieties we stock."
   },
   {
     "id": "pear-packham__merrimac__pears",
     "productId": "pear-packham",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pears",
     "price": 9.9,
     "qty": 1,
@@ -387,13 +402,13 @@
     "pricePerDestinationUnit": 9.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"pear\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"pear\" varieties we stock."
   },
   {
     "id": "strawberries__merrimac__strawberries-250g",
     "productId": "strawberries",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Strawberries 250g",
     "price": 8.9,
     "qty": 250,
@@ -408,7 +423,7 @@
     "id": "strawberries__merrimac__strawberries-500g-2nds",
     "productId": "strawberries",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Strawberries 500g 2nds",
     "price": 8.9,
     "qty": 500,
@@ -417,13 +432,13 @@
     "pricePerDestinationUnit": 17.8,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Same price as the 250g line on the board \u2014 worth double-checking against the source, an 500g-2nds punnet priced identically to a 250g punnet is unusual. Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Same price as the 250g line on the board — worth double-checking against the source, an 500g-2nds punnet priced identically to a 250g punnet is unusual. Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "tangelo__merrimac__tangelos",
     "productId": "tangelo",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Tangelos",
     "price": 9.9,
     "qty": 1,
@@ -438,7 +453,7 @@
     "id": "watermelon-mini-seedless__merrimac__watermelon",
     "productId": "watermelon-mini-seedless",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Watermelon",
     "price": 5.9,
     "qty": 1,
@@ -453,7 +468,7 @@
     "id": "beetroot-medium__merrimac__beetroot-loose",
     "productId": "beetroot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot Loose",
     "price": 19.9,
     "qty": 1,
@@ -462,13 +477,13 @@
     "pricePerDestinationUnit": 19.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-large__merrimac__beetroot-loose",
     "productId": "beetroot-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot Loose",
     "price": 19.9,
     "qty": 1,
@@ -477,13 +492,13 @@
     "pricePerDestinationUnit": 19.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-small__merrimac__beetroot-loose",
     "productId": "beetroot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot Loose",
     "price": 19.9,
     "qty": 1,
@@ -492,13 +507,13 @@
     "pricePerDestinationUnit": 19.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-bunch__merrimac__beetroot-loose",
     "productId": "beetroot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot Loose",
     "price": 19.9,
     "qty": 1,
@@ -507,13 +522,13 @@
     "pricePerDestinationUnit": 19.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-peeled-cooked__merrimac__beetroot-loose",
     "productId": "beetroot-peeled-cooked",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot Loose",
     "price": 19.9,
     "qty": 1,
@@ -522,13 +537,13 @@
     "pricePerDestinationUnit": 19.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-medium__merrimac__beetroot-1kg-bags",
     "productId": "beetroot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot 1kg Bags",
     "price": 5.9,
     "qty": 1,
@@ -537,13 +552,13 @@
     "pricePerDestinationUnit": 5.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-large__merrimac__beetroot-1kg-bags",
     "productId": "beetroot-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot 1kg Bags",
     "price": 5.9,
     "qty": 1,
@@ -552,13 +567,13 @@
     "pricePerDestinationUnit": 5.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-small__merrimac__beetroot-1kg-bags",
     "productId": "beetroot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot 1kg Bags",
     "price": 5.9,
     "qty": 1,
@@ -567,13 +582,13 @@
     "pricePerDestinationUnit": 5.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-bunch__merrimac__beetroot-1kg-bags",
     "productId": "beetroot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot 1kg Bags",
     "price": 5.9,
     "qty": 1,
@@ -582,13 +597,13 @@
     "pricePerDestinationUnit": 5.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "beetroot-peeled-cooked__merrimac__beetroot-1kg-bags",
     "productId": "beetroot-peeled-cooked",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Beetroot 1kg Bags",
     "price": 5.9,
     "qty": 1,
@@ -597,13 +612,13 @@
     "pricePerDestinationUnit": 5.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 5 \"beetroot\" varieties we stock."
+    "note": "Generic label — same price applied to all 5 \"beetroot\" varieties we stock."
   },
   {
     "id": "broccoli__merrimac__broccoli",
     "productId": "broccoli",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Broccoli",
     "price": 4.9,
     "qty": 1,
@@ -612,13 +627,13 @@
     "pricePerDestinationUnit": 4.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"broccoli\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"broccoli\" varieties we stock."
   },
   {
     "id": "broccoli-baby-purple__merrimac__broccoli",
     "productId": "broccoli-baby-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Broccoli",
     "price": 4.9,
     "qty": 1,
@@ -627,13 +642,13 @@
     "pricePerDestinationUnit": 4.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"broccoli\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"broccoli\" varieties we stock."
   },
   {
     "id": "cabbage-green__merrimac__cabbages",
     "productId": "cabbage-green",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Cabbages",
     "price": 6.9,
     "qty": 1,
@@ -642,13 +657,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"cabbage\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"cabbage\" varieties we stock."
   },
   {
     "id": "cabbage-red__merrimac__cabbages",
     "productId": "cabbage-red",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Cabbages",
     "price": 6.9,
     "qty": 1,
@@ -657,13 +672,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"cabbage\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"cabbage\" varieties we stock."
   },
   {
     "id": "cabbage-wombok__merrimac__cabbages",
     "productId": "cabbage-wombok",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Cabbages",
     "price": 6.9,
     "qty": 1,
@@ -672,13 +687,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 3 \"cabbage\" varieties we stock."
+    "note": "Generic label — same price applied to all 3 \"cabbage\" varieties we stock."
   },
   {
     "id": "capsicum-green__merrimac__capsicum-green",
     "productId": "capsicum-green",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Capsicum Green",
     "price": 7.9,
     "qty": 1,
@@ -693,7 +708,7 @@
     "id": "capsicum-red__merrimac__capsicum-red",
     "productId": "capsicum-red",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Capsicum Red",
     "price": 16.9,
     "qty": 1,
@@ -708,7 +723,7 @@
     "id": "capsicum-red-2nds__merrimac__capsicum-red",
     "productId": "capsicum-red-2nds",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Capsicum Red",
     "price": 16.9,
     "qty": 1,
@@ -723,7 +738,7 @@
     "id": "carrot-purple__merrimac__carrots-loose",
     "productId": "carrot-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -732,13 +747,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-bunch__merrimac__carrots-loose",
     "productId": "carrot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -747,13 +762,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-yellow__merrimac__carrots-loose",
     "productId": "carrot-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -762,13 +777,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-medium__merrimac__carrots-loose",
     "productId": "carrot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -777,13 +792,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-small__merrimac__carrots-loose",
     "productId": "carrot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -792,13 +807,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-med-large__merrimac__carrots-loose",
     "productId": "carrot-med-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots Loose",
     "price": 24.9,
     "qty": 1,
@@ -807,13 +822,13 @@
     "pricePerDestinationUnit": 24.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-purple__merrimac__carrots-1kg-bags",
     "productId": "carrot-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -822,13 +837,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-bunch__merrimac__carrots-1kg-bags",
     "productId": "carrot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -837,13 +852,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-yellow__merrimac__carrots-1kg-bags",
     "productId": "carrot-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -852,13 +867,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-medium__merrimac__carrots-1kg-bags",
     "productId": "carrot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -867,13 +882,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-small__merrimac__carrots-1kg-bags",
     "productId": "carrot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -882,13 +897,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-med-large__merrimac__carrots-1kg-bags",
     "productId": "carrot-med-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 1kg Bags",
     "price": 6.9,
     "qty": 1,
@@ -897,13 +912,13 @@
     "pricePerDestinationUnit": 6.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 6 \"carrot\" varieties we stock."
+    "note": "Generic label — same price applied to all 6 \"carrot\" varieties we stock."
   },
   {
     "id": "carrot-purple__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -912,13 +927,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-bunch__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -927,13 +942,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-yellow__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -942,13 +957,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-medium__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -957,13 +972,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-small__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -972,13 +987,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-med-large__merrimac__carrots-2nds-2kg-bags",
     "productId": "carrot-med-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 2kg Bags",
     "price": 6.5,
     "qty": 2,
@@ -987,13 +1002,13 @@
     "pricePerDestinationUnit": 3.25,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-purple__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1002,13 +1017,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-bunch__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1017,13 +1032,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-yellow__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-yellow",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1032,13 +1047,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-medium__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-medium",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1047,13 +1062,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-small__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-small",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1062,13 +1077,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "carrot-med-large__merrimac__carrots-2nds-5kg-bags",
     "productId": "carrot-med-large",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Carrots 2nds 5kg Bags",
     "price": 11.9,
     "qty": 5,
@@ -1077,13 +1092,13 @@
     "pricePerDestinationUnit": 2.38,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board grade \"2nds\" has no matching wholesale SKU \u2014 compared against standard-grade products instead."
+    "note": "Board grade \"2nds\" has no matching wholesale SKU — compared against standard-grade products instead."
   },
   {
     "id": "cauliflower__merrimac__cauliflower",
     "productId": "cauliflower",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Cauliflower",
     "price": 7.9,
     "qty": 1,
@@ -1098,7 +1113,7 @@
     "id": "celery__merrimac__celery",
     "productId": "celery",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Celery",
     "price": 7.9,
     "qty": 1,
@@ -1113,7 +1128,7 @@
     "id": "corn__merrimac__corn",
     "productId": "corn",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Corn",
     "price": 3.5,
     "qty": 1,
@@ -1128,7 +1143,7 @@
     "id": "cucumber-lebanese__merrimac__cucumber",
     "productId": "cucumber-lebanese",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Cucumber",
     "price": 11.9,
     "qty": 1,
@@ -1143,7 +1158,7 @@
     "id": "eggplant__merrimac__eggplant",
     "productId": "eggplant",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Eggplant",
     "price": 9.9,
     "qty": 1,
@@ -1158,7 +1173,7 @@
     "id": "garlic-bulbs-giant-australian-russian__merrimac__garlic",
     "productId": "garlic-bulbs-giant-australian-russian",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Garlic",
     "price": 79.9,
     "qty": 1,
@@ -1167,13 +1182,13 @@
     "pricePerDestinationUnit": 79.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"garlic\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"garlic\" varieties we stock."
   },
   {
     "id": "garlic-italian-purple__merrimac__garlic",
     "productId": "garlic-italian-purple",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Garlic",
     "price": 79.9,
     "qty": 1,
@@ -1182,13 +1197,13 @@
     "pricePerDestinationUnit": 79.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"garlic\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"garlic\" varieties we stock."
   },
   {
     "id": "ginger__merrimac__ginger",
     "productId": "ginger",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Ginger",
     "price": 29.9,
     "qty": 1,
@@ -1203,7 +1218,7 @@
     "id": "leek-single__merrimac__leeks",
     "productId": "leek-single",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Leeks",
     "price": 3.9,
     "qty": 1,
@@ -1212,13 +1227,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"leek\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"leek\" varieties we stock."
   },
   {
     "id": "leek-bunch__merrimac__leeks",
     "productId": "leek-bunch",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Leeks",
     "price": 3.9,
     "qty": 1,
@@ -1227,13 +1242,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"leek\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"leek\" varieties we stock."
   },
   {
     "id": "lettuce-salad-mix-punnet__merrimac__lettuce-mix-punnets",
     "productId": "lettuce-salad-mix-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Lettuce Mix Punnets",
     "price": 5.9,
     "qty": 1,
@@ -1248,7 +1263,7 @@
     "id": "rocket-punnet__merrimac__lettuce-rocket-punnets",
     "productId": "rocket-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Lettuce Rocket Punnets",
     "price": 5.9,
     "qty": 1,
@@ -1263,7 +1278,7 @@
     "id": "mushrooms-lions-mane__merrimac__mushrooms-loose",
     "productId": "mushrooms-lions-mane",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1272,13 +1287,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-oyster__merrimac__mushrooms-loose",
     "productId": "mushrooms-oyster",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1287,13 +1302,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-shiitake__merrimac__mushrooms-loose",
     "productId": "mushrooms-shiitake",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1302,13 +1317,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown__merrimac__mushrooms-loose",
     "productId": "mushrooms-swiss-brown",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1317,13 +1332,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-3kg-flat__merrimac__mushrooms-loose",
     "productId": "mushrooms-swiss-brown-3kg-flat",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1332,13 +1347,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-375g-flat__merrimac__mushrooms-loose",
     "productId": "mushrooms-swiss-brown-375g-flat",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1347,13 +1362,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-miscellaneous__merrimac__mushrooms-loose",
     "productId": "mushrooms-swiss-brown-miscellaneous",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1362,13 +1377,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white-180g-cups__merrimac__mushrooms-loose",
     "productId": "mushrooms-white-180g-cups",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1377,13 +1392,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white__merrimac__mushrooms-loose",
     "productId": "mushrooms-white",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1392,13 +1407,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white-miscellaneous__merrimac__mushrooms-loose",
     "productId": "mushrooms-white-miscellaneous",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Loose",
     "price": 39.9,
     "qty": 1,
@@ -1407,13 +1422,13 @@
     "pricePerDestinationUnit": 39.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-lions-mane__merrimac__mushrooms-punnets",
     "productId": "mushrooms-lions-mane",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1422,13 +1437,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-oyster__merrimac__mushrooms-punnets",
     "productId": "mushrooms-oyster",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1437,13 +1452,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-shiitake__merrimac__mushrooms-punnets",
     "productId": "mushrooms-shiitake",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1452,13 +1467,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown__merrimac__mushrooms-punnets",
     "productId": "mushrooms-swiss-brown",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1467,13 +1482,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-3kg-flat__merrimac__mushrooms-punnets",
     "productId": "mushrooms-swiss-brown-3kg-flat",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1482,13 +1497,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-375g-flat__merrimac__mushrooms-punnets",
     "productId": "mushrooms-swiss-brown-375g-flat",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1497,13 +1512,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-swiss-brown-miscellaneous__merrimac__mushrooms-punnets",
     "productId": "mushrooms-swiss-brown-miscellaneous",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1512,13 +1527,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white-180g-cups__merrimac__mushrooms-punnets",
     "productId": "mushrooms-white-180g-cups",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1527,13 +1542,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white__merrimac__mushrooms-punnets",
     "productId": "mushrooms-white",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1542,13 +1557,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "mushrooms-white-miscellaneous__merrimac__mushrooms-punnets",
     "productId": "mushrooms-white-miscellaneous",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Mushrooms Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1557,13 +1572,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 10 \"mushroom\" varieties we stock."
+    "note": "Generic label — same price applied to all 10 \"mushroom\" varieties we stock."
   },
   {
     "id": "parsnip__merrimac__parsnip",
     "productId": "parsnip",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Parsnip",
     "price": 14.9,
     "qty": 1,
@@ -1578,7 +1593,7 @@
     "id": "peas-sugarsnap__merrimac__peas-sugar-snap",
     "productId": "peas-sugarsnap",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Peas Sugar Snap",
     "price": 3.5,
     "qty": 1,
@@ -1593,7 +1608,7 @@
     "id": "pumpkin-butternut__merrimac__pumpkin-butternut-cut",
     "productId": "pumpkin-butternut",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pumpkin Butternut Cut",
     "price": 3.2,
     "qty": 1,
@@ -1608,7 +1623,7 @@
     "id": "pumpkin-butternut__merrimac__pumpkin-butternut-whole",
     "productId": "pumpkin-butternut",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pumpkin Butternut Whole",
     "price": 2.9,
     "qty": 1,
@@ -1623,7 +1638,7 @@
     "id": "pumpkin-jap__merrimac__pumpkin-jap-cut",
     "productId": "pumpkin-jap",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pumpkin Jap Cut",
     "price": 2.5,
     "qty": 1,
@@ -1638,7 +1653,7 @@
     "id": "pumpkin-jap__merrimac__pumpkin-jap-whole",
     "productId": "pumpkin-jap",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Pumpkin Jap Whole",
     "price": 6.5,
     "qty": 1,
@@ -1653,7 +1668,7 @@
     "id": "spinach-baby-punnet__merrimac__spinach-baby-loose",
     "productId": "spinach-baby-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Spinach Baby Loose",
     "price": 5.9,
     "qty": 1,
@@ -1668,7 +1683,7 @@
     "id": "spinach-baby-punnet__merrimac__spinach-baby-punnets",
     "productId": "spinach-baby-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Spinach Baby Punnets",
     "price": 9.9,
     "qty": 1,
@@ -1683,7 +1698,7 @@
     "id": "squash__merrimac__squash",
     "productId": "squash",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Squash",
     "price": 5.9,
     "qty": 1,
@@ -1698,7 +1713,7 @@
     "id": "superfood-mix__merrimac__superfood-mix-punnets",
     "productId": "superfood-mix",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Superfood Mix Punnets",
     "price": 4.9,
     "qty": 1,
@@ -1707,13 +1722,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"superfood\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"superfood\" varieties we stock."
   },
   {
     "id": "superfood-mix-punnet__merrimac__superfood-mix-punnets",
     "productId": "superfood-mix-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Superfood Mix Punnets",
     "price": 4.9,
     "qty": 1,
@@ -1722,13 +1737,13 @@
     "pricePerDestinationUnit": null,
     "needsConversionFactor": true,
     "confidence": "verify",
-    "note": "Generic label \u2014 same price applied to all 2 \"superfood\" varieties we stock."
+    "note": "Generic label — same price applied to all 2 \"superfood\" varieties we stock."
   },
   {
     "id": "herbs-thyme__merrimac__thyme",
     "productId": "herbs-thyme",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Thyme",
     "price": 19.9,
     "qty": 1,
@@ -1743,7 +1758,7 @@
     "id": "herbs-thyme-sleeve__merrimac__thyme",
     "productId": "herbs-thyme-sleeve",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Thyme",
     "price": 19.9,
     "qty": 1,
@@ -1758,7 +1773,7 @@
     "id": "herbs-thyme-punnet__merrimac__thyme",
     "productId": "herbs-thyme-punnet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Thyme",
     "price": 19.9,
     "qty": 1,
@@ -1773,7 +1788,7 @@
     "id": "tomato-cherry__merrimac__tomatoes-cherry-loose",
     "productId": "tomato-cherry",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Tomatoes Cherry Loose",
     "price": 5.9,
     "qty": 1,
@@ -1788,7 +1803,7 @@
     "id": "tomato-cherry__merrimac__tomatoes-cherry-punnets",
     "productId": "tomato-cherry",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Tomatoes Cherry Punnets",
     "price": 7.9,
     "qty": 1,
@@ -1803,7 +1818,7 @@
     "id": "tomato-roma__merrimac__tomatoes-roma-loose",
     "productId": "tomato-roma",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Tomatoes Roma Loose",
     "price": 7.9,
     "qty": 1,
@@ -1818,7 +1833,7 @@
     "id": "tomato-gourmet__merrimac__tomatoes-round-loose",
     "productId": "tomato-gourmet",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Tomatoes Round Loose",
     "price": 7.9,
     "qty": 1,
@@ -1827,13 +1842,13 @@
     "pricePerDestinationUnit": 7.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Board's 'Round' tomatoes are the wholesale 'Gourmet' round-truss tomato \u2014 no product literally named 'round' exists, matched by hand. Matched on variety word(s): gourmet."
+    "note": "Board's 'Round' tomatoes are the wholesale 'Gourmet' round-truss tomato — no product literally named 'round' exists, matched by hand. Matched on variety word(s): gourmet."
   },
   {
     "id": "turmeric__merrimac__turmeric",
     "productId": "turmeric",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Turmeric",
     "price": 7.9,
     "qty": 1,
@@ -1848,7 +1863,7 @@
     "id": "zucchini__merrimac__zucchini-green",
     "productId": "zucchini",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Zucchini Green",
     "price": 11.9,
     "qty": 1,
@@ -1857,13 +1872,13 @@
     "pricePerDestinationUnit": 11.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Wholesale's bare 'Zucchini' has no green/gold/Lebanese qualifier of its own \u2014 assumed to be the standard (green) one, but the fan-out here also includes zucchini-lebanese since nothing distinguishes it as a different variety in the catalog. Generic label \u2014 same price applied to all 2 \"zucchini\" varieties we stock."
+    "note": "Wholesale's bare 'Zucchini' has no green/gold/Lebanese qualifier of its own — assumed to be the standard (green) one, but the fan-out here also includes zucchini-lebanese since nothing distinguishes it as a different variety in the catalog. Generic label — same price applied to all 2 \"zucchini\" varieties we stock."
   },
   {
     "id": "zucchini-lebanese__merrimac__zucchini-green",
     "productId": "zucchini-lebanese",
     "retailerCode": "merrimac",
-    "date": "2026-08-23",
+    "date": "2026-08-31",
     "rawLabel": "Zucchini Green",
     "price": 11.9,
     "qty": 1,
@@ -1872,171 +1887,6 @@
     "pricePerDestinationUnit": 11.9,
     "needsConversionFactor": false,
     "confidence": "verify",
-    "note": "Wholesale's bare 'Zucchini' has no green/gold/Lebanese qualifier of its own \u2014 assumed to be the standard (green) one, but the fan-out here also includes zucchini-lebanese since nothing distinguishes it as a different variety in the catalog. Generic label \u2014 same price applied to all 2 \"zucchini\" varieties we stock."
-  },
-  {
-    "id": "apple-juicing-red__merrimac__apples-2nds-2kg-bags",
-    "productId": "apple-juicing-red",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples 2nds 2kg Bags",
-    "price": 11.9,
-    "qty": 2,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 5.95,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac's '2nds' bags are the wholesale juicing apples (all juicing varieties, not variety-specific). Matched on grade: juicing."
-  },
-  {
-    "id": "apple-braeburn-jazz__merrimac__apples-loose",
-    "productId": "apple-braeburn-jazz",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-fuji__merrimac__apples-loose",
-    "productId": "apple-fuji",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-gala__merrimac__apples-loose",
-    "productId": "apple-gala",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-granny-smith__merrimac__apples-loose",
-    "productId": "apple-granny-smith",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-pink-lady__merrimac__apples-loose",
-    "productId": "apple-pink-lady",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-red-del__merrimac__apples-loose",
-    "productId": "apple-red-del",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-southern-bliss__merrimac__apples-loose",
-    "productId": "apple-southern-bliss",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-southern-bliss-1kg-cardboard-punnet__merrimac__apples-loose",
-    "productId": "apple-southern-bliss-1kg-cardboard-punnet",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples Loose",
-    "price": 9.9,
-    "qty": 1,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 9.9,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac sells every wholesale apple variety loose at this one price, regardless of variety. Generic label \u2014 same price applied to all 8 \"apple\" varieties we stock."
-  },
-  {
-    "id": "apple-juicing-green__merrimac__apples-2nds-2kg-bags",
-    "productId": "apple-juicing-green",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples 2nds 2kg Bags",
-    "price": 11.9,
-    "qty": 2,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 5.95,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac's '2nds' bags are the wholesale juicing apples (all juicing varieties, not variety-specific). Matched on grade: juicing."
-  },
-  {
-    "id": "apple-juicing__merrimac__apples-2nds-2kg-bags",
-    "productId": "apple-juicing",
-    "retailerCode": "merrimac",
-    "date": "2026-09-01",
-    "rawLabel": "Apples 2nds 2kg Bags",
-    "price": 11.9,
-    "qty": 2,
-    "retailUnit": "KG",
-    "destinationUnit": "kg",
-    "pricePerDestinationUnit": 5.95,
-    "needsConversionFactor": false,
-    "confidence": "verify",
-    "note": "Confirmed by hand: Merrimac's '2nds' bags are the wholesale juicing apples (all juicing varieties, not variety-specific). Matched on grade: juicing."
+    "note": "Wholesale's bare 'Zucchini' has no green/gold/Lebanese qualifier of its own — assumed to be the standard (green) one, but the fan-out here also includes zucchini-lebanese since nothing distinguishes it as a different variety in the catalog. Generic label — same price applied to all 2 \"zucchini\" varieties we stock."
   }
 ]

@@ -45,8 +45,14 @@ export type RetailPricing = {
 };
 
 /**
- * A price a re-ingest found for a product that already has a different current price — staged
+ * A price (and possibly rawLabel/note/unit — a re-ingest can change more than just the number,
+ * e.g. a matching-logic fix) a re-ingest found that differs from what's currently live — staged
  * for a human to approve or reject in the admin UI rather than applied automatically.
+ *
+ * `proposedRow` carries the complete freshly-parsed row so approving swaps in everything the
+ * re-ingest produced, not just the price — otherwise metadata (note, rawLabel) can go stale even
+ * though the price itself gets fixed. The other fields here are a flattened summary for the UI
+ * diff view.
  */
 export type PendingRetailChange = {
   /** Same value as the RetailPricing row it proposes to change — see RetailPricing.id. */
@@ -63,4 +69,5 @@ export type PendingRetailChange = {
   /** The ingest date that proposed this change. */
   proposedDate: string;
   note: string;
+  proposedRow: RetailPricing;
 };
