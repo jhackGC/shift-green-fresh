@@ -16,13 +16,28 @@
  * verbatim off the board.
  *
  * Usage: pnpm import:merrimac --date 2026-08-23 [--dry-run]
+ *
+ * Re-running this for a later date does NOT overwrite whatever's live in current.json. Each
+ * parsed row is diffed against the current price for that product: no existing price -> merged
+ * into current.json directly (nothing to override); same price -> no-op; a different price ->
+ * staged as a PendingRetailChange for approval in the admin UI, current.json left untouched.
+ * That's what protects manual corrections made through the UI from being silently clobbered by a
+ * later re-ingest. The very first run for a retailer has nothing to diff against, so every row
+ * lands in current.json directly — that's the baseline.
  */
-import { computePricePerKg, parsePackSize } from '../../lib/vendor-pricing/normalize';
+import { computePricePerKg, parsePackSize, slugify } from '../../lib/vendor-pricing/normalize';
 import { loadProducts } from '../../lib/vendor-pricing/store';
 import type { Product } from '../../lib/vendor-pricing/types';
 import { matchProducts } from '../../lib/retail-pricing/match';
-import { retailPricingFileExists, saveRetailPricing } from '../../lib/retail-pricing/store';
-import type { RetailPricing } from '../../lib/retail-pricing/types';
+import {
+  importSnapshotExists,
+  loadCurrentRetailPricing,
+  loadPendingRetailChanges,
+  saveCurrentRetailPricing,
+  saveImportSnapshot,
+  savePendingRetailChanges
+} from '../../lib/retail-pricing/store';
+import type { PendingRetailChange, RetailPricing } from '../../lib/retail-pricing/types';
 
 const RETAILER_CODE = 'merrimac';
 
@@ -254,9 +269,9 @@ function main() {
     process.exit(1);
   }
 
-  if (!dryRun && retailPricingFileExists(RETAILER_CODE, date)) {
+  if (!dryRun && importSnapshotExists(RETAILER_CODE, date)) {
     console.error(
-      `data/retail-pricing/${RETAILER_CODE}/${date}.json already exists — refusing to overwrite. Pick a different --date.`
+      `data/retail-pricing/${RETAILER_CODE}/imports/${date}.json already exists — refusing to overwrite. Pick a different --date.`
     );
     process.exit(1);
   }
@@ -282,7 +297,7 @@ function main() {
 
     const parsed = parsePackSize(raw.size);
 
-    match.productIds.forEach((productId, i) => {
+    match.productIds.forEach((productId) => {
       const product = productById.get(productId);
       const conversion = computePricePerKg(
         raw.price,
@@ -295,7 +310,7 @@ function main() {
 
       const noteParts = [raw.note, match.note].filter(Boolean);
       rows.push({
-        id: `${productId}__${RETAILER_CODE}__${date}__${i}`,
+        id: `${productId}__${RETAILER_CODE}__${slugify(raw.rawLabel)}`,
         productId,
         retailerCode: RETAILER_CODE,
         date,
@@ -322,13 +337,65 @@ function main() {
   console.log(`  Priced directly ($/kg known): ${priced}`);
   console.log(`  Needs a conversion factor (no avgWeightG yet): ${needsConversion}`);
 
+  // Diff against whatever's currently live, rather than overwriting it: no existing price for
+  // this row -> nothing to override, merge straight in; same price -> no-op; different price ->
+  // stage for approval instead of applying it.
+  const current = loadCurrentRetailPricing(RETAILER_CODE);
+  const currentById = new Map(current.map((r) => [r.id, r]));
+  const nextCurrent = [...current];
+  // Preserve any still-unresolved pending change this run doesn't touch; a fresh proposal for the
+  // same row (below) supersedes an older unresolved one rather than piling up duplicates.
+  const previouslyPending = loadPendingRetailChanges(RETAILER_CODE);
+  const touchedIds = new Set(rows.map((r) => r.id));
+  const pendingChanges: PendingRetailChange[] = previouslyPending.filter(
+    (p) => !touchedIds.has(p.id)
+  );
+  let addedNew = 0;
+  let unchanged = 0;
+
+  for (const row of rows) {
+    const existing = currentById.get(row.id);
+    if (!existing) {
+      nextCurrent.push(row);
+      addedNew++;
+    } else if (existing.price === row.price) {
+      unchanged++;
+    } else {
+      pendingChanges.push({
+        id: row.id,
+        productId: row.productId,
+        retailerCode: RETAILER_CODE,
+        rawLabel: row.rawLabel,
+        currentPrice: existing.price,
+        currentPricePerDestinationUnit: existing.pricePerDestinationUnit,
+        proposedPrice: row.price,
+        proposedPricePerDestinationUnit: row.pricePerDestinationUnit,
+        qty: row.qty,
+        retailUnit: row.retailUnit,
+        proposedDate: date,
+        note: `Re-ingest on ${date} found a different price for "${row.rawLabel}" than what's currently live — approve to apply it, reject to keep the current value.`
+      });
+    }
+  }
+
+  console.log(
+    current.length === 0
+      ? `\nNo existing current.json for ${RETAILER_CODE} — this is the baseline: all ${addedNew} rows become current.`
+      : `\nDiff vs current: ${addedNew} new, ${unchanged} unchanged, ${pendingChanges.length} proposed change(s) awaiting approval.`
+  );
+
   if (dryRun) {
     console.log('\n--dry-run: nothing written.');
     return;
   }
 
-  saveRetailPricing(RETAILER_CODE, date, rows);
-  console.log(`\nWrote data/retail-pricing/${RETAILER_CODE}/${date}.json`);
+  saveImportSnapshot(RETAILER_CODE, date, rows);
+  saveCurrentRetailPricing(RETAILER_CODE, nextCurrent);
+  savePendingRetailChanges(RETAILER_CODE, pendingChanges);
+  console.log(
+    `\nWrote data/retail-pricing/${RETAILER_CODE}/imports/${date}.json, current.json, and pending.json` +
+      (pendingChanges.length ? ` — review pending changes at /admin/retail-pricing.` : '.')
+  );
 }
 
 main();

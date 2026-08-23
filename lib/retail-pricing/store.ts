@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { RetailPricing } from './types';
+import type { PendingRetailChange, RetailPricing } from './types';
 
 const DATA_ROOT = path.join(process.cwd(), 'data');
 
@@ -16,22 +16,6 @@ function writeJsonFile(filePath: string, data: unknown): void {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
 }
 
-export function retailPricingFilePath(retailerCode: string, date: string): string {
-  return path.join(DATA_ROOT, 'retail-pricing', retailerCode, `${date}.json`);
-}
-
-export function retailPricingFileExists(retailerCode: string, date: string): boolean {
-  return fs.existsSync(retailPricingFilePath(retailerCode, date));
-}
-
-export function saveRetailPricing(retailerCode: string, date: string, rows: RetailPricing[]): void {
-  writeJsonFile(retailPricingFilePath(retailerCode, date), rows);
-}
-
-export function loadRetailPricing(retailerCode: string, date: string): RetailPricing[] {
-  return readJsonFile<RetailPricing[]>(retailPricingFilePath(retailerCode, date), []);
-}
-
 export function listRetailerCodes(): string[] {
   const dir = path.join(DATA_ROOT, 'retail-pricing');
   if (!fs.existsSync(dir)) return [];
@@ -42,22 +26,122 @@ export function listRetailerCodes(): string[] {
     .sort();
 }
 
-export function listDatesForRetailer(retailerCode: string): string[] {
-  const dir = path.join(DATA_ROOT, 'retail-pricing', retailerCode);
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((name) => name.endsWith('.json'))
-    .map((name) => name.replace(/\.json$/, ''))
-    .sort()
-    .reverse();
+// ---------- current.json: the live, editable state ----------
+
+function currentFilePath(retailerCode: string): string {
+  return path.join(DATA_ROOT, 'retail-pricing', retailerCode, 'current.json');
 }
 
-export function loadLatestRetailPricing(retailerCode: string): RetailPricing[] {
-  const [latestDate] = listDatesForRetailer(retailerCode);
-  return latestDate ? loadRetailPricing(retailerCode, latestDate) : [];
+export function loadCurrentRetailPricing(retailerCode: string): RetailPricing[] {
+  return readJsonFile<RetailPricing[]>(currentFilePath(retailerCode), []);
 }
 
-export function loadAllLatestRetailPricing(): RetailPricing[] {
-  return listRetailerCodes().flatMap((retailerCode) => loadLatestRetailPricing(retailerCode));
+export function saveCurrentRetailPricing(retailerCode: string, rows: RetailPricing[]): void {
+  writeJsonFile(currentFilePath(retailerCode), rows);
+}
+
+export function loadAllCurrentRetailPricing(): RetailPricing[] {
+  return listRetailerCodes().flatMap((retailerCode) => loadCurrentRetailPricing(retailerCode));
+}
+
+/**
+ * Updates one row's price in `current.json` in place and recomputes its normalized $/kg (via
+ * `recompute`, injected by the caller so this module doesn't need to know about unit-conversion
+ * or products — see app/api/retail-pricing/route.ts). Throws if the row id doesn't exist.
+ */
+export function updateCurrentRetailPricingRow(
+  retailerCode: string,
+  id: string,
+  price: number,
+  date: string,
+  recompute: (
+    row: RetailPricing
+  ) => Pick<RetailPricing, 'pricePerDestinationUnit' | 'needsConversionFactor'>
+): RetailPricing {
+  const rows = loadCurrentRetailPricing(retailerCode);
+  const index = rows.findIndex((r) => r.id === id);
+  if (index === -1) {
+    throw new Error(`No current retail pricing row "${id}" found for ${retailerCode}.`);
+  }
+  const existing = rows[index]!;
+  const updated: RetailPricing = { ...existing, price, date };
+  Object.assign(updated, recompute(updated));
+  rows[index] = updated;
+  saveCurrentRetailPricing(retailerCode, rows);
+  return updated;
+}
+
+// ---------- imports/<date>.json: historical, append-only ingest snapshots (audit trail only,
+// never read by the live app) ----------
+
+function importSnapshotFilePath(retailerCode: string, date: string): string {
+  return path.join(DATA_ROOT, 'retail-pricing', retailerCode, 'imports', `${date}.json`);
+}
+
+export function importSnapshotExists(retailerCode: string, date: string): boolean {
+  return fs.existsSync(importSnapshotFilePath(retailerCode, date));
+}
+
+export function saveImportSnapshot(
+  retailerCode: string,
+  date: string,
+  rows: RetailPricing[]
+): void {
+  writeJsonFile(importSnapshotFilePath(retailerCode, date), rows);
+}
+
+// ---------- pending.json: changes a re-ingest proposed that differ from current, awaiting
+// approve/reject in the admin UI ----------
+
+function pendingFilePath(retailerCode: string): string {
+  return path.join(DATA_ROOT, 'retail-pricing', retailerCode, 'pending.json');
+}
+
+export function loadPendingRetailChanges(retailerCode: string): PendingRetailChange[] {
+  return readJsonFile<PendingRetailChange[]>(pendingFilePath(retailerCode), []);
+}
+
+export function savePendingRetailChanges(
+  retailerCode: string,
+  changes: PendingRetailChange[]
+): void {
+  writeJsonFile(pendingFilePath(retailerCode), changes);
+}
+
+export function loadAllPendingRetailChanges(): PendingRetailChange[] {
+  return listRetailerCodes().flatMap((retailerCode) => loadPendingRetailChanges(retailerCode));
+}
+
+/**
+ * Approves or rejects one pending change. Approving applies the proposed price to `current.json`
+ * (recomputed via `recompute`, same contract as updateCurrentRetailPricingRow) and returns the
+ * updated row; rejecting just discards the pending entry and returns null. Either way the change
+ * is removed from pending.json. Throws if no pending change exists for that product.
+ */
+export function resolvePendingRetailChange(
+  retailerCode: string,
+  id: string,
+  action: 'approve' | 'reject',
+  recompute: (
+    row: RetailPricing
+  ) => Pick<RetailPricing, 'pricePerDestinationUnit' | 'needsConversionFactor'>
+): RetailPricing | null {
+  const pending = loadPendingRetailChanges(retailerCode);
+  const index = pending.findIndex((p) => p.id === id);
+  if (index === -1) {
+    throw new Error(`No pending change "${id}" at ${retailerCode}.`);
+  }
+  const change = pending[index]!;
+  pending.splice(index, 1);
+  savePendingRetailChanges(retailerCode, pending);
+
+  if (action === 'reject') return null;
+
+  return updateCurrentRetailPricingRow(
+    retailerCode,
+    change.id,
+    change.proposedPrice,
+    change.proposedDate,
+    recompute
+  );
 }
