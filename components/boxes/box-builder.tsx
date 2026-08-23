@@ -4,7 +4,7 @@ import { priceForMargin } from 'lib/margins/calc';
 import { betterProcurement, planProcurement, type PackOption } from 'lib/boxes/procurement';
 import type { Box, BoxItem } from 'lib/boxes/types';
 import type { Product } from 'lib/vendor-pricing/types';
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 export type AvailableItem = {
@@ -40,6 +40,7 @@ export function BoxBuilder({
   const [saving, setSaving] = useState(false);
   const [boxCount, setBoxCount] = useState<number | ''>('');
   const [researchedRrp, setResearchedRrp] = useState<number | ''>('');
+  const [expandedBoxId, setExpandedBoxId] = useState<string | null>(null);
 
   const itemByProductId = useMemo(
     () => new Map(availableItems.map((i) => [i.productId, i])),
@@ -386,9 +387,11 @@ export function BoxBuilder({
           <table className="w-full min-w-[700px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-neutral-300 bg-neutral-50 text-left text-xs uppercase tracking-wide text-neutral-500 dark:border-neutral-700 dark:bg-neutral-900">
+                <th className="px-3 py-2" />
                 <th className="px-3 py-2">Box</th>
                 <th className="px-3 py-2">Week</th>
                 <th className="px-3 py-2">Items</th>
+                <th className="px-3 py-2 text-right">Weight</th>
                 <th className="px-3 py-2 text-right">Cost</th>
                 <th className="px-3 py-2 text-right">Sell</th>
                 <th className="px-3 py-2 text-right">Margin</th>
@@ -396,52 +399,92 @@ export function BoxBuilder({
               </tr>
             </thead>
             <tbody>
-              {boxes.map((box) => (
-                <tr
-                  key={box.id}
-                  className="border-b border-neutral-200 hover:bg-teal-50/60 dark:border-neutral-800 dark:hover:bg-teal-900/10"
-                >
-                  <td className="px-3 py-2 font-medium">
-                    {box.name}
-                    <input
-                      type="text"
-                      defaultValue={box.description ?? ''}
-                      placeholder="Who's this for? (click to add guidance)"
-                      onBlur={(e) => {
-                        if (e.target.value !== (box.description ?? ''))
-                          saveDescription(box.id, e.target.value);
-                      }}
-                      className="mt-0.5 block w-full rounded border-none bg-transparent px-0 py-0 text-[11px] font-normal text-neutral-500 placeholder:text-neutral-400 focus:border focus:border-neutral-300 focus:bg-white focus:px-1.5 focus:py-0.5 dark:text-neutral-400 dark:placeholder:text-neutral-600 dark:focus:border-neutral-700 dark:focus:bg-neutral-800"
-                    />
-                    {box.boxCount && (
-                      <div className="text-[10px] font-normal text-amber-600 dark:text-amber-400">
-                        pack-aware @ {box.boxCount} boxes
-                      </div>
+              {boxes.map((box) => {
+                const boxWeight = box.items.reduce((sum, item) => sum + item.qty, 0);
+                const expanded = expandedBoxId === box.id;
+                return (
+                  <Fragment key={box.id}>
+                    <tr className="border-b border-neutral-200 hover:bg-teal-50/60 dark:border-neutral-800 dark:hover:bg-teal-900/10">
+                      <td className="px-3 py-2 align-top">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedBoxId(expanded ? null : box.id)}
+                          aria-label={expanded ? 'Collapse' : 'Expand'}
+                          className="text-neutral-400 hover:text-teal-600 dark:hover:text-teal-400"
+                        >
+                          {expanded ? '▾' : '▸'}
+                        </button>
+                      </td>
+                      <td className="px-3 py-2 font-medium">
+                        {box.name}
+                        <input
+                          type="text"
+                          defaultValue={box.description ?? ''}
+                          placeholder="Who's this for? (click to add guidance)"
+                          onBlur={(e) => {
+                            if (e.target.value !== (box.description ?? ''))
+                              saveDescription(box.id, e.target.value);
+                          }}
+                          className="mt-0.5 block w-full rounded border-none bg-transparent px-0 py-0 text-[11px] font-normal text-neutral-500 placeholder:text-neutral-400 focus:border focus:border-neutral-300 focus:bg-white focus:px-1.5 focus:py-0.5 dark:text-neutral-400 dark:placeholder:text-neutral-600 dark:focus:border-neutral-700 dark:focus:bg-neutral-800"
+                        />
+                        {box.boxCount && (
+                          <div className="text-[10px] font-normal text-amber-600 dark:text-amber-400">
+                            pack-aware @ {box.boxCount} boxes
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-3 py-2 font-mono text-xs text-neutral-500">{box.weekOf}</td>
+                      <td className="px-3 py-2 text-xs text-neutral-500">
+                        {box.items.length} items
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-xs">
+                        {boxWeight.toFixed(1)}kg
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-xs">
+                        {formatMoney(box.wholesaleCost)}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-xs font-semibold">
+                        {formatMoney(box.sellPrice)}
+                        {box.researchedRrp && (
+                          <div className="text-[10px] font-normal text-neutral-400">RRP</div>
+                        )}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-xs">
+                        {box.marginPercent}%
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <button
+                          type="button"
+                          onClick={() => removeBox(box.id)}
+                          className="text-xs text-neutral-400 hover:text-red-600"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                    {expanded && (
+                      <tr className="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60">
+                        <td />
+                        <td colSpan={8} className="px-3 py-3">
+                          <div className="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
+                            {box.items.map((item) => (
+                              <div
+                                key={item.productId}
+                                className="flex justify-between gap-2 text-xs text-neutral-600 dark:text-neutral-400"
+                              >
+                                <span className="truncate">
+                                  {itemByProductId.get(item.productId)?.name ?? item.productId}
+                                </span>
+                                <span className="font-mono text-neutral-400">{item.qty}kg</span>
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
                     )}
-                  </td>
-                  <td className="px-3 py-2 font-mono text-xs text-neutral-500">{box.weekOf}</td>
-                  <td className="px-3 py-2 text-xs text-neutral-500">{box.items.length} items</td>
-                  <td className="px-3 py-2 text-right font-mono text-xs">
-                    {formatMoney(box.wholesaleCost)}
-                  </td>
-                  <td className="px-3 py-2 text-right font-mono text-xs font-semibold">
-                    {formatMoney(box.sellPrice)}
-                    {box.researchedRrp && (
-                      <div className="text-[10px] font-normal text-neutral-400">RRP</div>
-                    )}
-                  </td>
-                  <td className="px-3 py-2 text-right font-mono text-xs">{box.marginPercent}%</td>
-                  <td className="px-3 py-2 text-right">
-                    <button
-                      type="button"
-                      onClick={() => removeBox(box.id)}
-                      className="text-xs text-neutral-400 hover:text-red-600"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  </Fragment>
+                );
+              })}
             </tbody>
           </table>
         </div>
