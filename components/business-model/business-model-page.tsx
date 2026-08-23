@@ -3,16 +3,19 @@
 import {
   computeBusinessModel,
   computeLabourScenarios,
-  computeOwnVehicleCostPerTrip
+  computeOwnVehicleCostPerTrip,
+  computeTieredDeliveryFee
 } from 'lib/business-model/calc';
 import {
   DEFAULT_ASSUMPTIONS,
   type BoxMixEntry,
   type BusinessAssumptions,
   type BusinessModel,
-  type LogisticsMode
+  type LogisticsMode,
+  type NonPerishableMixEntry
 } from 'lib/business-model/types';
 import type { Box } from 'lib/boxes/types';
+import type { NonPerishableItem } from 'lib/non-perishables/types';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -74,6 +77,7 @@ function NumberField({
   value,
   onChange,
   step = 1,
+  min = 0,
   prefix,
   suffix
 }: {
@@ -81,6 +85,7 @@ function NumberField({
   value: number;
   onChange: (v: number) => void;
   step?: number;
+  min?: number;
   prefix?: string;
   suffix?: string;
 }) {
@@ -91,7 +96,7 @@ function NumberField({
         {prefix}
         <input
           type="number"
-          min={0}
+          min={min}
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value) || 0)}
@@ -105,9 +110,11 @@ function NumberField({
 
 export function BusinessModelPage({
   boxes,
+  nonPerishables,
   initialModel
 }: {
   boxes: Box[];
+  nonPerishables: NonPerishableItem[];
   initialModel: BusinessModel;
 }) {
   const [assumptions, setAssumptions] = useState<BusinessAssumptions>(
@@ -117,6 +124,12 @@ export function BusinessModelPage({
     boxes.map((b) => ({
       boxId: b.id,
       boxesPerWeek: initialModel.boxMix.find((m) => m.boxId === b.id)?.boxesPerWeek ?? 0
+    }))
+  );
+  const [nonPerishableMix, setNonPerishableMix] = useState<NonPerishableMixEntry[]>(() =>
+    nonPerishables.map((i) => ({
+      itemId: i.id,
+      unitsPerWeek: initialModel.nonPerishableMix?.find((m) => m.itemId === i.id)?.unitsPerWeek ?? 0
     }))
   );
   const [saving, setSaving] = useState(false);
@@ -130,10 +143,15 @@ export function BusinessModelPage({
   function updateBoxCount(boxId: string, boxesPerWeek: number) {
     setBoxMix((prev) => prev.map((m) => (m.boxId === boxId ? { ...m, boxesPerWeek } : m)));
   }
+  function updateNonPerishableCount(itemId: string, unitsPerWeek: number) {
+    setNonPerishableMix((prev) =>
+      prev.map((m) => (m.itemId === itemId ? { ...m, unitsPerWeek } : m))
+    );
+  }
 
   const result = useMemo(
-    () => computeBusinessModel(boxes, boxMix, assumptions),
-    [boxes, boxMix, assumptions]
+    () => computeBusinessModel(boxes, boxMix, nonPerishables, nonPerishableMix, assumptions),
+    [boxes, boxMix, nonPerishables, nonPerishableMix, assumptions]
   );
 
   async function save() {
@@ -142,7 +160,7 @@ export function BusinessModelPage({
       const res = await fetch('/api/business-model', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ assumptions, boxMix })
+        body: JSON.stringify({ assumptions, boxMix, nonPerishableMix })
       });
       if (!res.ok) throw new Error(`Save failed (${res.status})`);
       toast.success('Saved.');
@@ -189,13 +207,17 @@ export function BusinessModelPage({
           <NumberField
             label="Target margin"
             suffix="%"
+            min={-50}
             value={assumptions.marginPercent}
             onChange={(v) => updateAssumption('marginPercent', v)}
           />
           <p className="-mt-2 text-[11px] text-neutral-400">
             Applied live to every box's wholesale cost here — a scenario knob, separate from
             whatever margin each box was saved with in the box builder. A box with a researched RRP
-            still uses that fixed price regardless of this.
+            still uses that fixed price regardless of this. Negative margin means selling below
+            wholesale cost — a genuine produce subsidy, not just a thin margin. Non-perishables
+            below are meant to fund that gap; the P&amp;L shows both sides so you can see whether
+            they actually do.
           </p>
 
           {/* Transport — both options shown together so "is it worth it to have it sent"
@@ -209,12 +231,14 @@ export function BusinessModelPage({
 
           {(() => {
             const ownVehicle = computeOwnVehicleCostPerTrip(assumptions);
-            const deliveryCost = assumptions.deliveryFeePerTrip;
-            // Fair comparison uses the fully-loaded (labour-inclusive) figure — delivery has no
-            // driving-labour equivalent, so comparing it against transport-only understates what
-            // picking up actually costs.
-            const cheaper: LogisticsMode =
-              ownVehicle.withLabour <= deliveryCost ? 'own-vehicle' : 'delivery-service';
+            const delivery = computeTieredDeliveryFee(result.weeklyCogs);
+            const deliveryCost = delivery.total;
+            // Each version compared against delivery independently — "without driving hours" is
+            // the true marginal cost if you're going anyway for another reason; "with" is the
+            // honest cost if this trip only happens because of the pickup. They can land on
+            // different sides of "cheaper than delivery," which is the point of splitting them.
+            const transportOnlyCheaper = ownVehicle.transportOnly <= deliveryCost;
+            const withLabourCheaper = ownVehicle.withLabour <= deliveryCost;
             return (
               <>
                 <div
@@ -225,20 +249,27 @@ export function BusinessModelPage({
                       : 'border-neutral-200 dark:border-neutral-800'
                   }`}
                 >
-                  <div className="mb-1.5 flex items-center justify-between text-xs font-semibold">
-                    <span>
-                      Pick up (own vehicle){' '}
-                      {cheaper === 'own-vehicle' && (
+                  <div className="mb-1.5 text-xs font-semibold">Pick up (own vehicle)</div>
+                  <div className="mb-1 flex items-center justify-between text-xs">
+                    <span className="text-neutral-500">Without driving hours</span>
+                    <span className="font-mono">
+                      {formatMoney(ownVehicle.transportOnly)}/trip{' '}
+                      {transportOnlyCheaper && (
                         <span className="text-emerald-600 dark:text-emerald-400">cheaper</span>
                       )}
                     </span>
-                    <span className="font-mono">{formatMoney(ownVehicle.withLabour)}/trip</span>
                   </div>
-                  <div className="mb-1.5 text-[10px] text-neutral-400">
-                    {formatMoney(ownVehicle.transportOnly)} transport +{' '}
-                    {formatMoney(ownVehicle.withLabour - ownVehicle.transportOnly)} driving labour (
-                    {assumptions.drivingHoursPerTrip}hrs @{' '}
-                    {formatMoney(assumptions.hourlyLabourRate)}/hr, set below)
+                  <div className="mb-1.5 flex items-center justify-between text-xs">
+                    <span className="text-neutral-500">
+                      With driving hours ({assumptions.drivingHoursPerTrip}hrs @{' '}
+                      {formatMoney(assumptions.hourlyLabourRate)}/hr)
+                    </span>
+                    <span className="font-mono">
+                      {formatMoney(ownVehicle.withLabour)}/trip{' '}
+                      {withLabourCheaper && (
+                        <span className="text-emerald-600 dark:text-emerald-400">cheaper</span>
+                      )}
+                    </span>
                   </div>
                   <div className="flex flex-col gap-1.5" onClick={(e) => e.stopPropagation()}>
                     <NumberField
@@ -289,15 +320,22 @@ export function BusinessModelPage({
                     <span className="font-mono">{formatMoney(deliveryCost)}/trip</span>
                   </div>
                   <div className="mb-1.5 text-[10px] text-neutral-400">
-                    No driving labour — nobody drives.
+                    No driving labour — nobody drives. eco-farms' real rate card, tiered by order
+                    value:
                   </div>
-                  <div onClick={(e) => e.stopPropagation()}>
-                    <NumberField
-                      label="Delivery fee / trip"
-                      prefix="$"
-                      value={assumptions.deliveryFeePerTrip}
-                      onChange={(v) => updateAssumption('deliveryFeePerTrip', v)}
-                    />
+                  <div className="flex flex-col gap-0.5 text-[11px] text-neutral-500">
+                    <div className="flex justify-between">
+                      <span>Order value (produce COGS)</span>
+                      <span className="font-mono">{formatMoney(result.weeklyCogs)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Tier fee</span>
+                      <span className="font-mono">{formatMoney(delivery.tierFee)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Fuel levy</span>
+                      <span className="font-mono">{formatMoney(delivery.fuelLevy)}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -456,12 +494,100 @@ export function BusinessModelPage({
 
           <div className="rounded-lg border border-neutral-300 dark:border-neutral-700">
             <div className="border-b border-neutral-300 bg-neutral-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-900">
+              <h2 className="text-sm font-semibold uppercase tracking-wide">
+                Weekly non-perishables mix — {result.nonPerishableLines.length} lines
+              </h2>
+              <p className="mt-0.5 text-xs text-neutral-500">
+                Manage the item list at{' '}
+                <a href="/admin/non-perishables" className="underline hover:text-teal-600">
+                  /admin/non-perishables
+                </a>
+                . These feed straight into the P&amp;L below, alongside the box mix.
+              </p>
+            </div>
+            {nonPerishables.length === 0 ? (
+              <p className="p-4 text-sm text-neutral-400">
+                No non-perishable items yet — add some at /admin/non-perishables.
+              </p>
+            ) : (
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="border-b border-neutral-300 bg-neutral-50 text-left text-xs uppercase tracking-wide text-neutral-500 dark:border-neutral-700 dark:bg-neutral-900">
+                    <th className="px-3 py-2">Item</th>
+                    <th className="px-3 py-2 text-right">Cost</th>
+                    <th className="px-3 py-2 text-right">Sell</th>
+                    <th className="px-3 py-2 text-right">Units/week</th>
+                    <th className="px-3 py-2 text-right">Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {nonPerishables.map((item) => {
+                    const mix = nonPerishableMix.find((m) => m.itemId === item.id);
+                    return (
+                      <tr
+                        key={item.id}
+                        className="border-b border-neutral-200 dark:border-neutral-800"
+                      >
+                        <td className="px-3 py-2 font-medium">{item.name}</td>
+                        <td className="px-3 py-2 text-right font-mono text-xs">
+                          {formatMoney(item.cost)}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono text-xs">
+                          {formatMoney(item.sellPrice)}
+                        </td>
+                        <td className="px-3 py-2 text-right">
+                          <input
+                            type="number"
+                            min={0}
+                            value={mix?.unitsPerWeek ?? 0}
+                            onChange={(e) =>
+                              updateNonPerishableCount(item.id, Number(e.target.value) || 0)
+                            }
+                            className="w-16 rounded border border-neutral-300 bg-white px-1.5 py-0.5 text-right font-mono text-xs dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                          />
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono text-xs">
+                          {formatMoney((mix?.unitsPerWeek ?? 0) * item.sellPrice)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          <div className="rounded-lg border border-neutral-300 dark:border-neutral-700">
+            <div className="border-b border-neutral-300 bg-neutral-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-900">
               <h2 className="text-sm font-semibold uppercase tracking-wide">Weekly P&amp;L</h2>
             </div>
             <div className="flex flex-col gap-1.5 p-4 text-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">
+                Produce (boxes)
+              </p>
               <Row label="Revenue" value={result.weeklyRevenue} />
               <Row label="Cost of goods (wholesale)" value={-result.weeklyCogs} />
-              <Row label="Gross profit" value={result.grossProfit} bold />
+              <Row label="Produce gross profit" value={result.grossProfit} bold />
+
+              {result.nonPerishableLines.length > 0 && (
+                <>
+                  <hr className="my-1 border-neutral-200 dark:border-neutral-800" />
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">
+                    Non-perishables
+                  </p>
+                  <Row label="Revenue" value={result.nonPerishableRevenue} />
+                  <Row label="Cost of goods" value={-result.nonPerishableCogs} />
+                  <Row label="Non-perishables profit" value={result.nonPerishableProfit} bold />
+                  {result.grossProfit < 0 && (
+                    <p className="text-[11px] text-amber-600 dark:text-amber-400">
+                      Produce is running at a {formatMoney(-result.grossProfit)} loss (subsidized
+                      pricing) — non-perishables profit needs to cover that gap before anything's
+                      left for transport, labour, or actual profit.
+                    </p>
+                  )}
+                </>
+              )}
+
               <hr className="my-1 border-neutral-200 dark:border-neutral-800" />
               <Row
                 label={`Transport (${assumptions.logisticsMode === 'own-vehicle' ? 'pick up' : 'delivery'}, ${assumptions.tripsPerWeek}× trip/week)`}
@@ -530,10 +656,11 @@ export function BusinessModelPage({
                   <th className="px-3 py-2 text-right">Packing cost</th>
                   <th className="px-3 py-2 text-right">Total labour</th>
                   <th className="px-3 py-2 text-right">Net profit</th>
+                  <th className="px-3 py-2 text-right">Break-even</th>
                 </tr>
               </thead>
               <tbody>
-                {computeLabourScenarios(result).map((s) => (
+                {computeLabourScenarios(result, assumptions).map((s) => (
                   <tr key={s.label} className="border-b border-neutral-200 dark:border-neutral-800">
                     <td className="px-3 py-2">{s.label}</td>
                     <td className="px-3 py-2 text-right font-mono text-xs">
@@ -565,6 +692,13 @@ export function BusinessModelPage({
                       >
                         {formatMoney(s.netProfit)}
                       </span>
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono text-xs">
+                      {s.breakEvenBoxesPerWeek != null ? (
+                        `${Math.ceil(s.breakEvenBoxesPerWeek)} boxes/wk`
+                      ) : (
+                        <span className="text-red-500">never</span>
+                      )}
                     </td>
                   </tr>
                 ))}

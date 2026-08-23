@@ -7,7 +7,6 @@
     "fuelConsumptionL100km": 10,
     "vehicleCostPerTrip": 15,
     "drivingHoursPerTrip": 3,
-    "deliveryFeePerTrip": 60,
     "tripsPerWeek": 1,
     "hourlyLabourRate": 30,
     "packingMinutesPerBox": 8,
@@ -25,12 +24,13 @@
     },
     {
       "boxId": "box-1787487108516",
-      "boxesPerWeek": 20
+      "boxesPerWeek": 0
     },
     {
       "boxId": "box-1787487268791",
       "boxesPerWeek": 0
     }
   ],
-  "updatedAt": "2026-08-23T13:09:14.221Z"
+  "nonPerishableMix": [],
+  "updatedAt": "2026-08-23T14:34:20.903Z"
 }

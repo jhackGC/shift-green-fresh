@@ -1,6 +1,7 @@
 import { priceForMargin } from '../margins/calc';
 import type { Box } from '../boxes/types';
-import type { BoxMixEntry, BusinessAssumptions } from './types';
+import type { NonPerishableItem } from '../non-perishables/types';
+import type { BoxMixEntry, BusinessAssumptions, NonPerishableMixEntry } from './types';
 
 export type BoxMixLine = {
   boxId: string;
@@ -12,13 +13,30 @@ export type BoxMixLine = {
   weeklyCogs: number;
 };
 
+export type NonPerishableMixLine = {
+  itemId: string;
+  itemName: string;
+  unitsPerWeek: number;
+  costPerUnit: number;
+  sellPerUnit: number;
+  weeklyRevenue: number;
+  weeklyCogs: number;
+};
+
 export type BusinessModelResult = {
   lines: BoxMixLine[];
   totalBoxesPerWeek: number;
+  /** Produce only — see nonPerishable* fields for the other side of the P&L. */
   weeklyRevenue: number;
   weeklyCogs: number;
   /** revenue - cogs, before logistics/labour/fixed costs. */
   grossProfit: number;
+  nonPerishableLines: NonPerishableMixLine[];
+  nonPerishableRevenue: number;
+  nonPerishableCogs: number;
+  /** nonPerishableRevenue - nonPerishableCogs — the pool available to subsidize produce sold
+   *  below its own cost, if that's the strategy. */
+  nonPerishableProfit: number;
   logisticsCost: number;
   drivingLabourCost: number;
   packingLabourCost: number;
@@ -68,12 +86,39 @@ export function computeFuelCostPerTrip(a: BusinessAssumptions): number {
   return (roundTripKm / 100) * a.fuelConsumptionL100km * a.fuelPricePerLitre;
 }
 
+/** eco-farms' real delivery rate card — tiered by order value, plus a flat fuel levy on every
+ *  delivery regardless of tier. Real published rates, not an assumption to tune. */
+export const DELIVERY_FUEL_LEVY = 29.75;
+
+export function deliveryTierFee(orderValue: number): number {
+  if (orderValue < 400) return 85;
+  if (orderValue <= 1000) return 55;
+  if (orderValue <= 1600) return 35;
+  return 20;
+}
+
+export function computeTieredDeliveryFee(orderValue: number): {
+  tierFee: number;
+  fuelLevy: number;
+  total: number;
+} {
+  const tierFee = deliveryTierFee(orderValue);
+  return { tierFee, fuelLevy: DELIVERY_FUEL_LEVY, total: tierFee + DELIVERY_FUEL_LEVY };
+}
+
 /**
  * Logistics cost is trip-based, not per-box — one truck (or one delivery) covers however many
  * boxes it's carrying, up to whatever capacity really exists (not modelled here). That's why it
  * sits in the "fixed" side of the break-even math rather than scaling with box count.
+ *
+ * `orderValue` is the produce wholesale cost being delivered that trip — eco-farms' delivery fee
+ * tier is based on what you're ordering, not a flat rate, so it has to be computed from the
+ * actual box mix rather than entered as a standalone assumption.
  */
-export function computeLogisticsCost(a: BusinessAssumptions): {
+export function computeLogisticsCost(
+  a: BusinessAssumptions,
+  orderValue: number
+): {
   logisticsCost: number;
   drivingLabourCost: number;
 } {
@@ -83,12 +128,17 @@ export function computeLogisticsCost(a: BusinessAssumptions): {
       drivingLabourCost: a.drivingHoursPerTrip * a.tripsPerWeek * a.hourlyLabourRate
     };
   }
-  return { logisticsCost: a.deliveryFeePerTrip * a.tripsPerWeek, drivingLabourCost: 0 };
+  return {
+    logisticsCost: computeTieredDeliveryFee(orderValue).total * a.tripsPerWeek,
+    drivingLabourCost: 0
+  };
 }
 
 export function computeBusinessModel(
   boxes: Box[],
   boxMix: BoxMixEntry[],
+  nonPerishables: NonPerishableItem[],
+  nonPerishableMix: NonPerishableMixEntry[],
   a: BusinessAssumptions
 ): BusinessModelResult {
   const boxById = new Map(boxes.map((b) => [b.id, b]));
@@ -114,6 +164,27 @@ export function computeBusinessModel(
       };
     });
 
+  const nonPerishableById = new Map(nonPerishables.map((i) => [i.id, i]));
+  const nonPerishableLines: NonPerishableMixLine[] = nonPerishableMix
+    .filter((m) => m.unitsPerWeek > 0)
+    .map((m) => {
+      const item = nonPerishableById.get(m.itemId);
+      const costPerUnit = item?.cost ?? 0;
+      const sellPerUnit = item?.sellPrice ?? 0;
+      return {
+        itemId: m.itemId,
+        itemName: item?.name ?? m.itemId,
+        unitsPerWeek: m.unitsPerWeek,
+        costPerUnit,
+        sellPerUnit,
+        weeklyRevenue: sellPerUnit * m.unitsPerWeek,
+        weeklyCogs: costPerUnit * m.unitsPerWeek
+      };
+    });
+  const nonPerishableRevenue = nonPerishableLines.reduce((s, l) => s + l.weeklyRevenue, 0);
+  const nonPerishableCogs = nonPerishableLines.reduce((s, l) => s + l.weeklyCogs, 0);
+  const nonPerishableProfit = nonPerishableRevenue - nonPerishableCogs;
+
   const totalWeeklyKg = boxMix
     .filter((m) => m.boxesPerWeek > 0)
     .reduce((sum, m) => {
@@ -126,7 +197,7 @@ export function computeBusinessModel(
   const weeklyCogs = lines.reduce((s, l) => s + l.weeklyCogs, 0);
   const grossProfit = weeklyRevenue - weeklyCogs;
 
-  const { logisticsCost, drivingLabourCost } = computeLogisticsCost(a);
+  const { logisticsCost, drivingLabourCost } = computeLogisticsCost(a, weeklyCogs);
   const packingHours = totalBoxesPerWeek * (a.packingMinutesPerBox / 60);
   const packingLabourCost = packingHours * a.hourlyLabourRate;
   const drivingHours =
@@ -135,8 +206,13 @@ export function computeBusinessModel(
   const weeklyFixedCosts = a.weeklyFixedCosts;
 
   const totalWeeklyCosts =
-    weeklyCogs + logisticsCost + drivingLabourCost + packingLabourCost + weeklyFixedCosts;
-  const netProfit = weeklyRevenue - totalWeeklyCosts;
+    weeklyCogs +
+    nonPerishableCogs +
+    logisticsCost +
+    drivingLabourCost +
+    packingLabourCost +
+    weeklyFixedCosts;
+  const netProfit = weeklyRevenue + nonPerishableRevenue - totalWeeklyCosts;
 
   const packingCostPerBox = (a.packingMinutesPerBox / 60) * a.hourlyLabourRate;
   let avgContributionMarginPerBox: number | null = null;
@@ -156,6 +232,10 @@ export function computeBusinessModel(
     weeklyRevenue,
     weeklyCogs,
     grossProfit,
+    nonPerishableLines,
+    nonPerishableRevenue,
+    nonPerishableCogs,
+    nonPerishableProfit,
     logisticsCost,
     drivingLabourCost,
     packingLabourCost,
@@ -181,6 +261,15 @@ export type LabourScenario = {
   packingCost: number;
   totalLabourCost: number;
   netProfit: number;
+  /**
+   * Break-even boxes/week for THIS scenario specifically, at the current mix ratio — different
+   * scenarios have genuinely different break-even points, since self-performed labour isn't a
+   * cash cost dragging down the per-box contribution margin. "Break-even at 8 boxes" is only true
+   * for whichever scenario you're actually in; the paid-labour scenarios need more volume to
+   * reach the same cash outcome. Null if this scenario's margin per box is zero/negative — no
+   * volume reaches break-even.
+   */
+  breakEvenBoxesPerWeek: number | null;
 };
 
 /**
@@ -189,9 +278,22 @@ export type LabourScenario = {
  * combinations. In delivery mode drivingLabourCost is already zero (nobody drives), so the
  * "self-drives" toggle collapses to no difference there — that's expected, not a bug.
  */
-export function computeLabourScenarios(result: BusinessModelResult): LabourScenario[] {
+export function computeLabourScenarios(
+  result: BusinessModelResult,
+  a: BusinessAssumptions
+): LabourScenario[] {
   const base =
-    result.weeklyRevenue - result.weeklyCogs - result.logisticsCost - result.weeklyFixedCosts;
+    result.weeklyRevenue +
+    result.nonPerishableProfit -
+    result.weeklyCogs -
+    result.logisticsCost -
+    result.weeklyFixedCosts;
+  const packingCostPerBox = (a.packingMinutesPerBox / 60) * a.hourlyLabourRate;
+  const avgSellPerBox =
+    result.totalBoxesPerWeek > 0 ? result.weeklyRevenue / result.totalBoxesPerWeek : 0;
+  const avgCostPerBox =
+    result.totalBoxesPerWeek > 0 ? result.weeklyCogs / result.totalBoxesPerWeek : 0;
+
   return (
     [
       { label: 'You do both (driving + packing)', selfDrives: true, selfPacks: true },
@@ -200,9 +302,25 @@ export function computeLabourScenarios(result: BusinessModelResult): LabourScena
       { label: 'You do neither (pay for both)', selfDrives: false, selfPacks: false }
     ] as const
   ).map((s) => {
+    const fixedWeekly =
+      result.logisticsCost +
+      (s.selfDrives ? 0 : result.drivingLabourCost) +
+      result.weeklyFixedCosts;
+    const avgContributionMarginPerBox =
+      avgSellPerBox - avgCostPerBox - (s.selfPacks ? 0 : packingCostPerBox);
+    const breakEvenBoxesPerWeek =
+      avgContributionMarginPerBox > 0 ? fixedWeekly / avgContributionMarginPerBox : null;
+
     const drivingCost = s.selfDrives ? 0 : result.drivingLabourCost;
     const packingCost = s.selfPacks ? 0 : result.packingLabourCost;
     const totalLabourCost = drivingCost + packingCost;
-    return { ...s, drivingCost, packingCost, totalLabourCost, netProfit: base - totalLabourCost };
+    return {
+      ...s,
+      drivingCost,
+      packingCost,
+      totalLabourCost,
+      netProfit: base - totalLabourCost,
+      breakEvenBoxesPerWeek
+    };
   });
 }

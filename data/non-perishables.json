@@ -1,0 +1,18 @@
+[
+  {
+    "id": "np-1787494879826",
+    "name": "Local Honey 500g",
+    "category": "Pantry",
+    "cost": 6,
+    "sellPrice": 14,
+    "createdAt": "2026-08-23T14:21:19.826Z"
+  },
+  {
+    "id": "np-1787494880080",
+    "name": "Free-range Eggs Dozen",
+    "category": "Pantry",
+    "cost": 5,
+    "sellPrice": 9,
+    "createdAt": "2026-08-23T14:21:20.080Z"
+  }
+]

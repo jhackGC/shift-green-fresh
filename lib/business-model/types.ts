@@ -23,8 +23,9 @@ export type BusinessAssumptions = {
   /** Maintenance/depreciation/rego allocated to one trip — not just fuel. */
   vehicleCostPerTrip: number;
   drivingHoursPerTrip: number;
-  /** delivery-service mode: having the produce sent to you instead of driving to collect it. */
-  deliveryFeePerTrip: number;
+  /** delivery-service mode: having the produce sent to you instead of driving to collect it —
+   *  no assumption needed here, the fee is computed from eco-farms' real tiered rate card against
+   *  the actual order value (see computeTieredDeliveryFee in calc.ts). */
   /** Shared by both modes — how many market trips (or deliveries) per week. */
   tripsPerWeek: number;
   /** $/hour value of your own time or hired labour — used for both driving and packing. */
@@ -45,7 +46,6 @@ export const DEFAULT_ASSUMPTIONS: BusinessAssumptions = {
   fuelConsumptionL100km: 10,
   vehicleCostPerTrip: 15,
   drivingHoursPerTrip: 2,
-  deliveryFeePerTrip: 60,
   tripsPerWeek: 1,
   hourlyLabourRate: 30,
   packingMinutesPerBox: 8,
@@ -58,14 +58,21 @@ export type BoxMixEntry = {
   boxesPerWeek: number;
 };
 
+export type NonPerishableMixEntry = {
+  itemId: string;
+  unitsPerWeek: number;
+};
+
 export type BusinessModel = {
   assumptions: BusinessAssumptions;
   boxMix: BoxMixEntry[];
+  nonPerishableMix: NonPerishableMixEntry[];
   updatedAt: string;
 };
 
 export const EMPTY_BUSINESS_MODEL: BusinessModel = {
   assumptions: DEFAULT_ASSUMPTIONS,
   boxMix: [],
+  nonPerishableMix: [],
   updatedAt: new Date(0).toISOString()
 };

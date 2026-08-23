@@ -12,7 +12,7 @@ export function loadBusinessModel(): BusinessModel {
 }
 
 export function saveBusinessModel(
-  model: Pick<BusinessModel, 'assumptions' | 'boxMix'>
+  model: Pick<BusinessModel, 'assumptions' | 'boxMix' | 'nonPerishableMix'>
 ): BusinessModel {
   const full: BusinessModel = { ...model, updatedAt: new Date().toISOString() };
   fs.mkdirSync(path.dirname(FILE), { recursive: true });
