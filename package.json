@@ -12,7 +12,8 @@
     "prettier:check": "prettier --check --ignore-unknown .",
     "test": "pnpm prettier:check",
     "typecheck": "tsc --noEmit",
-    "import:eco-farms": "tsx scripts/importers/eco-farms.ts"
+    "import:eco-farms": "tsx scripts/importers/eco-farms.ts",
+    "import:merrimac": "tsx scripts/importers/merrimac.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
