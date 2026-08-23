@@ -13,7 +13,7 @@ import { createStorefrontClient } from '@shopify/hydrogen-react';
 const shopifyHydrogenClient = createStorefrontClient({
   storeDomain: 'https://shiftgreenhub.myshopify.com',
   storefrontApiVersion: '2024-10',
-  privateStorefrontToken: '***REMOVED-SHOPIFY-PRIVATE-TOKEN***'
+  privateStorefrontToken: process.env.SHOPIFY_PRIVATE_STOREFRONT_TOKEN
 });
 
 // make the request
