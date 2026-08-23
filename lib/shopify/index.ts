@@ -11,7 +11,12 @@ import {
   removeFromCartMutation
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
-import { getCollectionQuery, getCollectionsQuery, getShopDataQuery } from './queries/collection';
+import {
+  getCollectionProductsQuery,
+  getCollectionQuery,
+  getCollectionsQuery,
+  getShopDataQuery
+} from './queries/collection';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
@@ -32,6 +37,7 @@ import {
   ShopifyCartOperation,
   ShopifyCollection,
   ShopifyCollectionOperation,
+  ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
@@ -357,40 +363,26 @@ export async function getCollectionProducts({
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
-  console.log('### getCollectionProducts collection 2: ', collection);
-  // const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
-  //   query: getCollectionProductsQuery,
-  //   tags: [TAGS.collections, TAGS.products],
-  //   variables: {
-  //     handle: collection,
-  //     reverse,
-  //     sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
-  //   }
-  // });
+  console.log('### getCollectionProducts collection handle: ', collection);
 
-  const getCollectionProductsQuery = `query getCollectionProducts {
-       collection(handle: "face-care") {
-        id
-        products(first: 5) {
-          edges {
-            node {
-              id
-              handle
-            }
-          }
-        }
+  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+    query: getCollectionProductsQuery,
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
     }
-  }`;
-  const res = await shopifyFetchNoVars(getCollectionProductsQuery);
-
-  console.log('### getCollectionProducts collection res now: ', res.body.data.collection);
+  });
 
   if (!res.body.data.collection) {
     console.log(`No collection found for \`${collection}\``);
     return [];
   }
+  const reshapedProducts = reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+  console.log('### getCollectionProducts reshapedProducts: ', reshapedProducts);
 
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+  return reshapedProducts;
 }
 
 export async function getProductsHarcoded(): Promise<Product[]> {

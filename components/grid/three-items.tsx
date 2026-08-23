@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { GridTileImage } from 'components/grid/tile';
-import { getCollection, getCollectionProducts, getProducts, getProductsHarcoded, getShopData } from 'lib/shopify';
+import { getCollection, getCollectionProducts } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
@@ -45,24 +45,21 @@ function ThreeItemGridItem({
 export async function ThreeItemGrid() {
   // Collections that start with `hidden-*` are hidden from the search page.
   const homepageItems = await getCollectionProducts({
-    collection: 'face-care'
+    collection: 'sun-care'
   });
   console.log('### ThreeItemGrid homepageItems: ', homepageItems);
 
+  // const allProducts = await getProducts({});
+  // console.log('### ThreeItemGrid allProducts: ', allProducts);
 
-  const allProducts = await getProducts({});
-  console.log('### ThreeItemGrid allProducts: ', allProducts);
-
-
-  const shopData = await getShopData();
-  console.log('### ThreeItemGrid shopData: ', shopData);
+  // const shopData = await getShopData();
+  // console.log('### ThreeItemGrid shopData: ', shopData);
 
   const collection = await getCollection('face-care');
   console.log('### ThreeItemGrid face-care collection: ', collection);
 
-  const prods = await getProductsHarcoded();
-  console.log('### ThreeItemGrid getProductsHarcoded: ', prods);
-
+  // const prods = await getProductsHarcoded();
+  // console.log('### ThreeItemGrid getProductsHarcoded: ', prods);
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
