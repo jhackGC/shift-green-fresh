@@ -1,1 +1,222 @@
-[]
+[
+  {
+    "id": "box-1787487107965",
+    "name": "Small Mixed Box",
+    "weekOf": "2026-08-24",
+    "vendorCode": "eco-farms",
+    "items": [
+      {
+        "productId": "apple-pink-lady",
+        "qty": 0.5
+      },
+      {
+        "productId": "oranges-navel",
+        "qty": 0.5
+      },
+      {
+        "productId": "carrot-medium",
+        "qty": 0.5
+      },
+      {
+        "productId": "tomato-roma",
+        "qty": 0.5
+      },
+      {
+        "productId": "potato-sebago",
+        "qty": 0.5
+      },
+      {
+        "productId": "zucchini",
+        "qty": 0.3
+      },
+      {
+        "productId": "onion-brown",
+        "qty": 0.3
+      }
+    ],
+    "marginPercent": 35,
+    "wholesaleCost": 13.850000000000001,
+    "sellPrice": 21,
+    "createdAt": "2026-08-23T12:11:47.965Z",
+    "description": "Single person or couple, light week / top-up"
+  },
+  {
+    "id": "box-1787487108241",
+    "name": "Medium Mixed Box",
+    "weekOf": "2026-08-24",
+    "vendorCode": "eco-farms",
+    "items": [
+      {
+        "productId": "apple-pink-lady",
+        "qty": 1
+      },
+      {
+        "productId": "oranges-navel",
+        "qty": 1
+      },
+      {
+        "productId": "banana-cavendish",
+        "qty": 0.5
+      },
+      {
+        "productId": "carrot-medium",
+        "qty": 1
+      },
+      {
+        "productId": "tomato-roma",
+        "qty": 0.6
+      },
+      {
+        "productId": "potato-sebago",
+        "qty": 1
+      },
+      {
+        "productId": "pumpkin-butternut",
+        "qty": 0.5
+      },
+      {
+        "productId": "zucchini",
+        "qty": 0.5
+      },
+      {
+        "productId": "onion-brown",
+        "qty": 0.4
+      },
+      {
+        "productId": "capsicum-green",
+        "qty": 0.3
+      }
+    ],
+    "marginPercent": 35,
+    "wholesaleCost": 29.893076923076926,
+    "sellPrice": 46,
+    "createdAt": "2026-08-23T12:11:48.241Z",
+    "description": "Couple or small family, moderate variety"
+  },
+  {
+    "id": "box-1787487108516",
+    "name": "Large Mixed Box",
+    "weekOf": "2026-08-24",
+    "vendorCode": "eco-farms",
+    "items": [
+      {
+        "productId": "apple-pink-lady",
+        "qty": 1.5
+      },
+      {
+        "productId": "oranges-navel",
+        "qty": 1.5
+      },
+      {
+        "productId": "banana-cavendish",
+        "qty": 1
+      },
+      {
+        "productId": "watermelon-mini-seedless",
+        "qty": 1
+      },
+      {
+        "productId": "carrot-medium",
+        "qty": 1.5
+      },
+      {
+        "productId": "tomato-roma",
+        "qty": 1
+      },
+      {
+        "productId": "potato-sebago",
+        "qty": 1.5
+      },
+      {
+        "productId": "pumpkin-butternut",
+        "qty": 0.7
+      },
+      {
+        "productId": "zucchini",
+        "qty": 0.6
+      },
+      {
+        "productId": "onion-brown",
+        "qty": 0.5
+      },
+      {
+        "productId": "capsicum-green",
+        "qty": 0.3
+      },
+      {
+        "productId": "eggplant",
+        "qty": 0.3
+      }
+    ],
+    "marginPercent": 35,
+    "wholesaleCost": 49.74615384615383,
+    "sellPrice": 77,
+    "createdAt": "2026-08-23T12:11:48.516Z",
+    "description": "Family of 3-4, generous variety, not a full weekly shop"
+  },
+  {
+    "id": "box-1787487268791",
+    "name": "Family Box (Weekly, serves 4)",
+    "weekOf": "2026-08-24",
+    "vendorCode": "eco-farms",
+    "items": [
+      {
+        "productId": "potato-sebago",
+        "qty": 3
+      },
+      {
+        "productId": "onion-brown",
+        "qty": 1
+      },
+      {
+        "productId": "carrot-medium",
+        "qty": 2
+      },
+      {
+        "productId": "tomato-roma",
+        "qty": 1.5
+      },
+      {
+        "productId": "pumpkin-butternut",
+        "qty": 1
+      },
+      {
+        "productId": "zucchini",
+        "qty": 1
+      },
+      {
+        "productId": "cucumber-lebanese",
+        "qty": 1
+      },
+      {
+        "productId": "capsicum-green",
+        "qty": 0.6
+      },
+      {
+        "productId": "sweet-potato-gold",
+        "qty": 1
+      },
+      {
+        "productId": "apple-pink-lady",
+        "qty": 2
+      },
+      {
+        "productId": "oranges-navel",
+        "qty": 1.5
+      },
+      {
+        "productId": "banana-cavendish",
+        "qty": 2
+      },
+      {
+        "productId": "watermelon-mini-seedless",
+        "qty": 2
+      }
+    ],
+    "marginPercent": 35,
+    "wholesaleCost": 88.77230769230769,
+    "sellPrice": 137,
+    "createdAt": "2026-08-23T12:14:28.791Z",
+    "description": "Family of 4 (2 adults + 2 teens), replaces the weekly fresh produce shop"
+  }
+]

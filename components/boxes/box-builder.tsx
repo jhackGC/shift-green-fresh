@@ -34,6 +34,7 @@ export function BoxBuilder({
   const [boxes, setBoxes] = useState(initialBoxes);
   const [search, setSearch] = useState('');
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [marginPercent, setMarginPercent] = useState(35);
   const [draftItems, setDraftItems] = useState<BoxItem[]>([]);
   const [saving, setSaving] = useState(false);
@@ -76,13 +77,17 @@ export function BoxBuilder({
 
   const realCostPerBox = useMemo(() => {
     if (!procurement || typeof boxCount !== 'number' || boxCount <= 0) return null;
-    const total = procurement.reduce((sum, p) => sum + (p.chosen?.totalCost ?? p.item.qty * boxCount * (p.info?.pricePerKg ?? 0)), 0);
+    const total = procurement.reduce(
+      (sum, p) => sum + (p.chosen?.totalCost ?? p.item.qty * boxCount * (p.info?.pricePerKg ?? 0)),
+      0
+    );
     return total / boxCount;
   }, [procurement, boxCount]);
 
   const effectiveCost = realCostPerBox ?? naiveCost;
   const formulaSellPrice = Math.round(priceForMargin(effectiveCost, marginPercent));
-  const sellPrice = typeof researchedRrp === 'number' && researchedRrp > 0 ? researchedRrp : formulaSellPrice;
+  const sellPrice =
+    typeof researchedRrp === 'number' && researchedRrp > 0 ? researchedRrp : formulaSellPrice;
   const totalWeight = draftItems.reduce((sum, item) => sum + item.qty, 0);
 
   function addItem(productId: string) {
@@ -109,6 +114,7 @@ export function BoxBuilder({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
+          description: description || undefined,
           weekOf,
           vendorCode,
           marginPercent,
@@ -124,6 +130,7 @@ export function BoxBuilder({
       const box = (await res.json()) as Box;
       setBoxes((prev) => [...prev, box]);
       setName('');
+      setDescription('');
       setDraftItems([]);
       setBoxCount('');
       setResearchedRrp('');
@@ -146,6 +153,21 @@ export function BoxBuilder({
       setBoxes((prev) => prev.filter((b) => b.id !== id));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Delete failed');
+    }
+  }
+
+  async function saveDescription(id: string, value: string) {
+    try {
+      const res = await fetch('/api/boxes', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, description: value })
+      });
+      if (!res.ok) throw new Error(`Save failed (${res.status})`);
+      const updated = (await res.json()) as Box;
+      setBoxes((prev) => prev.map((b) => (b.id === id ? updated : b)));
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Save failed');
     }
   }
 
@@ -219,6 +241,13 @@ export function BoxBuilder({
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="rounded border border-neutral-300 bg-white px-3 py-1.5 text-sm font-medium dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+          />
+          <input
+            type="text"
+            placeholder="Who's this for? e.g. Family of 4, full week of cooking"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="rounded border border-neutral-300 bg-white px-3 py-1.5 text-xs dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
           />
 
           <label className="flex items-center justify-between text-xs text-neutral-500">
@@ -372,7 +401,24 @@ export function BoxBuilder({
                   key={box.id}
                   className="border-b border-neutral-200 hover:bg-teal-50/60 dark:border-neutral-800 dark:hover:bg-teal-900/10"
                 >
-                  <td className="px-3 py-2 font-medium">{box.name}</td>
+                  <td className="px-3 py-2 font-medium">
+                    {box.name}
+                    <input
+                      type="text"
+                      defaultValue={box.description ?? ''}
+                      placeholder="Who's this for? (click to add guidance)"
+                      onBlur={(e) => {
+                        if (e.target.value !== (box.description ?? ''))
+                          saveDescription(box.id, e.target.value);
+                      }}
+                      className="mt-0.5 block w-full rounded border-none bg-transparent px-0 py-0 text-[11px] font-normal text-neutral-500 placeholder:text-neutral-400 focus:border focus:border-neutral-300 focus:bg-white focus:px-1.5 focus:py-0.5 dark:text-neutral-400 dark:placeholder:text-neutral-600 dark:focus:border-neutral-700 dark:focus:bg-neutral-800"
+                    />
+                    {box.boxCount && (
+                      <div className="text-[10px] font-normal text-amber-600 dark:text-amber-400">
+                        pack-aware @ {box.boxCount} boxes
+                      </div>
+                    )}
+                  </td>
                   <td className="px-3 py-2 font-mono text-xs text-neutral-500">{box.weekOf}</td>
                   <td className="px-3 py-2 text-xs text-neutral-500">{box.items.length} items</td>
                   <td className="px-3 py-2 text-right font-mono text-xs">
@@ -380,6 +426,9 @@ export function BoxBuilder({
                   </td>
                   <td className="px-3 py-2 text-right font-mono text-xs font-semibold">
                     {formatMoney(box.sellPrice)}
+                    {box.researchedRrp && (
+                      <div className="text-[10px] font-normal text-neutral-400">RRP</div>
+                    )}
                   </td>
                   <td className="px-3 py-2 text-right font-mono text-xs">{box.marginPercent}%</td>
                   <td className="px-3 py-2 text-right">

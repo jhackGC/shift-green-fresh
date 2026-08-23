@@ -14,6 +14,11 @@ export type BoxItem = {
 export type Box = {
   id: string;
   name: string;
+  /** Who/what this box is a starting point for, e.g. "Single person or couple, light week" or
+   *  "Family of 4, full week of home cooking" — every box here is a template a customer (or you)
+   *  adjusts item-by-item, not a fixed product; this is the guidance that points them at the
+   *  right starting size before they tweak it. */
+  description?: string;
   /** The wholesale import date this box's pricing was composed against — ties the box to a
    *  specific week's availability/cost snapshot, since both change week to week. */
   weekOf: string;

@@ -1,5 +1,5 @@
 import { priceForMargin } from 'lib/margins/calc';
-import { addBox, deleteBox, loadBoxes } from 'lib/boxes/store';
+import { addBox, deleteBox, loadBoxes, updateBoxDescription } from 'lib/boxes/store';
 import { betterProcurement, planProcurement } from 'lib/boxes/procurement';
 import type { Box, BoxItem } from 'lib/boxes/types';
 import { loadAllLatestVendorPricing, loadProducts } from 'lib/vendor-pricing/store';
@@ -21,15 +21,17 @@ export async function GET(): Promise<NextResponse> {
  */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();
-  const { name, weekOf, vendorCode, marginPercent, items, boxCount, researchedRrp } = body as {
-    name?: string;
-    weekOf?: string;
-    vendorCode?: string;
-    marginPercent?: number;
-    items?: BoxItem[];
-    boxCount?: number;
-    researchedRrp?: number;
-  };
+  const { name, description, weekOf, vendorCode, marginPercent, items, boxCount, researchedRrp } =
+    body as {
+      name?: string;
+      description?: string;
+      weekOf?: string;
+      vendorCode?: string;
+      marginPercent?: number;
+      items?: BoxItem[];
+      boxCount?: number;
+      researchedRrp?: number;
+    };
 
   if (
     !name ||
@@ -97,6 +99,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const box: Box = {
     id: `box-${Date.now()}`,
     name,
+    ...(description ? { description } : {}),
     weekOf,
     vendorCode,
     items,
@@ -109,6 +112,22 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   };
   addBox(box);
   return NextResponse.json(box);
+}
+
+/** Edits an existing box's guidance label only — cost/sell price are computed at save time from
+ *  that week's pricing, so changing the recipe means saving a new box, not patching this one. */
+export async function PATCH(req: NextRequest): Promise<NextResponse> {
+  const { id, description } = (await req.json()) as { id?: string; description?: string };
+  if (!id) return NextResponse.json({ error: 'Expected { id, description }.' }, { status: 400 });
+  try {
+    const updated = updateBoxDescription(id, description ?? '');
+    return NextResponse.json(updated);
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : String(err) },
+      { status: 404 }
+    );
+  }
 }
 
 export async function DELETE(req: NextRequest): Promise<NextResponse> {

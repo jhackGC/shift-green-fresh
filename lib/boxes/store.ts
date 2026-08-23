@@ -25,3 +25,13 @@ export function addBox(box: Box): void {
 export function deleteBox(id: string): void {
   saveBoxes(loadBoxes().filter((b) => b.id !== id));
 }
+
+export function updateBoxDescription(id: string, description: string): Box {
+  const boxes = loadBoxes();
+  const index = boxes.findIndex((b) => b.id === id);
+  if (index === -1) throw new Error(`No box "${id}" found.`);
+  const updated: Box = { ...boxes[index]!, description: description || undefined };
+  boxes[index] = updated;
+  saveBoxes(boxes);
+  return updated;
+}

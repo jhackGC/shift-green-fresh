@@ -53,7 +53,8 @@ export function planProcurement(
   const remainderKg = demandKg - fullPacks * cheapest.qty;
   let split: ProcurementPlan | null = null;
   if (remainderKg > 0.001 && fullPacks < packsNeeded) {
-    const splitCost = fullPacks * cheapest.price + remainderKg * pricePerKg * (1 + SPLIT_BOX_HANDLING_FEE);
+    const splitCost =
+      fullPacks * cheapest.price + remainderKg * pricePerKg * (1 + SPLIT_BOX_HANDLING_FEE);
     split = {
       strategy: 'split',
       packQty: cheapest.qty,
@@ -70,7 +71,10 @@ export function planProcurement(
 }
 
 /** The cheaper of the two strategies (split only exists when there's a remainder to split). */
-export function betterProcurement(plan: { wholePacks: ProcurementPlan; split: ProcurementPlan | null }): ProcurementPlan {
+export function betterProcurement(plan: {
+  wholePacks: ProcurementPlan;
+  split: ProcurementPlan | null;
+}): ProcurementPlan {
   if (!plan.split) return plan.wholePacks;
   return plan.split.totalCost < plan.wholePacks.totalCost ? plan.split : plan.wholePacks;
 }
