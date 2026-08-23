@@ -1,0 +1,1160 @@
+[
+  {
+    "id": "capsicum-green",
+    "name": "Capsicum Green",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-purple",
+    "name": "Carrot Purple",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "parsnip",
+    "name": "Parsnip",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-white-star-sebago",
+    "name": "Potato White Star Sebago",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-sebago",
+    "name": "Potato Sebago",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "tomato-cherry",
+    "name": "Tomato Cherry",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "artichoke-jerusalem",
+    "name": "Artichoke Jerusalem",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "asian-greens-bok-choy",
+    "name": "Asian Greens Bok Choy",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "asian-greens-pak-choy",
+    "name": "Asian Greens Pak Choy",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beans-hand-picked",
+    "name": "Beans Hand Picked",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beans-machine-picked",
+    "name": "Beans Machine Picked",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-medium",
+    "name": "Beetroot Medium",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-large",
+    "name": "Beetroot Large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-processing",
+    "name": "Beetroot Processing",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-small",
+    "name": "Beetroot Small",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-bunch",
+    "name": "Beetroot Bunch",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "beetroot-peeled-cooked",
+    "name": "Beetroot Peeled & Cooked",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "broccoli",
+    "name": "Broccoli",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "broccoli-baby-purple",
+    "name": "Broccoli Baby Purple",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cabbage-green",
+    "name": "Cabbage Green",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cabbage-red",
+    "name": "Cabbage Red",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cabbage-wombok",
+    "name": "Cabbage Wombok",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "capsicum-coloured",
+    "name": "Capsicum Coloured",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "capsicum-red",
+    "name": "Capsicum Red",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "capsicum-red-2nds",
+    "name": "Capsicum Red 2nds",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "capsicum-snacking-mix-colour",
+    "name": "Capsicum Snacking Mix Colour",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-bunch",
+    "name": "Carrot Bunch",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-yellow",
+    "name": "Carrot Yellow",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-medium",
+    "name": "Carrot Medium",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-small",
+    "name": "Carrot Small",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-med-large",
+    "name": "Carrot Med/large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "carrot-juicing",
+    "name": "Carrot Juicing",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cauliflower",
+    "name": "Cauliflower",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "celery",
+    "name": "Celery",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "celeriac",
+    "name": "Celeriac",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "corn",
+    "name": "Corn",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cucumber-lebanese",
+    "name": "Cucumber Lebanese",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "cucumber-lebanese-2nd",
+    "name": "Cucumber Lebanese 2nd",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "daikon-bunch",
+    "name": "Daikon Bunch",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "eggplant",
+    "name": "Eggplant",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "eschallot",
+    "name": "Eschallot",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "garlic-bulbs-giant-australian-russian",
+    "name": "Garlic Bulbs Giant Australian / Russian",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "garlic-italian-purple",
+    "name": "Garlic Italian Purple",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "ginger",
+    "name": "Ginger",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "leek-single",
+    "name": "Leek Single",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "leek-bunch",
+    "name": "Leek Bunch",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-cos",
+    "name": "Lettuce Cos",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-cos-twin-pack",
+    "name": "Lettuce Cos Twin Pack",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-iceberg",
+    "name": "Lettuce Iceberg",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-butter",
+    "name": "Lettuce Butter",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-green-oak",
+    "name": "Lettuce Green Oak",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-radiccio",
+    "name": "Lettuce Radiccio",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-red-oak",
+    "name": "Lettuce Red Oak",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "lettuce-salad-mix-punnet",
+    "name": "Lettuce Salad Mix Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-lions-mane",
+    "name": "Mushrooms Lions Mane",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-oyster",
+    "name": "Mushrooms Oyster",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-shiitake",
+    "name": "Mushrooms Shiitake",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-swiss-brown",
+    "name": "Mushrooms Swiss Brown",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-swiss-brown-3kg-flat",
+    "name": "Mushrooms Swiss Brown 3kg Flat",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-swiss-brown-375g-flat",
+    "name": "Mushrooms Swiss Brown 375g Flat",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-swiss-brown-miscellaneous",
+    "name": "Mushrooms Swiss Brown Miscellaneous",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-white-180g-cups",
+    "name": "Mushrooms White 180g Cups",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-white",
+    "name": "Mushrooms White",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "mushrooms-white-miscellaneous",
+    "name": "Mushrooms White Miscellaneous",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-dutch-shallot",
+    "name": "Onion Dutch Shallot",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-brown",
+    "name": "Onion Brown",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-brown-large",
+    "name": "Onion Brown Large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-brown-pickling",
+    "name": "Onion Brown Pickling",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-red",
+    "name": "Onion Red",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-red-large",
+    "name": "Onion Red Large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "onion-red-pickling",
+    "name": "Onion Red Pickling",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "peas-snow",
+    "name": "Peas Snow",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "peas-sugarsnap",
+    "name": "Peas Sugarsnap",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-dutch-cream",
+    "name": "Potato Dutch Cream",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-dutch-cream-large",
+    "name": "Potato Dutch Cream Large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-dutch-cream-washed",
+    "name": "Potato Dutch Cream Washed",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-dutch-cream-chat",
+    "name": "Potato Dutch Cream Chat",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-dutch-cream-chat-washed",
+    "name": "Potato Dutch Cream Chat Washed",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-kestral",
+    "name": "Potato Kestral",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-kipfler",
+    "name": "Potato Kipfler",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-kipfler-washed",
+    "name": "Potato Kipfler Washed",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-sebago-washed",
+    "name": "Potato Sebago Washed",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "potato-sebago-chat-washed",
+    "name": "Potato Sebago Chat Washed",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "pumpkin-butternut",
+    "name": "Pumpkin Butternut",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "pumpkin-jap",
+    "name": "Pumpkin Jap",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "pumpkin-grey",
+    "name": "Pumpkin Grey",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "radish",
+    "name": "Radish",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "silverbeet",
+    "name": "Silverbeet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "chard",
+    "name": "Chard",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "squash",
+    "name": "Squash",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sweet-potato-gold",
+    "name": "Sweet Potato Gold",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sweet-potato-gold-extra-small",
+    "name": "Sweet Potato Gold Extra Small",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sweet-potato-gold-large",
+    "name": "Sweet Potato Gold Large",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sweet-potato-red",
+    "name": "Sweet Potato Red",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "tomato-gourmet",
+    "name": "Tomato Gourmet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "tomato-heirloom",
+    "name": "Tomato Heirloom",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "tomato-roma",
+    "name": "Tomato Roma",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "zucchini",
+    "name": "Zucchini",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "zucchini-lebanese",
+    "name": "Zucchini Lebanese",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-braeburn-jazz",
+    "name": "Apple Braeburn (jazz)",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-fuji",
+    "name": "Apple Fuji",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-gala",
+    "name": "Apple Gala",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-granny-smith",
+    "name": "Apple Granny Smith",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-pink-lady",
+    "name": "Apple Pink Lady",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-red-del",
+    "name": "Apple Red Del",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-southern-bliss",
+    "name": "Apple Southern Bliss",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-southern-bliss-1kg-cardboard-punnet",
+    "name": "Apple Southern Bliss 1kg Cardboard Punnet",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-juicing-red",
+    "name": "Apple Juicing Red",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-juicing-green",
+    "name": "Apple Juicing Green",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "apple-juicing",
+    "name": "Apple Juicing",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "avocado-hass-tray",
+    "name": "Avocado Hass Tray",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "avocado-hass-tray-premium",
+    "name": "Avocado Hass Tray Premium",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "avocado-hass-bulk",
+    "name": "Avocado Hass Bulk",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "banana-cavendish",
+    "name": "Banana Cavendish",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "banana-lady-finger",
+    "name": "Banana Lady Finger",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "banana-smoothie",
+    "name": "Banana Smoothie",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "grapefruit-yellow",
+    "name": "Grapefruit Yellow",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "grapefruit-pink",
+    "name": "Grapefruit Pink",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "grapefruit-ruby",
+    "name": "Grapefruit Ruby",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "kiwifruit",
+    "name": "Kiwifruit",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "kiwifruit-imperfect",
+    "name": "Kiwifruit Imperfect",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lemonades",
+    "name": "Lemonades",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lemon",
+    "name": "Lemon",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lemons",
+    "name": "Lemons",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lemons-imperfect",
+    "name": "Lemons Imperfect",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lemons-juicing",
+    "name": "Lemons Juicing",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "limes",
+    "name": "Limes",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "lime-2nds",
+    "name": "Lime 2nds",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "mandarins-aphora-afourer",
+    "name": "Mandarins Aphora/afourer",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "mandarins-ellendale",
+    "name": "Mandarins Ellendale",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "mandarin-imperial",
+    "name": "Mandarin Imperial",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "mandarin-daisy",
+    "name": "Mandarin Daisy",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "oranges-juicing",
+    "name": "Oranges Juicing",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "oranges-navel",
+    "name": "Oranges Navel",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "oranges-navel-3kg-net",
+    "name": "Oranges Navel 3kg Net",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "orange-navelina",
+    "name": "Orange Navelina",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "orange-blood",
+    "name": "Orange Blood",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "orange-blood-juicing",
+    "name": "Orange Blood Juicing",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "orange-cara-cara-red",
+    "name": "Orange Cara Cara (red)",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "papaya",
+    "name": "Papaya",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "passionfruit",
+    "name": "Passionfruit",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "pear-beurre-bosc",
+    "name": "Pear Beurre Bosc",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "pear-packham",
+    "name": "Pear Packham",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "quince",
+    "name": "Quince",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "sapote-black",
+    "name": "Sapote Black",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "strawberries",
+    "name": "Strawberries",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "tangelo",
+    "name": "Tangelo",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "watermelon-mini-seedless",
+    "name": "Watermelon Mini Seedless",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "kale-green",
+    "name": "Kale Green",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "kale-black",
+    "name": "Kale Black",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "english-spinach-bunch",
+    "name": "English Spinach Bunch",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "salad-lettuce-mix",
+    "name": "Salad Lettuce Mix",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "salad-lettuce-mix-punnet",
+    "name": "Salad Lettuce Mix Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "spinach-baby-punnet",
+    "name": "Spinach Baby Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "spinach-bulk",
+    "name": "Spinach Bulk",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "rocket-punnet",
+    "name": "Rocket Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "superfood-mix",
+    "name": "Superfood Mix",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "superfood-mix-punnet",
+    "name": "Superfood Mix Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-bay-leaves",
+    "name": "Herbs Bay Leaves",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-coriander",
+    "name": "Herbs Coriander",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-coriander-sleeve",
+    "name": "Herbs Coriander Sleeve",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-coriander-punnet",
+    "name": "Herbs Coriander Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-kaffir-lime-leaves",
+    "name": "Herbs Kaffir Lime Leaves",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-mint",
+    "name": "Herbs Mint",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-mint-sleeve",
+    "name": "Herbs Mint Sleeve",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-mint-punnet",
+    "name": "Herbs Mint Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-parsley-curly",
+    "name": "Herbs Parsley Curly",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-parsley-flat",
+    "name": "Herbs Parsley Flat",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-parsley-flat-sleeve",
+    "name": "Herbs Parsley Flat Sleeve",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-parsley-flat-punnet",
+    "name": "Herbs Parsley Flat Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-rosemary",
+    "name": "Herbs Rosemary",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-rosemary-sleeve",
+    "name": "Herbs Rosemary Sleeve",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-rosemary-punnet",
+    "name": "Herbs Rosemary Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-thyme",
+    "name": "Herbs Thyme",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-thyme-sleeve",
+    "name": "Herbs Thyme Sleeve",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "herbs-thyme-punnet",
+    "name": "Herbs Thyme Punnet",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-broccoli",
+    "name": "Sprouts Broccoli",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-radish",
+    "name": "Sprouts Radish",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-salad",
+    "name": "Sprouts Salad",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-snow-pea",
+    "name": "Sprouts Snow Pea",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-sunflower",
+    "name": "Sprouts Sunflower",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-wheatgrass",
+    "name": "Sprouts Wheatgrass",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-daikon-radish",
+    "name": "Sprouts Daikon Radish",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-green-mustard",
+    "name": "Sprouts Green Mustard",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-pea-shoots-tendrils",
+    "name": "Sprouts Pea Shoots (tendrils)",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-purple-radish",
+    "name": "Sprouts Purple Radish",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-red-cabbage",
+    "name": "Sprouts Red Cabbage",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-spicy-mix",
+    "name": "Sprouts Spicy Mix",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "sprouts-sunflower-shoots",
+    "name": "Sprouts Sunflower Shoots",
+    "category": "Vegetables",
+    "avgWeightG": null
+  },
+  {
+    "id": "medjool-dates",
+    "name": "Medjool Dates",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "dates-medjool",
+    "name": "Dates Medjool",
+    "category": "Fruit",
+    "avgWeightG": null
+  },
+  {
+    "id": "org-eggs",
+    "name": "Org Eggs",
+    "category": "Fruit",
+    "avgWeightG": null
+  }
+]

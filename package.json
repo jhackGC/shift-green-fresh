@@ -10,7 +10,9 @@
     "start": "next start",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "test": "pnpm prettier:check"
+    "test": "pnpm prettier:check",
+    "typecheck": "tsc --noEmit",
+    "import:eco-farms": "tsx scripts/importers/eco-farms.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -39,7 +41,9 @@
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.6",
-    "typescript": "5.5.4"
+    "tsx": "^4.23.12",
+    "typescript": "5.5.4",
+    "xlsx": "^0.18.5"
   },
   "pnpm": {
     "overrides": {
