@@ -26,6 +26,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const updated = resolvePendingRetailChange(retailerCode, id, action);
     return NextResponse.json({ action, updated });
   } catch (err) {
-    return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 404 });
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : String(err) },
+      { status: 404 }
+    );
   }
 }

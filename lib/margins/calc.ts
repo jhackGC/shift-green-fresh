@@ -52,6 +52,16 @@ export function computeMargin(row: ProduceRow, freight: FreightAssumption): Comp
   return { wholesalePerUnit, landedPerRetailUnit, marginDollar, marginPercent };
 }
 
+/**
+ * Sell price that yields a given margin percent over cost, using the same convention as
+ * marginPercent everywhere else in this app: margin = (sellPrice - cost) / sellPrice * 100 (i.e.
+ * margin on the sell price, not a markup on cost). Solving for sellPrice: cost / (1 - margin/100).
+ */
+export function priceForMargin(cost: number, marginPercent: number): number {
+  const factor = 1 - marginPercent / 100;
+  return factor > 0 ? cost / factor : NaN;
+}
+
 export function marginTier(pct: number): MarginTier {
   if (Number.isNaN(pct)) return 'warn';
   if (pct < 0) return 'bad';

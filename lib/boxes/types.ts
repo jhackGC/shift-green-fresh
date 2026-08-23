@@ -1,0 +1,39 @@
+/**
+ * A "box" for the pickup-only pre-order trial: a curated mix of whatever's available on a given
+ * week's wholesale list, priced as one bundle. Unlike the à-la-carte margin/pricing tools
+ * elsewhere in this app, a box's contents are hand-composed week to week (whatever eco-farms has
+ * fresh/cheap that week) — this is just the entity + cost math, not an auto-composer.
+ */
+
+export type BoxItem = {
+  productId: string;
+  /** kg for this item in one box. */
+  qty: number;
+};
+
+export type Box = {
+  id: string;
+  name: string;
+  /** The wholesale import date this box's pricing was composed against — ties the box to a
+   *  specific week's availability/cost snapshot, since both change week to week. */
+  weekOf: string;
+  vendorCode: string;
+  items: BoxItem[];
+  /** Target margin (%) used to derive the sell price when this box was saved. */
+  marginPercent: number;
+  /**
+   * Cost per box at save time. If `boxCount` was given, this is the pack-rounding-aware cost
+   * (real packs bought ÷ boxCount, cheaper of whole-packs-vs-split-fee per item) — otherwise it's
+   * the naive cost assuming you can buy the exact kg needed at the cheapest $/kg, which tends to
+   * undercount real procurement cost once pack sizes don't divide demand evenly.
+   */
+  wholesaleCost: number;
+  /** How many boxes this cost was estimated against, when pack-rounding was used. */
+  boxCount?: number;
+  /** A market-researched RRP, if supplied — takes priority over the formula price when set. */
+  researchedRrp?: number;
+  /** researchedRrp if set, else round(priceForMargin(wholesaleCost, marginPercent)) to the
+   *  nearest dollar. */
+  sellPrice: number;
+  createdAt: string;
+};
