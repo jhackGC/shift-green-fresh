@@ -6,6 +6,7 @@
   },
   "scripts": {
     "dev": "next dev --turbo",
+    "dev:kv": "./scripts/run-with-keyvault-env.sh dev_javier --debug-env-prefix -- next dev --turbo",
     "build": "next build",
     "start": "next start",
     "prettier": "prettier --write --ignore-unknown .",
