@@ -65,18 +65,41 @@ export function boxWeightKg(box: Box): number {
   return box.items.reduce((sum, item) => sum + item.qty, 0);
 }
 
+/** eco-farms' real pick-up rate card: a flat small-order handling fee on orders under $400 — no
+ *  fuel levy, unlike delivery (the levy is specifically for eco-farms' own delivery run, not
+ *  something they charge when you collect it yourself). Real published rate, not an assumption. */
+export const PICKUP_SMALL_ORDER_THRESHOLD = 400;
+export const PICKUP_SMALL_ORDER_FEE = 25;
+
+export function pickupSmallOrderFee(orderValue: number): number {
+  return orderValue < PICKUP_SMALL_ORDER_THRESHOLD ? PICKUP_SMALL_ORDER_FEE : 0;
+}
+
 /**
- * Own-vehicle cost per trip, two ways: transport-only (fuel + vehicle cost — what the "Transport"
- * comparison card used to show, in isolation) and fully-loaded with driving labour included. The
- * fair comparison against a delivery fee is the fully-loaded figure — delivery has no labour
- * equivalent, so comparing it to transport-only understates what picking up actually costs.
+ * Own-vehicle cost per trip, two ways: transport-only (fuel + vehicle cost + eco-farms' small-order
+ * fee — what the "Transport" comparison card used to show, in isolation) and fully-loaded with
+ * driving labour included. The fair comparison against a delivery fee is the fully-loaded figure —
+ * delivery has no labour equivalent, so comparing it to transport-only understates what picking up
+ * actually costs.
+ *
+ * `orderValue` is the produce wholesale cost being collected that trip — same basis eco-farms uses
+ * for its delivery tiers, just a flat $25 rather than a tiered fee, and with no fuel levy added.
  */
-export function computeOwnVehicleCostPerTrip(a: BusinessAssumptions): {
+export function computeOwnVehicleCostPerTrip(
+  a: BusinessAssumptions,
+  orderValue: number
+): {
   transportOnly: number;
   withLabour: number;
+  smallOrderFee: number;
 } {
-  const transportOnly = computeFuelCostPerTrip(a) + a.vehicleCostPerTrip;
-  return { transportOnly, withLabour: transportOnly + a.drivingHoursPerTrip * a.hourlyLabourRate };
+  const smallOrderFee = pickupSmallOrderFee(orderValue);
+  const transportOnly = computeFuelCostPerTrip(a) + a.vehicleCostPerTrip + smallOrderFee;
+  return {
+    transportOnly,
+    withLabour: transportOnly + a.drivingHoursPerTrip * a.hourlyLabourRate,
+    smallOrderFee
+  };
 }
 
 /** Round-trip fuel cost from distance × consumption × price — not entered directly, since those
@@ -124,7 +147,9 @@ export function computeLogisticsCost(
 } {
   if (a.logisticsMode === 'own-vehicle') {
     return {
-      logisticsCost: (computeFuelCostPerTrip(a) + a.vehicleCostPerTrip) * a.tripsPerWeek,
+      logisticsCost:
+        (computeFuelCostPerTrip(a) + a.vehicleCostPerTrip + pickupSmallOrderFee(orderValue)) *
+        a.tripsPerWeek,
       drivingLabourCost: a.drivingHoursPerTrip * a.tripsPerWeek * a.hourlyLabourRate
     };
   }

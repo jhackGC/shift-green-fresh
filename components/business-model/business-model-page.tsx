@@ -4,17 +4,18 @@ import {
   computeBusinessModel,
   computeLabourScenarios,
   computeOwnVehicleCostPerTrip,
-  computeTieredDeliveryFee
+  computeTieredDeliveryFee,
+  PICKUP_SMALL_ORDER_THRESHOLD
 } from 'lib/business-model/calc';
 import {
   DEFAULT_ASSUMPTIONS,
   type BoxMixEntry,
   type BusinessAssumptions,
   type BusinessModel,
-  type LogisticsMode,
   type NonPerishableMixEntry
 } from 'lib/business-model/types';
 import type { Box } from 'lib/boxes/types';
+import { priceForMargin } from 'lib/margins/calc';
 import type { NonPerishableItem } from 'lib/non-perishables/types';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
@@ -230,7 +231,7 @@ export function BusinessModelPage({
           />
 
           {(() => {
-            const ownVehicle = computeOwnVehicleCostPerTrip(assumptions);
+            const ownVehicle = computeOwnVehicleCostPerTrip(assumptions, result.weeklyCogs);
             const delivery = computeTieredDeliveryFee(result.weeklyCogs);
             const deliveryCost = delivery.total;
             // Each version compared against delivery independently — "without driving hours" is
@@ -270,6 +271,22 @@ export function BusinessModelPage({
                         <span className="text-emerald-600 dark:text-emerald-400">cheaper</span>
                       )}
                     </span>
+                  </div>
+                  <div className="mb-1.5 flex flex-col gap-0.5 text-[11px] text-neutral-500">
+                    <div className="flex justify-between">
+                      <span>Order value (produce COGS)</span>
+                      <span className="font-mono">{formatMoney(result.weeklyCogs)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>
+                        Small order fee (
+                        {result.weeklyCogs < 400
+                          ? `<$${PICKUP_SMALL_ORDER_THRESHOLD}`
+                          : `≥$${PICKUP_SMALL_ORDER_THRESHOLD}`}
+                        , no fuel levy)
+                      </span>
+                      <span className="font-mono">{formatMoney(ownVehicle.smallOrderFee)}</span>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-1.5" onClick={(e) => e.stopPropagation()}>
                     <NumberField
@@ -313,8 +330,10 @@ export function BusinessModelPage({
                   <div className="mb-1.5 flex items-center justify-between text-xs font-semibold">
                     <span>
                       Sent to me (delivery){' '}
-                      {cheaper === 'delivery-service' && (
-                        <span className="text-emerald-600 dark:text-emerald-400">cheaper</span>
+                      {!withLabourCheaper && (
+                        <span className="text-emerald-600 dark:text-emerald-400">
+                          cheaper than pick-up with driving hours
+                        </span>
                       )}
                     </span>
                     <span className="font-mono">{formatMoney(deliveryCost)}/trip</span>
@@ -460,6 +479,14 @@ export function BusinessModelPage({
                 <tbody>
                   {boxes.map((box) => {
                     const mix = boxMix.find((m) => m.boxId === box.id);
+                    const boxesPerWeek = mix?.boxesPerWeek ?? 0;
+                    // box.sellPrice is a snapshot from whenever the box was last saved in the box
+                    // builder — it doesn't move with this model's live margin slider. Recompute the
+                    // same way computeBusinessModel does (respecting a fixed researchedRrp when
+                    // set) so what's shown here always matches what's actually driving the P&L.
+                    const livePrice =
+                      box.researchedRrp ??
+                      Math.round(priceForMargin(box.wholesaleCost, assumptions.marginPercent));
                     return (
                       <tr
                         key={box.id}
@@ -470,19 +497,19 @@ export function BusinessModelPage({
                           {formatMoney(box.wholesaleCost)}
                         </td>
                         <td className="px-3 py-2 text-right font-mono text-xs">
-                          {formatMoney(box.sellPrice)}
+                          {formatMoney(livePrice)}
                         </td>
                         <td className="px-3 py-2 text-right">
                           <input
                             type="number"
                             min={0}
-                            value={mix?.boxesPerWeek ?? 0}
+                            value={boxesPerWeek}
                             onChange={(e) => updateBoxCount(box.id, Number(e.target.value) || 0)}
                             className="w-16 rounded border border-neutral-300 bg-white px-1.5 py-0.5 text-right font-mono text-xs dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                           />
                         </td>
                         <td className="px-3 py-2 text-right font-mono text-xs">
-                          {formatMoney((mix?.boxesPerWeek ?? 0) * box.sellPrice)}
+                          {formatMoney(boxesPerWeek * livePrice)}
                         </td>
                       </tr>
                     );
