@@ -24,9 +24,12 @@ export type BoxOrder = {
   price: number;
   items: BoxOrderItem[];
   customerName: string;
-  /** Phone or email, whatever they gave — kept as one free-text field rather than forcing a
-   *  format, since pickup coordination for a small local operation is usually a phone call. */
-  contact: string;
+  /** Required — the order-notification email is sent to the business owner, but a real address on
+   *  file is also what makes replying to the customer directly (via `replyTo`) possible at all. */
+  email: string;
+  /** Optional — pickup coordination for a small local operation is often a phone call, but not
+   *  everyone wants to give a number. */
+  phone?: string;
   note?: string;
   status: 'new' | 'fulfilled' | 'cancelled';
   createdAt: string;

@@ -65,7 +65,8 @@ export function BoxOrdersPage({
                       {order.boxName} — {formatMoney(order.price)}
                     </div>
                     <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                      {order.customerName} · {order.contact}
+                      {order.customerName} · {order.email}
+                      {order.phone ? ` · ${order.phone}` : ''}
                     </div>
                     <div className="text-xs text-neutral-400">
                       {new Date(order.createdAt).toLocaleString('en-AU')}

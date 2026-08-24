@@ -31,7 +31,8 @@ export function BoxCard({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [customerName, setCustomerName] = useState('');
-  const [contact, setContact] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [note, setNote] = useState('');
 
   const totalKg = boxTotalKg(box);
@@ -47,8 +48,8 @@ export function BoxCard({
   }
 
   async function reserve() {
-    if (!customerName.trim() || !contact.trim()) {
-      toast.error('Name and a phone or email are needed to reserve a box.');
+    if (!customerName.trim() || !email.trim()) {
+      toast.error('Name and email are needed to reserve a box.');
       return;
     }
     setSubmitting(true);
@@ -60,7 +61,8 @@ export function BoxCard({
           swappedForProductId
         })),
         customerName,
-        contact,
+        email,
+        phone: phone || undefined,
         note: note || undefined
       });
       setSubmitted(true);
@@ -141,10 +143,17 @@ export function BoxCard({
             className="rounded border border-neutral-300 bg-white px-2 py-1 text-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
           />
           <input
-            type="text"
-            placeholder="Phone or email"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="rounded border border-neutral-300 bg-white px-2 py-1 text-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+          />
+          <input
+            type="tel"
+            placeholder="Phone (optional)"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             className="rounded border border-neutral-300 bg-white px-2 py-1 text-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
           />
           <input
