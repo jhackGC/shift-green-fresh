@@ -41,9 +41,10 @@ export const DEFAULT_ASSUMPTIONS: BusinessAssumptions = {
   logisticsMode: 'own-vehicle',
   distanceKmOneWay: 100,
   fuelPricePerLitre: 2.5,
-  // Default for a light commercial van/ute doing this kind of run — check against your actual
-  // vehicle's real-world figure, it varies a lot by vehicle and load.
-  fuelConsumptionL100km: 10,
+  // Real Renault Master figures: 9 L/100km urban, 8.5 L/100km highway. The 100km market run is
+  // mostly highway (M1) with short urban legs at each end, so this is that blend, not a generic
+  // van guess — adjust if the actual route mix (or the vehicle) changes.
+  fuelConsumptionL100km: 8.6,
   vehicleCostPerTrip: 15,
   drivingHoursPerTrip: 2,
   tripsPerWeek: 1,

@@ -4,7 +4,7 @@
     "logisticsMode": "delivery-service",
     "distanceKmOneWay": 100,
     "fuelPricePerLitre": 2.5,
-    "fuelConsumptionL100km": 10,
+    "fuelConsumptionL100km": 8.6,
     "vehicleCostPerTrip": 15,
     "drivingHoursPerTrip": 3,
     "tripsPerWeek": 1,
@@ -41,5 +41,5 @@
       "unitsPerWeek": 0
     }
   ],
-  "updatedAt": "2026-08-23T21:59:04.977Z"
+  "updatedAt": "2026-08-24T03:45:49.619Z"
 }
