@@ -57,6 +57,14 @@ export const DEFAULT_ASSUMPTIONS: BusinessAssumptions = {
 export type BoxMixEntry = {
   boxId: string;
   boxesPerWeek: number;
+  /**
+   * Per-box margin override (%). When set, this box prices off its own margin instead of the
+   * model's global `marginPercent` — which is what makes a *price ladder* modellable: small boxes
+   * carried at a higher margin so the mid sizes read as obviously better value, larger boxes at a
+   * lower one to reward buying volume. Unset means "follow the global margin". A box with a
+   * `researchedRrp` still ignores both, same priority order as everywhere else.
+   */
+  marginPercent?: number;
 };
 
 export type NonPerishableMixEntry = {

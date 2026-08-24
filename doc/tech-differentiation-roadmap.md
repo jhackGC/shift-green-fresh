@@ -1,102 +1,179 @@
-# Tech-Powered Differentiation — Reference
+# Tech Differentiators — Customer-Facing Ideas
 
-A running list of ways this business can use the fact that it's being built by someone who can
-actually write software, not just run a fruit stand. Grouped by status so it's clear what's real
-versus what's still an idea. Every "shipped" item ties back to data the app already computes —
-none of this is speculative infrastructure, it's mostly *surfacing* things that already exist
-internally.
+A reference list of things this business can offer customers **because it's being built by someone
+who writes software**, aimed squarely at a local competitive set that isn't tech savvy at all.
 
----
-
-## Shipped
-
-- **Value transparency (`/boxes`)** — every box shows per-item weight in kg and total $/kg, not
-  just product names. Nobody in the local competitor set (Flannery's, Ambarella, Awesome
-  Organics/the Sunday market, or any of the nine regional box businesses researched) publishes
-  this. Built off `lib/boxes/calc.ts`, data that already existed for cost purposes.
-- **Curated swap pools** — box items can carry a small, admin-picked set of substitutes (not
-  "anything on the wholesale list"), so "I don't use much parsley" has an answer without breaking
-  the pack-rounding procurement math. Customer picks a swap on `/boxes`; price doesn't move.
-  (`lib/boxes/types.ts`, `components/boxes/box-card.tsx`)
-- **Box reservation capture** — a swap choice is pointless if it goes nowhere. `/boxes` → "Reserve
-  this box" → `/admin/box-orders`, server-validated (a swap outside the curated pool is silently
-  rejected, price is never trusted from the client). Not a paid order yet, but a real request the
-  business can act on. (`lib/box-orders/`, `app/api/box-orders/`)
-- **Real vehicle data replacing guesses** — the Business Model tool's fuel-consumption assumption
-  now reflects the actual Renault Master (8.6 L/100km, highway-weighted blend of real 9 urban /
-  8.5 highway figures) instead of a generic van placeholder.
+The test every idea on this page has to pass: **why can't a market stall or a grocery shop just copy
+this?** If Flannery's could match it by putting up a sign, it isn't a differentiator and it doesn't
+belong here.
 
 ---
 
-## Immediate — the heat problem
+## Why the competition structurally can't follow
 
-Confirmed as the first move: **insulate and cool the garage itself**, not the distribution model.
-Cheapest fix aimed directly at the actual mechanism (time × temperature exposure):
+From `doc/research-competitor-produce-boxes.md`:
 
-- Insulated crates/eskies + ice bricks or gel packs for whatever's staged during a pickup window.
-- Shade, ventilation, or a portable AC/fan just for pickup hours — doesn't need to condition the
-  whole garage all day, just the exposure window.
-- Tighter pickup windows on hot days rather than one long all-day slot, so nothing sits out for
-  six-plus hours.
+- **Awesome Organics** — the main organic stall at the Gold Coast Organic Farmers Market, and the
+  closest direct competitor. Sunday only, 6:00–11:30am, and no website, shopfront, or other trading
+  day findable anywhere. Reachable 5.5 hours a week, through one channel.
+- **Flannery's / Ambarella** — daily walk-in shops, browse-and-choose, both carrying a public review
+  record of "pricier than expected."
+- **None of the nine regional box businesses surveyed** publish a $/kg figure or a box weight.
 
-**A genuinely tech-flavoured add-on, cheap and currently uncontested:** a $20–40 Bluetooth/WiFi
-temperature-and-humidity logger in the garage during pickup hours, with the log surfaced to
-customers — "cold chain, shown not claimed." Same instinct as the $/kg transparency play: nobody
-else in the local set publishes anything like this, and it's a trust signal that costs almost
-nothing to build given the skill already in the room.
+Nobody in that set can personalise, remember, notify, recompute, or explain anything. That's the
+whole opening.
 
----
+## The two assets that make these ideas possible
 
-## Near-term, cheap, high-leverage
-
-Small builds against data or logic that already exists — no new modelling required.
-
-| Idea | What it needs | Why it's cheap |
-|---|---|---|
-| Price-comparison line on `/boxes` | Text pulled from `doc/research-competitor-produce-boxes.md` findings | The research already exists; this is just putting it where a customer decides |
-| Pickup slot/window booking | A simple calendar/slot UI | Directly answers the market-rigidity finding (fixed 6–11:30am Sunday, no other way to reach the closest competitor) |
-| Saved exclusion-list preferences | A customer profile field, applied automatically each week | Cheaper than live substitution logic; matches the "no lock-in" pattern behind the two most durable competitors found (FreshBox, Ripe n Raw) |
-| SMS/WhatsApp pickup reminder + confirmation | A transactional SMS API (e.g. Twilio) | Cuts no-shows, which matter more for a pickup-only, perishable business than most |
-| Leftover/same-day clearance flag | Reuses `priceForMargin`'s existing negative-margin support | The pricing math for below-cost clearance was already built for the subsidy strategy — this just needs a UI surface and a same-day nudge |
+1. **Both sides of the price equation, as structured data.** `data/vendor-pricing/eco-farms/` holds
+   what produce actually costs wholesale, normalised to $/kg. `data/retail-pricing/merrimac/` holds
+   the main competitor's own board, normalised the same way. _Nobody else in this market has their
+   competitor's price list as queryable data._
+2. **Procurement math that surfaces things the business itself couldn't otherwise see.**
+   `lib/boxes/procurement.ts` computes real pack-rounding surplus (`surplusKg`);
+   `lib/margins/calc.ts`'s `priceForMargin` already handles negative margins, so deliberate
+   below-cost pricing is already expressible.
 
 ---
 
-## Bigger bets — pilot small, don't commit yet
+## Prove the value
 
-Both aimed at the same heat/rigidity problem, but structurally different businesses. Don't do
-both, and don't scale either past a pilot before real signal exists.
+Against the "I know the products, not the kg — I don't know what this box is actually worth" problem.
 
-- **Short local delivery round (Renault Master).** Not the same economics as the long-haul
-  delivery already ruled out (eco-farms' tiered fees, the Farm Gate Express precedent) — those
-  were 50–100km+ runs. A tight-radius round inside the immediate Varsity Lakes cluster is a
-  different cost shape (no fuel levy, high stop density if customers cluster, short total drive
-  time). It's also the one that reintroduces the "syncing" problem — every stop needs a rough
-  window and a sequence, and it doesn't scale past what one driver can cover in a heat-safe
-  timeframe. Pilot with one tight-radius day and a handful of customers before treating it as a
-  standing schedule.
-- **Air-conditioned community hall as a pickup point.** Solves the heat problem with zero routing
-  complexity — it's still an appointment, just a cooler one. Same shape as the rotating pop-up
-  idea already scoped, now justified by heat-safety rather than reach. Real recurring cost (hall
-  hire — already has a home as `weeklyFixedCosts` in the Business Model tool), no scheduling
-  complexity added.
-- **Full customer portal** — pause/skip/cancel a subscription, manage saved exclusions, see order
-  history. The natural next step after the exclusion-list MVP above, once there's enough
-  recurring-customer volume to justify it.
-- **Wire boxes into the storefront that already exists.** This repo is a Next.js
-  Commerce/Shopify-Hydrogen starter (`app/product/`, `app/search/`, `lib/shopify/`, cart/checkout
-  mutations) — currently dormant, Shopify retrieval disabled on the homepage. Real payment/
-  checkout for box reservations is a matter of reconnecting that, not building commerce
-  infrastructure from scratch.
+**"Same basket elsewhere" comparison.** For any box, compute what the identical produce would cost
+at Awesome Organics' own board prices. "This box: $46. The same 6.8kg at the Sunday market's own
+prices: $61."
+→ _They can't copy it: it requires holding a competitor's price list as data and recomputing it per
+box. We'd be quoting their published prices back at them, accurately._
+
+**Seasonal price intelligence.** Dated wholesale imports accumulate into real price history per
+product. "Oranges are 40% down on June — that's why there are more in this week's box." Turns box
+composition from arbitrary into explained.
+→ _A stall knows this week's price. Only accumulated data knows the trend._
+
+**The honest margin page.** What we paid, what we charge, why. Radical transparency as a brand
+position — backed by live numbers that update themselves, not a claim on a chalkboard.
+→ _Any shop could claim fairness. Almost none would show the arithmetic, and none could keep it
+current automatically._
+
+**QR code on the box → full provenance.** Scan it: contents, exact weights, $/kg, what you'd have
+paid elsewhere, when it was packed, how cold it's been.
+→ _The physical box becomes a pointer into everything above. A cardboard box from a stall is just a
+cardboard box._
+
+## Bend pickup around the customer
+
+Against the rigidity that makes the Sunday market annoying — you go at their time or not at all.
+
+**"Your box is packed — come anytime today" live status.** The market is a fixed 5.5-hour
+appointment. This is its exact inverse: a flexible window, with live status telling you when it's
+actually ready.
+→ _Structurally impossible for a stall. Their availability window IS their business model._
+
+**Self-service slot picking with live capacity.** Choose your window, see what's left, change it
+without phoning anyone.
+
+**Cold-chain receipt.** A temperature log from pack time to handover, shown to the customer. "Held
+at 6°C since 5:40am." Proof rather than "we keep it fresh" — and a direct answer to the QLD heat
+problem that every local competitor also has but none of them talk about.
+→ _Nobody in this category publishes anything like this. It costs almost nothing to capture and is
+very hard to counter without the same instrumentation._
+
+## Make the box actually theirs
+
+Against "I don't use so much parsley" — the thing that quietly kills box subscriptions.
+
+**Build-your-own from a curated weekly pool.** Live $/kg and a running total as you assemble it.
+Feels like total freedom to the customer; stays inside a pool that keeps pack-rounding predictable.
+→ _A stall can let you pick items. It can't hold a per-customer composition and reprice it live._
+
+**A never-send list that learns.** "You've swapped beetroot out three times — want us to stop
+including it?" Set once, applied forever.
+→ _Software remembers every customer perfectly. A shopkeeper remembers their regulars, at best._
+
+**Household calibration.** "2 adults, 2 kids, we cook 5 nights a week" → the right box size and mix,
+instead of guessing between Small and Medium and getting it wrong twice.
+
+**Budget-led standing order.** "Keep me at about $50 a week, fill it with whatever's best value."
+An algorithm re-optimising composition against live wholesale prices, every week, per customer.
+→ _This is the clearest example of the whole page: no shopkeeper can do this for every customer
+every week. It's only possible as software._
+
+## Stop the churn
+
+The stated problem: _box schemes get used a couple of times and then abandoned._ Retention is the
+thing to design against, not acquisition.
+
+**Per-item feedback loop.** One tap per item: loved it / too much / never again. Next week's box
+responds. Every box gets measurably better fitted to that household.
+→ _This is the direct fix for the abandonment pattern, and it compounds — the longer someone stays,
+the better their box gets, the less reason to leave._
+
+**Recipes generated from actual box contents.** We know it's 1kg zucchini, 600g tomato, 500g onion —
+not "some vegetables." "I didn't use it all, so I stopped ordering" is the number one churn reason,
+and it's solvable with data already held per box.
+
+**Use-by ordering nudges.** "Your leafy greens go first — use those by Wednesday, the root veg will
+keep two weeks." Turns a spoilage complaint into a service.
+
+**Accumulated savings dashboard.** "This year: $340 saved versus shop prices, 47kg of organic
+produce, 12 boxes." Retention through visible, compounding, personally-attributed value.
+→ _Requires holding both the customer's history and competitor pricing. Nobody local has either._
+
+## Turn waste into a weapon
+
+**The surplus board.** Pack-rounding _already computes_ leftover kg — buy a 10kg pack to satisfy 7kg
+of demand and 3kg is surplus (`surplusKg` in `lib/boxes/procurement.ts`). Right now that surplus is
+absorbed silently into box cost, and in a Queensland summer it's also a spoilage clock ticking.
+
+Published live as an at-cost, first-come board — with a notification to whoever wants one — it
+becomes three things at once: **revenue from what was waste, a low-risk first purchase for new
+customers, and heat-risk mitigation.** `priceForMargin` already supports negative margins, so
+deliberately pricing at or below cost is already expressible.
+
+→ _Probably the strongest idea here. It's uniquely enabled by machinery that already exists, and a
+stall genuinely does not know what its own surplus is — let alone have a way to broadcast it the
+moment it appears._
+
+## Grow it
+
+**Neighbourhood pooling.** "Four more Varsity Lakes orders this week unlocks a bigger pack size —
+cheaper for all of you." Turns the procurement engine into a local growth loop, where customers have
+a real financial reason to recruit their neighbours.
+→ _Requires knowing pack-size economics per product and aggregating demand in real time. Nothing
+about a stall supports this._
+
+**Demand-led pop-up locations.** Let people register interest in where the van goes next, so a hall
+booking follows measured demand rather than a hunch — and so the first pop-up at a new location
+already has customers waiting when it opens.
 
 ---
 
-## Internal-only leverage (not customer-facing, still a real edge)
+## Already shipped
 
-- **Pack-rounding procurement math** (`lib/boxes/procurement.ts`) — buys exactly what's needed in
-  whole packs (or takes eco-farms' 20% split-pack fee when that's cheaper), rather than eyeballing
-  an order like a manual operator would. Tighter margins than competitors who don't do this,
-  quietly, every week.
-- **JSON-file persistence, no DB** — keeps infrastructure cost at effectively zero at this scale,
-  and every entity (boxes, pricing, orders, the business model itself) is easy for a technical
-  solo operator to extend without provisioning anything. Not a customer-facing differentiator, but
-  it's why every other item on this list is cheap to build at all.
+Small, but each one is already something the local competition doesn't do:
+
+- **Value transparency** (`/boxes`) — every box shows per-item weight and total $/kg. None of the
+  nine box businesses or three local shops surveyed publish either.
+- **Curated swap pools** — box items carry admin-picked substitutes, so "I don't use parsley" has an
+  answer that doesn't break procurement.
+- **Reservation capture** — pick swaps, reserve a box, land in `/admin/box-orders`, server-validated.
+
+## Appendix — internal advantages (not customer-facing)
+
+Worth knowing about, but nothing a customer sees:
+
+- **Pack-rounding procurement** (`lib/boxes/procurement.ts`) — buys in whole packs, or takes
+  eco-farms' 20% split fee when that's cheaper. Quietly tighter margins than eyeballing an order.
+- **The Business Model tool** — real transport/labour/break-even modelling with actual rate cards.
+- **JSON-file persistence, no database** — near-zero infrastructure cost at this scale, and why
+  everything above is cheap to build at all.
+- **Insulating and cooling the garage** is the agreed first physical step on the heat problem —
+  ahead of any delivery round or hall hire.
+
+---
+
+<sub>One note deliberately left unexpanded, so it isn't lost: `/admin` and every API route are
+currently open to anyone who guesses the URL (including customer names and contacts), and the
+`data/*.json` write paths won't persist on Vercel's read-only filesystem. Both matter before
+anything customer-facing goes live for real — but neither is an idea problem.</sub>

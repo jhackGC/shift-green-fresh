@@ -173,11 +173,14 @@ export function computeBusinessModel(
     .map((m) => {
       const box = boxById.get(m.boxId);
       const costPerBox = box?.wholesaleCost ?? 0;
-      // A researched RRP is a deliberate, fixed price — respect it. Otherwise sell price tracks
-      // this model's live margin assumption, not whatever margin the box happened to be saved
-      // with, so you can scenario-test margin changes without re-saving every box.
+      // A researched RRP is a deliberate, fixed price — respect it. Otherwise sell price tracks a
+      // margin: this box's own override if the mix sets one (that's how a price ladder gets
+      // modelled), else the model's global margin. Either way it's the live assumption, not
+      // whatever margin the box happened to be saved with, so margins stay scenario-testable
+      // without re-saving every box.
       const sellPerBox =
-        box?.researchedRrp ?? Math.round(priceForMargin(costPerBox, a.marginPercent));
+        box?.researchedRrp ??
+        Math.round(priceForMargin(costPerBox, m.marginPercent ?? a.marginPercent));
       return {
         boxId: m.boxId,
         boxName: box?.name ?? m.boxId,

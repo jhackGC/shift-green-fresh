@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  boxWeightKg,
   computeBusinessModel,
   computeLabourScenarios,
   computeOwnVehicleCostPerTrip,
@@ -122,10 +123,14 @@ export function BusinessModelPage({
     initialModel.assumptions ?? DEFAULT_ASSUMPTIONS
   );
   const [boxMix, setBoxMix] = useState<BoxMixEntry[]>(() =>
-    boxes.map((b) => ({
-      boxId: b.id,
-      boxesPerWeek: initialModel.boxMix.find((m) => m.boxId === b.id)?.boxesPerWeek ?? 0
-    }))
+    boxes.map((b) => {
+      const saved = initialModel.boxMix.find((m) => m.boxId === b.id);
+      return {
+        boxId: b.id,
+        boxesPerWeek: saved?.boxesPerWeek ?? 0,
+        ...(saved?.marginPercent != null ? { marginPercent: saved.marginPercent } : {})
+      };
+    })
   );
   const [nonPerishableMix, setNonPerishableMix] = useState<NonPerishableMixEntry[]>(() =>
     nonPerishables.map((i) => ({
@@ -143,6 +148,19 @@ export function BusinessModelPage({
   }
   function updateBoxCount(boxId: string, boxesPerWeek: number) {
     setBoxMix((prev) => prev.map((m) => (m.boxId === boxId ? { ...m, boxesPerWeek } : m)));
+  }
+  /** Clearing the field (null) drops the override so the box follows the global margin again. */
+  function updateBoxMargin(boxId: string, marginPercent: number | null) {
+    setBoxMix((prev) =>
+      prev.map((m) => {
+        if (m.boxId !== boxId) return m;
+        if (marginPercent == null) {
+          const { marginPercent: _dropped, ...rest } = m;
+          return rest;
+        }
+        return { ...m, marginPercent };
+      })
+    );
   }
   function updateNonPerishableCount(itemId: string, unitsPerWeek: number) {
     setNonPerishableMix((prev) =>
@@ -206,19 +224,20 @@ export function BusinessModelPage({
         <div className="flex flex-col gap-4 rounded-lg border border-neutral-300 p-4 dark:border-neutral-700">
           <h2 className="text-sm font-semibold uppercase tracking-wide">Pricing</h2>
           <NumberField
-            label="Target margin"
+            label="Default margin"
             suffix="%"
             min={-50}
             value={assumptions.marginPercent}
             onChange={(v) => updateAssumption('marginPercent', v)}
           />
           <p className="-mt-2 text-[11px] text-neutral-400">
-            Applied live to every box's wholesale cost here — a scenario knob, separate from
-            whatever margin each box was saved with in the box builder. A box with a researched RRP
-            still uses that fixed price regardless of this. Negative margin means selling below
-            wholesale cost — a genuine produce subsidy, not just a thin margin. Non-perishables
-            below are meant to fund that gap; the P&amp;L shows both sides so you can see whether
-            they actually do.
+            The fallback for any box without its own margin set in the mix table below — override
+            per box there to model a price ladder (small boxes at a higher margin so the mid sizes
+            read as better value). A scenario knob either way, separate from whatever margin each
+            box was saved with in the box builder. A box with a researched RRP still uses that fixed
+            price regardless. Negative margin means selling below wholesale cost — a genuine produce
+            subsidy, not just a thin margin. Non-perishables below are meant to fund that gap; the
+            P&amp;L shows both sides so you can see whether they actually do.
           </p>
 
           {/* Transport — both options shown together so "is it worth it to have it sent"
@@ -471,7 +490,9 @@ export function BusinessModelPage({
                   <tr className="border-b border-neutral-300 bg-neutral-50 text-left text-xs uppercase tracking-wide text-neutral-500 dark:border-neutral-700 dark:bg-neutral-900">
                     <th className="px-3 py-2">Box</th>
                     <th className="px-3 py-2 text-right">Cost</th>
+                    <th className="px-3 py-2 text-right">Margin</th>
                     <th className="px-3 py-2 text-right">Sell</th>
+                    <th className="px-3 py-2 text-right">$/kg</th>
                     <th className="px-3 py-2 text-right">Boxes/week</th>
                     <th className="px-3 py-2 text-right">Revenue</th>
                   </tr>
@@ -481,23 +502,59 @@ export function BusinessModelPage({
                     const mix = boxMix.find((m) => m.boxId === box.id);
                     const boxesPerWeek = mix?.boxesPerWeek ?? 0;
                     // box.sellPrice is a snapshot from whenever the box was last saved in the box
-                    // builder — it doesn't move with this model's live margin slider. Recompute the
-                    // same way computeBusinessModel does (respecting a fixed researchedRrp when
-                    // set) so what's shown here always matches what's actually driving the P&L.
+                    // builder — it doesn't move with this model's live margin. Recompute the same
+                    // way computeBusinessModel does (researchedRrp wins, else this box's own
+                    // margin override, else the global one) so what's shown here always matches
+                    // what's actually driving the P&L.
+                    const effectiveMargin = mix?.marginPercent ?? assumptions.marginPercent;
                     const livePrice =
                       box.researchedRrp ??
-                      Math.round(priceForMargin(box.wholesaleCost, assumptions.marginPercent));
+                      Math.round(priceForMargin(box.wholesaleCost, effectiveMargin));
+                    const kg = boxWeightKg(box);
                     return (
                       <tr
                         key={box.id}
                         className="border-b border-neutral-200 dark:border-neutral-800"
                       >
-                        <td className="px-3 py-2 font-medium">{box.name}</td>
+                        <td className="px-3 py-2 font-medium">
+                          {box.name}
+                          <span className="ml-1 text-[10px] font-normal text-neutral-400">
+                            {kg.toFixed(1)}kg
+                          </span>
+                        </td>
                         <td className="px-3 py-2 text-right font-mono text-xs">
                           {formatMoney(box.wholesaleCost)}
                         </td>
+                        <td className="px-3 py-2 text-right">
+                          {box.researchedRrp ? (
+                            <span className="font-mono text-[10px] text-neutral-400">RRP</span>
+                          ) : (
+                            <input
+                              type="number"
+                              min={-50}
+                              max={95}
+                              placeholder={String(assumptions.marginPercent)}
+                              value={mix?.marginPercent ?? ''}
+                              onChange={(e) =>
+                                updateBoxMargin(
+                                  box.id,
+                                  e.target.value === '' ? null : Number(e.target.value)
+                                )
+                              }
+                              title="Blank follows the global margin. Set a value to model a price ladder."
+                              className={`w-14 rounded border px-1.5 py-0.5 text-right font-mono text-xs dark:bg-neutral-800 dark:text-white ${
+                                mix?.marginPercent != null
+                                  ? 'border-teal-500 text-teal-700 dark:border-teal-400 dark:text-teal-300'
+                                  : 'border-neutral-300 dark:border-neutral-700'
+                              }`}
+                            />
+                          )}
+                        </td>
                         <td className="px-3 py-2 text-right font-mono text-xs">
                           {formatMoney(livePrice)}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono text-xs text-neutral-500">
+                          {kg > 0 ? formatMoney(livePrice / kg) : '—'}
                         </td>
                         <td className="px-3 py-2 text-right">
                           <input

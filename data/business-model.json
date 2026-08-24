@@ -1,7 +1,7 @@
 {
   "assumptions": {
     "marginPercent": 35,
-    "logisticsMode": "delivery-service",
+    "logisticsMode": "own-vehicle",
     "distanceKmOneWay": 100,
     "fuelPricePerLitre": 2.5,
     "fuelConsumptionL100km": 8.6,
@@ -16,19 +16,23 @@
   "boxMix": [
     {
       "boxId": "box-1787487107965",
-      "boxesPerWeek": 4
+      "boxesPerWeek": 5,
+      "marginPercent": 50
     },
     {
       "boxId": "box-1787487108241",
-      "boxesPerWeek": 3
+      "boxesPerWeek": 5,
+      "marginPercent": 35
     },
     {
       "boxId": "box-1787487108516",
-      "boxesPerWeek": 2
+      "boxesPerWeek": 5,
+      "marginPercent": 32
     },
     {
       "boxId": "box-1787487268791",
-      "boxesPerWeek": 1
+      "boxesPerWeek": 5,
+      "marginPercent": 30
     }
   ],
   "nonPerishableMix": [
@@ -41,5 +45,5 @@
       "unitsPerWeek": 0
     }
   ],
-  "updatedAt": "2026-08-24T03:45:49.619Z"
+  "updatedAt": "2026-08-24T04:52:57.345Z"
 }
