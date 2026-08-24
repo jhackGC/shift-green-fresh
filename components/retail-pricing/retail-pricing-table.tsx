@@ -1,8 +1,9 @@
 'use client';
 
 import { marginTier } from 'lib/margins/calc';
-import type { Product } from 'lib/vendor-pricing/types';
+import { resolvePendingRetailPriceChange, updateRetailPrice } from 'lib/retail-pricing/actions';
 import type { PendingRetailChange, RetailPricing } from 'lib/retail-pricing/types';
+import type { Product } from 'lib/vendor-pricing/types';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -107,16 +108,7 @@ export function RetailPricingTable({
   async function savePrice(row: JoinedRetailRow, price: number) {
     setSavingId(row.id);
     try {
-      const res = await fetch('/api/retail-pricing', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: row.id, retailerCode: row.retailerCode, price })
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? `Save failed (${res.status})`);
-      }
-      const updated = (await res.json()) as RetailPricing;
+      const updated = await updateRetailPrice(row.id, row.retailerCode, price);
       setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, ...updated } : r)));
       toast.success(`Saved ${row.productName} — ${formatMoney(price)}`);
     } catch (err) {
@@ -129,16 +121,11 @@ export function RetailPricingTable({
   async function resolvePending(change: JoinedPendingChange, action: 'approve' | 'reject') {
     setResolvingId(change.id);
     try {
-      const res = await fetch('/api/retail-pricing/pending', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: change.id, retailerCode: change.retailerCode, action })
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? `${action} failed (${res.status})`);
-      }
-      const { updated } = (await res.json()) as { updated: RetailPricing | null };
+      const { updated } = await resolvePendingRetailPriceChange(
+        change.id,
+        change.retailerCode,
+        action
+      );
       setPending((prev) => prev.filter((p) => p.id !== change.id));
       if (action === 'approve' && updated) {
         setRows((prev) => prev.map((r) => (r.id === change.id ? { ...r, ...updated } : r)));

@@ -1,40 +1,37 @@
-import { priceForMargin } from 'lib/margins/calc';
-import { addBox, deleteBox, loadBoxes, updateBoxDescription } from 'lib/boxes/store';
-import { betterProcurement, planProcurement } from 'lib/boxes/procurement';
-import type { Box, BoxItem } from 'lib/boxes/types';
-import { loadAllLatestVendorPricing, loadProducts } from 'lib/vendor-pricing/store';
-import { NextRequest, NextResponse } from 'next/server';
+'use server';
 
-export async function GET(): Promise<NextResponse> {
-  return NextResponse.json(loadBoxes());
-}
+import { betterProcurement, planProcurement } from 'lib/boxes/procurement';
+import { addBox, deleteBox as deleteBoxRecord, updateBoxDescription } from 'lib/boxes/store';
+import type { Box, BoxItem } from 'lib/boxes/types';
+import { priceForMargin } from 'lib/margins/calc';
+import { loadAllLatestVendorPricing, loadProducts } from 'lib/vendor-pricing/store';
+import { revalidatePath } from 'next/cache';
+
+export type SaveBoxInput = {
+  name: string;
+  description?: string;
+  weekOf: string;
+  vendorCode: string;
+  marginPercent: number;
+  items: BoxItem[];
+  boxCount?: number;
+  researchedRrp?: number;
+};
 
 /**
- * Saves a new box. Body: { name, weekOf, vendorCode, marginPercent,
- * items: [{productId, qty, swapOptions?}], boxCount?, researchedRrp? }. Cost/sell price are
- * computed server-side from that week's actual wholesale pricing, not trusted from the client, so
- * a saved box always reflects real numbers. `swapOptions` per item is trusted for *which*
- * alternatives were curated, but filtered server-side to ones this week's import can actually
- * price.
+ * Saves a new box. Cost/sell price are computed server-side from that week's actual wholesale
+ * pricing, never trusted from the client, so a saved box always reflects real numbers.
+ * `swapOptions` per item is trusted for *which* alternatives were curated, but filtered to ones
+ * this week's import can actually price.
  *
  * When `boxCount` is given, cost is pack-rounding-aware: for each item, total demand across all
- * boxes is procured as whole packs or (eco-farms' own 20% handling fee) a split pack, whichever
- * is cheaper, then divided back down to a per-box cost — a more honest number than assuming you
- * can buy the exact fractional kg needed at the cheapest listed $/kg.
+ * boxes is procured as whole packs or (eco-farms' own 20% handling fee) a split pack, whichever is
+ * cheaper, then divided back down to a per-box cost — a more honest number than assuming you can
+ * buy the exact fractional kg needed at the cheapest listed $/kg.
  */
-export async function POST(req: NextRequest): Promise<NextResponse> {
-  const body = await req.json();
+export async function saveBox(input: SaveBoxInput): Promise<Box> {
   const { name, description, weekOf, vendorCode, marginPercent, items, boxCount, researchedRrp } =
-    body as {
-      name?: string;
-      description?: string;
-      weekOf?: string;
-      vendorCode?: string;
-      marginPercent?: number;
-      items?: BoxItem[];
-      boxCount?: number;
-      researchedRrp?: number;
-    };
+    input;
 
   if (
     !name ||
@@ -44,12 +41,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     !Array.isArray(items) ||
     items.length === 0
   ) {
-    return NextResponse.json(
-      {
-        error:
-          'Expected { name, weekOf, vendorCode, marginPercent, items: [{productId, qty}] } with at least one item.'
-      },
-      { status: 400 }
+    throw new Error(
+      'Expected a name, week, vendor, margin, and at least one item: { productId, qty }.'
     );
   }
 
@@ -76,12 +69,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   for (const item of items) {
     const pricePerKg = cheapestByProduct.get(item.productId);
     if (pricePerKg == null) {
-      const name = productById.get(item.productId)?.name ?? item.productId;
-      return NextResponse.json(
-        {
-          error: `No priced ${vendorCode} line for "${name}" this week — remove it or wait for a fresh import.`
-        },
-        { status: 400 }
+      const label = productById.get(item.productId)?.name ?? item.productId;
+      throw new Error(
+        `No priced ${vendorCode} line for "${label}" this week — remove it or wait for a fresh import.`
       );
     }
 
@@ -127,28 +117,22 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     createdAt: new Date().toISOString()
   };
   addBox(box);
-  return NextResponse.json(box);
+  revalidatePath('/admin/boxes');
+  revalidatePath('/boxes');
+  return box;
+}
+
+export async function removeBox(id: string): Promise<void> {
+  deleteBoxRecord(id);
+  revalidatePath('/admin/boxes');
+  revalidatePath('/boxes');
 }
 
 /** Edits an existing box's guidance label only — cost/sell price are computed at save time from
  *  that week's pricing, so changing the recipe means saving a new box, not patching this one. */
-export async function PATCH(req: NextRequest): Promise<NextResponse> {
-  const { id, description } = (await req.json()) as { id?: string; description?: string };
-  if (!id) return NextResponse.json({ error: 'Expected { id, description }.' }, { status: 400 });
-  try {
-    const updated = updateBoxDescription(id, description ?? '');
-    return NextResponse.json(updated);
-  } catch (err) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : String(err) },
-      { status: 404 }
-    );
-  }
-}
-
-export async function DELETE(req: NextRequest): Promise<NextResponse> {
-  const { id } = (await req.json()) as { id?: string };
-  if (!id) return NextResponse.json({ error: 'Expected { id }.' }, { status: 400 });
-  deleteBox(id);
-  return NextResponse.json({ ok: true });
+export async function saveBoxDescription(id: string, description: string): Promise<Box> {
+  const updated = updateBoxDescription(id, description);
+  revalidatePath('/admin/boxes');
+  revalidatePath('/boxes');
+  return updated;
 }

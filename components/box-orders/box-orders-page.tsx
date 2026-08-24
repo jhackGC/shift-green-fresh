@@ -1,5 +1,6 @@
 'use client';
 
+import { setBoxOrderStatus } from 'lib/box-orders/actions';
 import type { BoxOrder } from 'lib/box-orders/types';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -28,13 +29,7 @@ export function BoxOrdersPage({
 
   async function setStatus(id: string, status: BoxOrder['status']) {
     try {
-      const res = await fetch('/api/box-orders', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, status })
-      });
-      if (!res.ok) throw new Error(`Update failed (${res.status})`);
-      const updated = (await res.json()) as BoxOrder;
+      const updated = await setBoxOrderStatus(id, status);
       setOrders((prev) => prev.map((o) => (o.id === id ? updated : o)));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Update failed');

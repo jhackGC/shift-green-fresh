@@ -16,6 +16,7 @@ import {
   type NonPerishableMixEntry
 } from 'lib/business-model/types';
 import type { Box } from 'lib/boxes/types';
+import { updateBusinessModel } from 'lib/business-model/actions';
 import { priceForMargin } from 'lib/margins/calc';
 import type { NonPerishableItem } from 'lib/non-perishables/types';
 import { useMemo, useState } from 'react';
@@ -176,12 +177,7 @@ export function BusinessModelPage({
   async function save() {
     setSaving(true);
     try {
-      const res = await fetch('/api/business-model', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ assumptions, boxMix, nonPerishableMix })
-      });
-      if (!res.ok) throw new Error(`Save failed (${res.status})`);
+      await updateBusinessModel({ assumptions, boxMix, nonPerishableMix });
       toast.success('Saved.');
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Save failed');

@@ -1,5 +1,6 @@
 'use client';
 
+import { createNonPerishable, removeNonPerishable } from 'lib/non-perishables/actions';
 import type { NonPerishableItem } from 'lib/non-perishables/types';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -29,13 +30,12 @@ export function NonPerishablesPage({ initialItems }: { initialItems: NonPerishab
     }
     setSaving(true);
     try {
-      const res = await fetch('/api/non-perishables', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, category: category || undefined, cost, sellPrice })
+      const item = await createNonPerishable({
+        name,
+        category: category || undefined,
+        cost,
+        sellPrice
       });
-      if (!res.ok) throw new Error(`Save failed (${res.status})`);
-      const item = (await res.json()) as NonPerishableItem;
       setItems((prev) => [...prev, item]);
       setName('');
       setCategory('');
@@ -51,12 +51,7 @@ export function NonPerishablesPage({ initialItems }: { initialItems: NonPerishab
 
   async function removeItem(id: string) {
     try {
-      const res = await fetch('/api/non-perishables', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-      if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+      await removeNonPerishable(id);
       setItems((prev) => prev.filter((i) => i.id !== id));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Delete failed');

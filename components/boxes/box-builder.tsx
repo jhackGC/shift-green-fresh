@@ -1,5 +1,10 @@
 'use client';
 
+import {
+  removeBox as removeBoxAction,
+  saveBox as saveBoxAction,
+  saveBoxDescription
+} from 'lib/boxes/actions';
 import { priceForMargin } from 'lib/margins/calc';
 import { betterProcurement, planProcurement, type PackOption } from 'lib/boxes/procurement';
 import type { Box, BoxItem } from 'lib/boxes/types';
@@ -135,25 +140,16 @@ export function BoxBuilder({
     }
     setSaving(true);
     try {
-      const res = await fetch('/api/boxes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          description: description || undefined,
-          weekOf,
-          vendorCode,
-          marginPercent,
-          items: draftItems,
-          boxCount: typeof boxCount === 'number' ? boxCount : undefined,
-          researchedRrp: typeof researchedRrp === 'number' ? researchedRrp : undefined
-        })
+      const box = await saveBoxAction({
+        name,
+        description: description || undefined,
+        weekOf,
+        vendorCode,
+        marginPercent,
+        items: draftItems,
+        boxCount: typeof boxCount === 'number' ? boxCount : undefined,
+        researchedRrp: typeof researchedRrp === 'number' ? researchedRrp : undefined
       });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? `Save failed (${res.status})`);
-      }
-      const box = (await res.json()) as Box;
       setBoxes((prev) => [...prev, box]);
       setName('');
       setDescription('');
@@ -170,12 +166,7 @@ export function BoxBuilder({
 
   async function removeBox(id: string) {
     try {
-      const res = await fetch('/api/boxes', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-      if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+      await removeBoxAction(id);
       setBoxes((prev) => prev.filter((b) => b.id !== id));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Delete failed');
@@ -184,13 +175,7 @@ export function BoxBuilder({
 
   async function saveDescription(id: string, value: string) {
     try {
-      const res = await fetch('/api/boxes', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, description: value })
-      });
-      if (!res.ok) throw new Error(`Save failed (${res.status})`);
-      const updated = (await res.json()) as Box;
+      const updated = await saveBoxDescription(id, value);
       setBoxes((prev) => prev.map((b) => (b.id === id ? updated : b)));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Save failed');

@@ -2,6 +2,7 @@
 
 import { boxPricePerKg, boxTotalKg } from 'lib/boxes/calc';
 import type { Box } from 'lib/boxes/types';
+import { createBoxOrder } from 'lib/box-orders/actions';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -52,24 +53,16 @@ export function BoxCard({
     }
     setSubmitting(true);
     try {
-      const res = await fetch('/api/box-orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          boxId: box.id,
-          swaps: Object.entries(swaps).map(([productId, swappedForProductId]) => ({
-            productId,
-            swappedForProductId
-          })),
-          customerName,
-          contact,
-          note: note || undefined
-        })
+      await createBoxOrder({
+        boxId: box.id,
+        swaps: Object.entries(swaps).map(([productId, swappedForProductId]) => ({
+          productId,
+          swappedForProductId
+        })),
+        customerName,
+        contact,
+        note: note || undefined
       });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? `Reservation failed (${res.status})`);
-      }
       setSubmitted(true);
       toast.success(`Reserved "${box.name}" — we'll be in touch to confirm pickup.`);
     } catch (err) {
