@@ -10,9 +10,12 @@ export async function GET(): Promise<NextResponse> {
 }
 
 /**
- * Saves a new box. Body: { name, weekOf, vendorCode, marginPercent, items: [{productId, qty}],
- * boxCount?, researchedRrp? }. Cost/sell price are computed server-side from that week's actual
- * wholesale pricing, not trusted from the client, so a saved box always reflects real numbers.
+ * Saves a new box. Body: { name, weekOf, vendorCode, marginPercent,
+ * items: [{productId, qty, swapOptions?}], boxCount?, researchedRrp? }. Cost/sell price are
+ * computed server-side from that week's actual wholesale pricing, not trusted from the client, so
+ * a saved box always reflects real numbers. `swapOptions` per item is trusted for *which*
+ * alternatives were curated, but filtered server-side to ones this week's import can actually
+ * price.
  *
  * When `boxCount` is given, cost is pack-rounding-aware: for each item, total demand across all
  * boxes is procured as whole packs or (eco-farms' own 20% handling fee) a split pack, whichever
@@ -96,13 +99,26 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       ? researchedRrp
       : Math.round(priceForMargin(wholesaleCost, marginPercent));
 
+  // Swap options are a curated pool, not "anything on the wholesale list" — trust the client for
+  // which alternatives were offered, but still only keep ones this week's import can actually
+  // price (an alternative that vanished from availability shouldn't silently stay offerable) and
+  // drop an item swapping for itself.
+  const normalizedItems = items.map((item) => ({
+    ...item,
+    swapOptions: item.swapOptions?.length
+      ? [...new Set(item.swapOptions)].filter(
+          (id) => id !== item.productId && cheapestByProduct.has(id)
+        )
+      : undefined
+  }));
+
   const box: Box = {
     id: `box-${Date.now()}`,
     name,
     ...(description ? { description } : {}),
     weekOf,
     vendorCode,
-    items,
+    items: normalizedItems,
     marginPercent,
     wholesaleCost,
     ...(usePackRounding ? { boxCount } : {}),

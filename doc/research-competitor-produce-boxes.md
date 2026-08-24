@@ -1,9 +1,8 @@
 # Produce Box Market Research — SEQ & Northern Rivers
 
-**Scope:** Two parts. First, fruit-and-veg *box* businesses operating across South East
+**Scope:** Two parts. First, fruit-and-veg _box_ businesses operating across South East
 Queensland and the Northern Rivers (NSW), benchmarked against Shift Green Fresh's own box
-pricing — nine surveyed, pricing captured live from each business's own website in August
-2026. Second, given deliveries are off the table except very close to the Varsity Lakes
+pricing — nine surveyed, pricing captured live from each business's own website in August 2026. Second, given deliveries are off the table except very close to the Varsity Lakes
 warehouse, a closer look at the **physical shops a Varsity Lakes customer would actually
 drive to instead** — Flannery's, Ambarella, and the Sunday organic farmers market, whose main
 stall's shelf pricing this repo already has captured first-hand.
@@ -26,17 +25,17 @@ vs. closed status, self-reported milestones. Treat it as directional, not audite
 
 ## The landscape
 
-| Business | Region | Model | Price range | Signal |
-|---|---|---|---|---|
-| **Farm Gate Express** — Hervey Bay, QLD | Wide Bay | Pickup only | $25–$95 | Shopfront + click-and-collect; cut home delivery entirely in 2024; 94% recommend (15 FB reviews) |
-| **Good Harvest Organic Farm** — Coolum Beach, QLD | Sunshine Coast | Pickup + delivery | n/a† | Farm-gate pickup or home delivery, 12–18 items per box, subscribe & save 10% |
-| **Joy Wholefoods** (fka Spray-Free Farmacy) — Brisbane, QLD | Brisbane – Gold Coast | Pickup points + delivery | $55–$115 | Established local pickup-point network; also stocks $200+ premium meat/seafood bundles |
-| **FreshBox Organic** — Kunda Park, QLD | Sunshine Coast – Brisbane | Delivery only | $55–$136 | Trading 14+ years; testimonials citing 3–5 year customer relationships; no lock-in |
-| **Ripe n Raw Organics** — Brisbane, QLD | SEQ + Northern NSW + Toowoomba | Delivery only | n/a† | Trading since 2003 (20+ years); refrigerated van fleet; 1,000+ SKUs stocked |
-| **The Farmers' Store Byron** — Byron Bay, NSW | Gold Coast – Tweed – Lismore – Byron | Delivery only | $45–$110 | Generously itemised boxes (14–15 lines); free delivery over $150 |
-| **Hinterland Deliveries** — Byron Shire, NSW | Byron Shire only | Delivery only | $80–$125 | ~85% certified organic in winter, mixed sourcing rest of year; narrow 3-suburb radius |
-| **Of The Earth** — Northern Rivers, NSW | Postcodes 2479, 2481–2483 | Pickup or delivery | $65–$135 | Pickup via Santos Organics store; "100+ happy customers," 4.9★ avg (small review base) |
-| **Scenic Rim Farm Box** — Scenic Rim, QLD | SEQ (multi-farm aggregator) | **Closed Dec 2024** | — | 4.5 yrs trading, 50+ partner farms, $7.8M lifetime sales — see case study below |
+| Business                                                    | Region                               | Model                    | Price range | Signal                                                                                           |
+| ----------------------------------------------------------- | ------------------------------------ | ------------------------ | ----------- | ------------------------------------------------------------------------------------------------ |
+| **Farm Gate Express** — Hervey Bay, QLD                     | Wide Bay                             | Pickup only              | $25–$95     | Shopfront + click-and-collect; cut home delivery entirely in 2024; 94% recommend (15 FB reviews) |
+| **Good Harvest Organic Farm** — Coolum Beach, QLD           | Sunshine Coast                       | Pickup + delivery        | n/a†        | Farm-gate pickup or home delivery, 12–18 items per box, subscribe & save 10%                     |
+| **Joy Wholefoods** (fka Spray-Free Farmacy) — Brisbane, QLD | Brisbane – Gold Coast                | Pickup points + delivery | $55–$115    | Established local pickup-point network; also stocks $200+ premium meat/seafood bundles           |
+| **FreshBox Organic** — Kunda Park, QLD                      | Sunshine Coast – Brisbane            | Delivery only            | $55–$136    | Trading 14+ years; testimonials citing 3–5 year customer relationships; no lock-in               |
+| **Ripe n Raw Organics** — Brisbane, QLD                     | SEQ + Northern NSW + Toowoomba       | Delivery only            | n/a†        | Trading since 2003 (20+ years); refrigerated van fleet; 1,000+ SKUs stocked                      |
+| **The Farmers' Store Byron** — Byron Bay, NSW               | Gold Coast – Tweed – Lismore – Byron | Delivery only            | $45–$110    | Generously itemised boxes (14–15 lines); free delivery over $150                                 |
+| **Hinterland Deliveries** — Byron Shire, NSW                | Byron Shire only                     | Delivery only            | $80–$125    | ~85% certified organic in winter, mixed sourcing rest of year; narrow 3-suburb radius            |
+| **Of The Earth** — Northern Rivers, NSW                     | Postcodes 2479, 2481–2483            | Pickup or delivery       | $65–$135    | Pickup via Santos Organics store; "100+ happy customers," 4.9★ avg (small review base)           |
+| **Scenic Rim Farm Box** — Scenic Rim, QLD                   | SEQ (multi-farm aggregator)          | **Closed Dec 2024**      | —           | 4.5 yrs trading, 50+ partner farms, $7.8M lifetime sales — see case study below                  |
 
 † Good Harvest and Ripe n Raw block automated price scraping — sizes and model confirmed,
 exact tiers weren't retrievable.
@@ -58,7 +57,7 @@ facilitated $7.8M in farmer-direct sales — not a small operation. The closure 
 reads as a deliberate wind-down rather than a collapse. No cause is confirmable from public
 sources.
 
-What *is* confirmable: a multi-farm aggregator box model, in this exact region, did not carry
+What _is_ confirmable: a multi-farm aggregator box model, in this exact region, did not carry
 on past its pandemic-tailwind launch window despite genuine scale. Worth remembering against
 the "source direct from many small farms" idea raised earlier — coordinating many small
 growers is plausibly part of what got harder once the initial energy faded, not just demand.
@@ -68,7 +67,7 @@ growers is plausibly part of what got harder once the initial energy faded, not 
 An established Hervey Bay operator with a physical shopfront, named supplier partnerships
 (Hydroponic Harvest, Peterson Farms, Frog Hollow Mushrooms among others) and a multi-year
 track record explicitly killed its home-delivery channel in 2024, stating plainly on their
-site: *"NO HOME DELIVERY SERVICE IN 2024."* They kept click-and-collect only.
+site: _"NO HOME DELIVERY SERVICE IN 2024."_ They kept click-and-collect only.
 
 That's a real business, with a shopfront to amortise costs against, concluding delivery
 specifically didn't pencil — the same conclusion the transport modelling in the Business
@@ -87,39 +86,39 @@ underlying cost data already exists in this repo.
 
 ### Small / couple-sized box
 
-| Business | Price | Notes |
-|---|---|---|
-| **Shift Green Fresh (ours)** | **$21.00** | 3.1kg, $6.77/kg — single/couple, light week |
-| Farm Gate Express — Fruit Box | $42.00 | Fruit-only, weight not published |
-| The Farmers' Store Byron — Small Fruit | $45.00 | ~4.5kg itemised fruit only, delivered |
-| Of The Earth — Wellness | $65.00 | 1–2 people, weight not published |
-| FreshBox — Small | $55.00 | 1–2 people, delivered, weight not published |
-| Joy Wholefoods — Small | $55.00 | Weight not published |
+| Business                               | Price      | Notes                                       |
+| -------------------------------------- | ---------- | ------------------------------------------- |
+| **Shift Green Fresh (ours)**           | **$21.00** | 3.1kg, $6.77/kg — single/couple, light week |
+| Farm Gate Express — Fruit Box          | $42.00     | Fruit-only, weight not published            |
+| The Farmers' Store Byron — Small Fruit | $45.00     | ~4.5kg itemised fruit only, delivered       |
+| Of The Earth — Wellness                | $65.00     | 1–2 people, weight not published            |
+| FreshBox — Small                       | $55.00     | 1–2 people, delivered, weight not published |
+| Joy Wholefoods — Small                 | $55.00     | Weight not published                        |
 
 ### Medium / small-family box
 
-| Business | Price | Notes |
-|---|---|---|
-| **Shift Green Fresh (ours)** | **$46.00** | 6.8kg, $6.76/kg — couple/small family |
-| Farm Gate Express — Mixed | $60.00 | Weight not published |
-| FreshBox — Medium | $75.00 | Weight not published |
-| Joy Wholefoods — Medium | $75.00 | Weight not published |
-| Hinterland Deliveries — Staples | $80.00 | Couples/small families, delivered |
-| The Farmers' Store Byron — Medium veg | $90.00 | ~15 itemised lines, delivered |
-| Of The Earth — Bounty (best seller) | $95.00 | 3–4 people |
+| Business                              | Price      | Notes                                 |
+| ------------------------------------- | ---------- | ------------------------------------- |
+| **Shift Green Fresh (ours)**          | **$46.00** | 6.8kg, $6.76/kg — couple/small family |
+| Farm Gate Express — Mixed             | $60.00     | Weight not published                  |
+| FreshBox — Medium                     | $75.00     | Weight not published                  |
+| Joy Wholefoods — Medium               | $75.00     | Weight not published                  |
+| Hinterland Deliveries — Staples       | $80.00     | Couples/small families, delivered     |
+| The Farmers' Store Byron — Medium veg | $90.00     | ~15 itemised lines, delivered         |
+| Of The Earth — Bounty (best seller)   | $95.00     | 3–4 people                            |
 
 ### Large / family box
 
-| Business | Price | Notes |
-|---|---|---|
-| **Shift Green Fresh (ours)** | **$77.00** | 11.4kg, $6.75/kg — family of 3–4 |
-| **Shift Green Fresh (ours)** | **$137.00** | 19.6kg, $6.99/kg — Family Box, replaces the weekly shop |
-| Farm Gate Express — Premium mixed | $95.00 | Weight not published |
-| Joy Wholefoods — Large / XL | $95–$115 | Weight not published |
-| The Farmers' Store Byron — Large veg | $110.00 | ~15 itemised lines + extras, delivered |
-| FreshBox — Large / XL | $106–$136 | Weight not published |
-| Of The Earth — Abundance | $135.00 | 4+ people |
-| Hinterland Deliveries — Large | $125.00 | Larger families, delivered |
+| Business                             | Price       | Notes                                                   |
+| ------------------------------------ | ----------- | ------------------------------------------------------- |
+| **Shift Green Fresh (ours)**         | **$77.00**  | 11.4kg, $6.75/kg — family of 3–4                        |
+| **Shift Green Fresh (ours)**         | **$137.00** | 19.6kg, $6.99/kg — Family Box, replaces the weekly shop |
+| Farm Gate Express — Premium mixed    | $95.00      | Weight not published                                    |
+| Joy Wholefoods — Large / XL          | $95–$115    | Weight not published                                    |
+| The Farmers' Store Byron — Large veg | $110.00     | ~15 itemised lines + extras, delivered                  |
+| FreshBox — Large / XL                | $106–$136   | Weight not published                                    |
+| Of The Earth — Abundance             | $135.00     | 4+ people                                               |
+| Hinterland Deliveries — Large        | $125.00     | Larger families, delivered                              |
 
 ---
 
@@ -142,7 +141,7 @@ any business in the survey, both bear on whether this category has wind at its b
 ## What this means for the model
 
 **Pickup-only has a real precedent, not just a launch excuse.** Farm Gate Express is an
-established, shopfront-backed regional QLD operator that *gave up delivery* in 2024. A newer,
+established, shopfront-backed regional QLD operator that _gave up delivery_ in 2024. A newer,
 shopfront-less operation choosing pickup-only from day one isn't cutting a corner — it's
 starting where a comparable business ended up after testing the alternative.
 
@@ -206,10 +205,10 @@ premium, not one that's immune to it.
 
 ### The two everyday walk-in shops
 
-| Business | Location | Format | Positioning | Price signal |
-|---|---|---|---|---|
-| **Flannery's Organic & Wholefood Market** | Robina — closest Flannery's to Varsity Lakes | Organic/health food store, naturopath on staff | Premium specialist; "food is medicine"; trading since 1973, now Australia's largest organic/health retailer | Reviews consistently call it pricier than supermarkets — "sometimes very pricey," mixed value-for-money, recent complaints about discontinued loyalty discounts |
-| **Ambarella Fine Foods** | Burleigh Waters | Market-style grocery/deli/butcher/juice bar/greengrocer | Gourmet lifestyle destination, not organic-certified — produce "hand-selected from local growers" alongside imported specialty goods | Mixed reviews, several calling prices high relative to competitors; reads as a browsing destination more than an everyday shop |
+| Business                                  | Location                                     | Format                                                  | Positioning                                                                                                                          | Price signal                                                                                                                                                    |
+| ----------------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Flannery's Organic & Wholefood Market** | Robina — closest Flannery's to Varsity Lakes | Organic/health food store, naturopath on staff          | Premium specialist; "food is medicine"; trading since 1973, now Australia's largest organic/health retailer                          | Reviews consistently call it pricier than supermarkets — "sometimes very pricey," mixed value-for-money, recent complaints about discontinued loyalty discounts |
+| **Ambarella Fine Foods**                  | Burleigh Waters                              | Market-style grocery/deli/butcher/juice bar/greengrocer | Gourmet lifestyle destination, not organic-certified — produce "hand-selected from local growers" alongside imported specialty goods | Mixed reviews, several calling prices high relative to competitors; reads as a browsing destination more than an everyday shop                                  |
 
 Neither is open only occasionally — both are a daily walk-in option, which is exactly what a
 pickup-only box has to compete with on convenience, not just price.
@@ -226,8 +225,8 @@ community-feeling — but it only runs 5.5 hours, once a week.
 Its main organic stall is **Awesome Organics** — the board already photographed and ingested
 in this repo (`data/retail-pricing/merrimac/`), matched line-by-line against the same product
 catalog the box builder uses. One detail worth knowing about them specifically: the market's
-own listing describes Awesome Organics as *"a reseller of fruits and vegetables — providing
-produce that cannot be supplied by the local farmers"* at the market, i.e. they're filling
+own listing describes Awesome Organics as _"a reseller of fruits and vegetables — providing
+produce that cannot be supplied by the local farmers"_ at the market, i.e. they're filling
 gaps in what the certified-organic growers themselves bring, not necessarily growing
 everything on their own board. That's a plausible explanation for a line like the carrot
 outlier below — a resold item can carry a different price basis than a grower's own line.
@@ -242,23 +241,23 @@ a real point of difference against that, not just a pricing one.
 That still turns "the closest positioning match" from a qualitative read into an actual
 item-by-item comparison against eco-farms wholesale cost:
 
-| Product | eco-farms wholesale $/kg | Awesome Organics $/kg | Retail markup |
-|---|---:|---:|---:|
-| Capsicum, green | $7.80 | $7.90 | 1.0× |
-| Butternut pumpkin | $2.60 | $3.20 | 1.2× |
-| Pink Lady apples | $7.50 | $9.90 | 1.3× |
-| Watermelon (mini seedless) | $4.00 | $5.90 | 1.5× |
-| Lebanese cucumber | $8.20 | $11.90 | 1.5× |
-| Roma tomato | $5.40 | $7.90 | 1.5× |
-| Eggplant | $6.00 | $9.90 | 1.7× |
-| Navel oranges | $3.73 | $7.90 | 2.1× |
-| Zucchini | $4.90 | $11.90 | 2.4× |
-| Carrots (loose) | $4.93 | $24.90 | 5.1× |
+| Product                    | eco-farms wholesale $/kg | Awesome Organics $/kg | Retail markup |
+| -------------------------- | -----------------------: | --------------------: | ------------: |
+| Capsicum, green            |                    $7.80 |                 $7.90 |          1.0× |
+| Butternut pumpkin          |                    $2.60 |                 $3.20 |          1.2× |
+| Pink Lady apples           |                    $7.50 |                 $9.90 |          1.3× |
+| Watermelon (mini seedless) |                    $4.00 |                 $5.90 |          1.5× |
+| Lebanese cucumber          |                    $8.20 |                $11.90 |          1.5× |
+| Roma tomato                |                    $5.40 |                 $7.90 |          1.5× |
+| Eggplant                   |                    $6.00 |                 $9.90 |          1.7× |
+| Navel oranges              |                    $3.73 |                 $7.90 |          2.1× |
+| Zucchini                   |                    $4.90 |                $11.90 |          2.4× |
+| Carrots (loose)            |                    $4.93 |                $24.90 |          5.1× |
 
-*Median markup 1.47×, average 1.92× (the carrot line is a clear outlier pulling the average
+_Median markup 1.47×, average 1.92× (the carrot line is a clear outlier pulling the average
 up — worth a second look in person rather than taken at face value; every other loose carrot
 variety on their board is priced off the same generic "Carrots Loose" line, so this may be a
-premium-variety price applied too broadly on the board itself).*
+premium-variety price applied too broadly on the board itself)._
 
 The useful number here isn't any single row — it's the median. **1.47×** is what the region's
 own certified-organic, affordably-positioned Sunday market — the single closest comparable
@@ -277,10 +276,13 @@ priced near the Sunday market's own shelf-price median has real room to read as 
 against both, without needing to be the cheapest option in absolute terms.
 
 **The Sunday market is the closest match in spirit — and now in price, not just positioning.**
-Certified organic, affordably positioned, community-feeling, and (per its own main stall's
+Certified organic, affordably positioned, community-feeling, and (per Awesome Organics' own
 board) pricing within a few cents of what a 35%-margin box already implies. What it doesn't
-have is availability: 5.5 hours, one morning a week. A pickup point open more often is a
-cadence advantage over the market it's closest to on everything else.
+have is availability: 5.5 hours, one morning a week, and — as far as searching can tell —
+Awesome Organics themselves aren't reachable any other way either. A pickup window offered on
+more than one day, or outside a single 5.5-hour Sunday slot, isn't a minor convenience add-on
+against this specific competitor — it's the one thing on offer here that they structurally
+can't match.
 
 **Nobody in this set is a "reserve online, collect a fixed box" business.** Flannery's and
 Ambarella are daily browse-and-choose retail; the Sunday market is browse-and-choose too, just
@@ -299,6 +301,7 @@ pitch, it's worth confirming that number in store rather than repeating it as-is
 - [Flannerys — About Us](https://flannerys.com.au/about-us/)
 - [Ambarella Fine Foods](https://ambarella.com.au/) — Burleigh Waters
 - [Gold Coast Organic Farmers Market](https://gcorganicmarket.com/) — Merrimac State High School, Sundays
+- [Gold Coast Organic Farmers Market listing — GuideToOrganics.com.au](https://guidetoorganics.com.au/listings/gold-coast-organic-farmers-market/) — names Awesome Organics as the market's reseller stall
 - [ABS 2021 Census — Mermaid Beach–Broadbeach](https://abs.gov.au/census/find-census-data/quickstats/2021/309011227)
 - ABS 2021 Census QuickStats — Varsity Lakes QLD 4227
-- This repo — `data/retail-pricing/merrimac/current.json` and `doc/fresh_organic_merrimac_retailer_pricing_1.jpeg` — the market's main organic stall, photographed in-store and already ingested
+- This repo — `data/retail-pricing/merrimac/current.json` and `doc/fresh_organic_merrimac_retailer_pricing_1.jpeg` — Awesome Organics' own board, photographed in-store and already ingested

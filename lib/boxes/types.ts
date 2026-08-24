@@ -9,6 +9,14 @@ export type BoxItem = {
   productId: string;
   /** kg for this item in one box. */
   qty: number;
+  /**
+   * Alternatives a customer may swap this item for, at the same kg — a small pool curated by
+   * whoever built the box, not "anything on the wholesale list." Keeps procurement predictable
+   * (every alternative was already priced this week when the box was saved) while still letting
+   * someone who doesn't use parsley pick something they'll actually use. Omitted or empty means
+   * this slot isn't swappable.
+   */
+  swapOptions?: string[];
 };
 
 export type Box = {

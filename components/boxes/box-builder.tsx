@@ -15,6 +15,10 @@ export type AvailableItem = {
   packOptions: PackOption[];
 };
 
+// A swap pool this large stops meaning "curated" — cap it so the intent (a small, deliberate set
+// of alternatives) stays true no matter how many are added.
+const MAX_SWAP_OPTIONS = 4;
+
 function formatMoney(n: number): string {
   if (Number.isNaN(n)) return '—';
   return `$${n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -101,6 +105,27 @@ export function BoxBuilder({
   }
   function removeItem(productId: string) {
     setDraftItems((prev) => prev.filter((i) => i.productId !== productId));
+  }
+  // Swap options are a deliberately small, curated pool per item — not "swap for anything on the
+  // wholesale list" — so a customer who doesn't use parsley has somewhere to go, without opening
+  // up unpredictable substitutions the procurement math can't plan around.
+  function addSwapOption(productId: string, swapProductId: string) {
+    setDraftItems((prev) =>
+      prev.map((i) =>
+        i.productId === productId
+          ? { ...i, swapOptions: [...(i.swapOptions ?? []), swapProductId] }
+          : i
+      )
+    );
+  }
+  function removeSwapOption(productId: string, swapProductId: string) {
+    setDraftItems((prev) =>
+      prev.map((i) =>
+        i.productId === productId
+          ? { ...i, swapOptions: (i.swapOptions ?? []).filter((id) => id !== swapProductId) }
+          : i
+      )
+    );
   }
 
   async function saveBox() {
@@ -337,6 +362,47 @@ export function BoxBuilder({
                         : `${p.chosen.packsBought}× ${p.chosen.packQty}kg pack${p.chosen.packsBought !== 1 ? 's' : ''} + ${p.chosen.splitKg?.toFixed(1)}kg split (+20% fee, no surplus)`}
                     </div>
                   )}
+                  <div className="flex flex-wrap items-center gap-1 pl-1">
+                    <span className="text-[10px] text-neutral-400">Swap pool:</span>
+                    {(item.swapOptions ?? []).map((swapId) => (
+                      <span
+                        key={swapId}
+                        className="flex items-center gap-1 rounded-full border border-teal-300 bg-teal-50 px-1.5 py-0.5 text-[10px] text-teal-700 dark:border-teal-800 dark:bg-teal-900/20 dark:text-teal-300"
+                      >
+                        {itemByProductId.get(swapId)?.name ?? swapId}
+                        <button
+                          type="button"
+                          onClick={() => removeSwapOption(item.productId, swapId)}
+                          aria-label={`Remove ${swapId} from swap pool`}
+                          className="text-teal-400 hover:text-red-600"
+                        >
+                          &times;
+                        </button>
+                      </span>
+                    ))}
+                    {(item.swapOptions?.length ?? 0) < MAX_SWAP_OPTIONS && (
+                      <select
+                        value=""
+                        onChange={(e) => {
+                          if (e.target.value) addSwapOption(item.productId, e.target.value);
+                        }}
+                        className="rounded border border-dashed border-neutral-300 bg-white px-1 py-0.5 text-[10px] text-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400"
+                      >
+                        <option value="">+ add alternative</option>
+                        {availableItems
+                          .filter(
+                            (a) =>
+                              a.productId !== item.productId &&
+                              !(item.swapOptions ?? []).includes(a.productId)
+                          )
+                          .map((a) => (
+                            <option key={a.productId} value={a.productId}>
+                              {a.name}
+                            </option>
+                          ))}
+                      </select>
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -468,14 +534,21 @@ export function BoxBuilder({
                         <td colSpan={8} className="px-3 py-3">
                           <div className="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
                             {box.items.map((item) => (
-                              <div
-                                key={item.productId}
-                                className="flex justify-between gap-2 text-xs text-neutral-600 dark:text-neutral-400"
-                              >
-                                <span className="truncate">
-                                  {itemByProductId.get(item.productId)?.name ?? item.productId}
-                                </span>
-                                <span className="font-mono text-neutral-400">{item.qty}kg</span>
+                              <div key={item.productId} className="text-xs">
+                                <div className="flex justify-between gap-2 text-neutral-600 dark:text-neutral-400">
+                                  <span className="truncate">
+                                    {itemByProductId.get(item.productId)?.name ?? item.productId}
+                                  </span>
+                                  <span className="font-mono text-neutral-400">{item.qty}kg</span>
+                                </div>
+                                {item.swapOptions && item.swapOptions.length > 0 && (
+                                  <div className="truncate text-[10px] text-teal-600 dark:text-teal-400">
+                                    swap:{' '}
+                                    {item.swapOptions
+                                      .map((id) => itemByProductId.get(id)?.name ?? id)
+                                      .join(', ')}
+                                  </div>
+                                )}
                               </div>
                             ))}
                           </div>
